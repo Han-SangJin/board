@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="${pageContext.request.contextPath }/js/js.cookie-2.2.1.min.js"></script>
   <style>
     /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
     .row.content {height: 1500px}
@@ -21,7 +22,7 @@
       background-color: #f1f1f1;
       height: 100%;
     }
-    
+     
     /* Set black background color, white text and some padding */
     footer {
       background-color: #555;
@@ -40,24 +41,25 @@
     label{
     	width : 100px;
     }
-    
+      
   </style>
 </head>
 <body>
 
-<div class="container-fluid">
   <div class="row content">
+   
+   
     <div class="col-sm-3 sidenav">
       <h4>블로그</h4>
       <ul class="nav nav-pills nav-stacked">
         <li class="active"><a href="#section1">Home</a></li>
-        <li><a href="${pageContext.request.contextPath}/ctgrmake">게시판 생성</a></li>
+        <li><a href="${pageContext.request.contextPath}/ctgrinsertservlet">게시판 생성</a></li>
         <li><a href="#section3">자유 게시판</a></li>
         <li><a href="#section3">공지 게시판</a></li>
       </ul><br>
   
     </div>
- 
+ 	
     <div class="col-sm-9">
       <h4><small>게시판 목록</small></h4>
       <hr>
@@ -68,7 +70,6 @@
   
     </div>
   </div>
-</div>
 
 <footer class="container-fluid">
   <p>Footer Text</p>

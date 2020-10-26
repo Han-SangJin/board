@@ -9,10 +9,6 @@ import kr.or.ddit.db.MybatisUtil;
 
 public class CtgrDao implements CtgrDaoI {
 	
-//	private String memId;		// 아이디		MEM_ID
-//	private String memPass;		// 비밀번호	MEM_PASS
-//	private Date memRegdt;		// 생성일		MEM_REGDT
-	
 	// select 
 	// 한건 : selectOne
 	// 여러건 : selctList
@@ -24,6 +20,52 @@ public class CtgrDao implements CtgrDaoI {
 		 
 		sqlSession.close();
 		return ctgrList;
+	}
+
+	@Override
+	public int insertCtgr(CtgrVO ctgrVo) {
+		SqlSession sqlSession = MybatisUtil.getSession();
+		int insertCnt = 0;
+
+		try{
+			insertCnt = sqlSession.insert("ctgr.insertCtgr", ctgrVo);
+			System.out.println(ctgrVo.getCtgr_name());
+			System.out.println(ctgrVo.getCtgr_use());
+		}catch(Exception e){
+			
+		}
+
+		if(insertCnt == 1) {
+			sqlSession.commit();
+		}else {
+			sqlSession.rollback();
+		}
+		
+		sqlSession.close();
+		return insertCnt;
+	}
+
+	@Override
+	public int updateMember(CtgrVO ctgrVo) {
+		SqlSession sqlSession = MybatisUtil.getSession();
+		int updateCnt = sqlSession.delete("ctgr.updateCtgr", ctgrVo);
+		
+		if(updateCnt ==1){
+			sqlSession.commit();
+		}else{
+			sqlSession.rollback();
+		}
+		sqlSession.close();
+		return updateCnt;
+	}
+
+	@Override
+	public CtgrVO getCtgr(int ctgr_seq1) {
+		SqlSession sqlSession = MybatisUtil.getSession();
+		CtgrVO ctgrVo = sqlSession.selectOne("ctgr.getCtgr", ctgr_seq1);
+		
+		sqlSession.close();
+		return ctgrVo;
 	}
 
 	

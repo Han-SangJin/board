@@ -8,6 +8,22 @@ public class CtgrVO {
 	int ctgr_use;		// 카테고리 사용여부
 	
 	
+	
+	public CtgrVO() {
+	}
+		
+	
+	public CtgrVO(String ctgr_name, int ctgr_use) {
+		this.ctgr_name = ctgr_name;
+		this.ctgr_use = ctgr_use;
+	}
+	
+	public CtgrVO(int ctgr_seq1, String ctgr_name, int ctgr_use) {
+		this.ctgr_seq1 = ctgr_seq1;
+		this.ctgr_name = ctgr_name;
+		this.ctgr_use = ctgr_use;
+	}
+	
 	public int getCtgr_seq1() {
 		return ctgr_seq1;
 	}

@@ -2,9 +2,12 @@ package kr.or.ddit.category.service;
 
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+
 import kr.or.ddit.category.dao.CtgrDao;
 import kr.or.ddit.category.dao.CtgrDaoI;
 import kr.or.ddit.category.model.CtgrVO;
+import kr.or.ddit.db.MybatisUtil;
 
 public class CtgrService implements CtgrServiceI {
 	
@@ -23,6 +26,25 @@ public class CtgrService implements CtgrServiceI {
 	public List<CtgrVO> selectAllCtgr() {
 		return ctgrDao.selectAllCtgr();
 	}
+
+
+	@Override
+	public int insertCtgr(CtgrVO ctgrVo) {
+		SqlSession sqlSession = MybatisUtil.getSession();
+		return ctgrDao.insertCtgr(ctgrVo);
+	}
+
+
+	@Override
+	public int updateMember(CtgrVO ctgrVo) {
+		SqlSession sqlSession = MybatisUtil.getSession();
+		return ctgrDao.updateMember(ctgrVo);
+	}
 	
+	
+	@Override
+	public CtgrVO getCtgr(int ctgr_seq1) {
+		return ctgrDao.getCtgr(ctgr_seq1);
+	}
 	
 }

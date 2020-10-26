@@ -6,7 +6,12 @@ import kr.or.ddit.category.model.CtgrVO;
 
 public interface CtgrServiceI {
 
+	CtgrVO getCtgr(int ctgr_seq1);
+	
 	List<CtgrVO> selectAllCtgr();
 	
+	int insertCtgr(CtgrVO ctgrVo);
+	
+	int updateMember(CtgrVO ctgrVo); 
 }
- 
+  

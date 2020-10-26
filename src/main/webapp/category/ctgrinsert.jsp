@@ -46,26 +46,69 @@
     }
     
   </style>
+<script>
+/* $(document).ready(function(){
+	$("#ctgrList #update").on("click", function(){
+	// data-userid
+	var ctgeseq1 = $(this).data("ctgeseq1");
+	//alert("ctgeseq1 : " + ctgeseq1); 
+	//alert($("select[name=use]").val());
+
+	/* document.location="/member?userid=" + userid; 
+})
+
+*/
+/*
+	$("#ctgrList #delete").on("click", function(){
+	// data-userid
+	var ctgeseq2 = $(this).data("ctgeseq2");
+	/* alert("ctgeseq2 : " + ctgeseq2); */
+		
+	/* document.location="/member?userid=" + userid; 
+	})
+})  */   
+		  
+$(function(){
+
+	var se = document.getElementBuId("used");
+	alert(se)
+	
+	 $("#ctgrList #update").click(function(){
+		var email = $("#used option:selected").text();
+		alert(email)
+	)}; 
+});    
+</script>
 </head>
 <body>
 
-<div class="container-fluid">
   <div class="row content">
-    <div class="col-sm-3 sidenav">
+  
+  
+   
+  
+     <div class="col-sm-3 sidenav">
       <h4>블로그</h4>
       <ul class="nav nav-pills nav-stacked">
         <li class="active"><a href="#section1">Home</a></li>
-        <li><a href="${pageContext.request.contextPath}/boardmake">게시판 생성</a></li>
+        <li><a href="${pageContext.request.contextPath}/ctgrinsertservlet">게시판 생성</a></li>
         <li><a href="#section3">자유 게시판</a></li>
         <li><a href="#section3">공지 게시판</a></li>
       </ul><br>
   
     </div>
- 
+ 	 
+    <div class="col-sm-9">
+      <h4><small>게시판 목록</small></h4>
+      <hr>
+      
+      
+      
     <div class="col-sm-9">
       <h4><small>Board Make</small></h4>
       <hr>
     
+		<form id="ctgrfm" action="${pageContext.request.contextPath}/ctgrinsertservlet" method="post">
         <table class="table table-striped">
 				 <tr> 
 				 	<td><h4>카테고리 번호</h4></td>
@@ -73,42 +116,53 @@
 				 	<td><h4>카테고리 사용여부</h4></td>
 				 	<td><h4>생성/삭제</h4></td>
 				 </tr>
-				 <tr> 
-				 	<form id="ctgrfm" action="${cp }/CtgrMake" method="POST" enctype="multipart/form-data">
+				 <tr>   
 				 	<td><p> 게시판 이름 : </p></td>
-				 	<td><input type="text" name="ctgrname" value=""></td>
+				 	<td><input type="text" name="ctgr_name" value=""></td>
 				 	<td><p>
-				 	<select name="ctgruse">
-			      		<option value=1>사용</option>
-			      		<option value=2>미사용</option>
+				 	<select name="ctgr_use" id="ctgr_use">
+			      		<option value="1">사용</option>
+			      		<option value="2">미사용</option>
 			        </select></p></td>
 				 	<td><input type="submit"value="생성"></td>
-				 	</form>
 				 </tr>
+				  
 				 
 				 <tbody id="ctgrList">
-				 
+				  
 				<% 	 
 					int ctgrSize = ctgrList.size();
 					if(ctgrSize > 0){
 						for(int i=0; i<ctgrSize; i++){
 				%>			 
-					<tr data-userid="<%= ctgrList.get(i).getCtgr_seq1() %>">
+					<tr>
 						<td><%= ctgrList.get(i).getCtgr_seq1() %></td>
 						<td><%= ctgrList.get(i).getCtgr_name() %></td>
 						
 						<td>
-						<select>
-					   <% if(ctgrList.get(i).getCtgr_use() == 1){ %>
+						<select name="use" id="used">
+						
+						
+					    <% if(ctgrList.get(i).getCtgr_use() == 1){ %>
 						<option>사용</option>
 					   <%} else if(ctgrList.get(i).getCtgr_use() == 2){ %>
 						<option>미사용</option>
-						<%} %>
+						<%} %> 
+						
+						
+						<option value="1">사용</option>
+			      		<option value="2">미사용</option>
+						
+						    <%-- <option value=1 <c:if test="${ctgr_use == 1}">selected</c:if>>사용</option>
+		                    <option value=2 <c:if test="${ctgr_use == 2}">selected</c:if>>미사용</option>  --%>
+		
 						</select>
 						</td>
 						
-						<td><input type="button" value="삭제"></td>
-						
+						<td>
+						<input id="update" type="button" value="수정" data-ctgeseq1="<%= ctgrList.get(i).getCtgr_seq1() %>">
+						<input id="delete" type="button" value="삭제" data-ctgeseq2="<%= ctgrList.get(i).getCtgr_seq1() %>"></td>
+						 
 					</tr>	  
 				  
 				  <% 			
@@ -124,7 +178,7 @@
 				</tbody>
 				
 			</table>
-    
+    		</form>
     
     
   
