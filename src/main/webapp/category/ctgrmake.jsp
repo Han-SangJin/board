@@ -2,7 +2,11 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-     
+    
+<%
+    	List<CtgrVO> ctgrList = (List<CtgrVO>) request.getAttribute("ctgrList");
+    %>        
+    
 <!DOCTYPE html>
 <html lang="UTF-8">
 <head>
@@ -51,7 +55,7 @@
       <h4>블로그</h4>
       <ul class="nav nav-pills nav-stacked">
         <li class="active"><a href="#section1">Home</a></li>
-        <li><a href="${pageContext.request.contextPath}/ctgrmake">게시판 생성</a></li>
+        <li><a href="${pageContext.request.contextPath}/boardmake">게시판 생성</a></li>
         <li><a href="#section3">자유 게시판</a></li>
         <li><a href="#section3">공지 게시판</a></li>
       </ul><br>
@@ -59,9 +63,67 @@
     </div>
  
     <div class="col-sm-9">
-      <h4><small>게시판 목록</small></h4>
+      <h4><small>Board Make</small></h4>
       <hr>
-  
+    
+        <table class="table table-striped">
+				 <tr> 
+				 	<td><h4>카테고리 번호</h4></td>
+				 	<td><h4>카테고리 이름</h4></td>
+				 	<td><h4>카테고리 사용여부</h4></td>
+				 	<td><h4>생성/삭제</h4></td>
+				 </tr>
+				 <tr> 
+				 	<form id="ctgrfm" action="${cp }/CtgrMake" method="POST" enctype="multipart/form-data">
+				 	<td><p> 게시판 이름 : </p></td>
+				 	<td><input type="text" name="ctgrname" value=""></td>
+				 	<td><p>
+				 	<select name="ctgruse">
+			      		<option value=1>사용</option>
+			      		<option value=2>미사용</option>
+			        </select></p></td>
+				 	<td><input type="submit"value="생성"></td>
+				 	</form>
+				 </tr>
+				 
+				 <tbody id="ctgrList">
+				 
+				<% 	 
+					int ctgrSize = ctgrList.size();
+					if(ctgrSize > 0){
+						for(int i=0; i<ctgrSize; i++){
+				%>			 
+					<tr data-userid="<%= ctgrList.get(i).getCtgr_seq1() %>">
+						<td><%= ctgrList.get(i).getCtgr_seq1() %></td>
+						<td><%= ctgrList.get(i).getCtgr_name() %></td>
+						
+						<td>
+						<select>
+					   <% if(ctgrList.get(i).getCtgr_use() == 1){ %>
+						<option>사용</option>
+					   <%} else if(ctgrList.get(i).getCtgr_use() == 2){ %>
+						<option>미사용</option>
+						<%} %>
+						</select>
+						</td>
+						
+						<td><input type="button" value="삭제"></td>
+						
+					</tr>	  
+				  
+				  <% 			
+						}
+					}else{ // 회원정보가 존재하지 않을 경우...
+				  %> 
+					<tr>
+						<td colspan="2">회원정보가 존재하지 않습니다.</td>
+					</tr>
+				<%	
+					}
+				%>
+				</tbody>
+				
+			</table>
     
     
     

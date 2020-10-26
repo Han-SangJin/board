@@ -3,11 +3,12 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-	<typeAliases>
-		<typeAlias type="kr.or.ddit.board.model.BlogVO" alias="BoardVO"/>
-	</typeAliases>
 
-	
+	<typeAliases>
+		<typeAlias type="kr.or.ddit.category.model.CtgrVO" alias="CtgrVO"/>
+		<typeAlias type="kr.or.ddit.member.model.MemberVO" alias="MemberVO"/>
+	</typeAliases>
+ 
 	
   <environments default="development">
     <environment id="development">
@@ -21,7 +22,9 @@
     </environment>
   </environments>
 	  
-  <mappers>
-    <mapper resource="kr/or/ddit/db/mapper/board.xml"/>
+		  
+  <mappers> 
+    <mapper resource="kr/or/ddit/db/mapper/category.xml"/>
+    <mapper resource="kr/or/ddit/db/mapper/member.xml"/>
   </mappers>
 </configuration>

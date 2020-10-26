@@ -33,7 +33,8 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/x
 			<url>http://maven.jahia.org/maven2</url>
 		</repository>
 	</repositories>
-
+ 
+ 
 	<dependencies>
 
 		<!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
