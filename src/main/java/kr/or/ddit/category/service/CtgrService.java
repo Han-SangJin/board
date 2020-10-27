@@ -21,7 +21,7 @@ public class CtgrService implements CtgrServiceI {
 		ctgrDao = new CtgrDao();
 	}
 	
-	  
+	   
 	@Override
 	public List<CtgrVO> selectAllCtgr() {
 		return ctgrDao.selectAllCtgr();
@@ -36,9 +36,9 @@ public class CtgrService implements CtgrServiceI {
 
 
 	@Override
-	public int updateMember(CtgrVO ctgrVo) {
+	public int updateCtgr(CtgrVO ctgrVo) {
 		SqlSession sqlSession = MybatisUtil.getSession();
-		return ctgrDao.updateMember(ctgrVo);
+		return ctgrDao.updateCtgr(ctgrVo);
 	}
 	
 	

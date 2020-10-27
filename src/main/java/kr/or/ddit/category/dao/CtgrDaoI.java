@@ -12,6 +12,6 @@ public interface CtgrDaoI {
 	
 	int insertCtgr(CtgrVO ctgrVo);
 
-	int updateMember(CtgrVO ctgrVo);
+	int updateCtgr(CtgrVO ctgrVo);
 }
  

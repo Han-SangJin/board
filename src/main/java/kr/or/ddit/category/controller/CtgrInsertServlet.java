@@ -29,28 +29,28 @@ public class CtgrInsertServlet extends HttpServlet {
 	 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("ctgrList");
-		  
+		
 		List<CtgrVO> ctgrList = ctgrService.selectAllCtgr();
 		request.setAttribute("ctgrList", ctgrList);
 		request.getRequestDispatcher("/category/ctgrinsert.jsp").forward(request, response);
 	}
-	 
-	 
+	
+	  
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("ctgrPost");
 		request.setCharacterEncoding("utf-8");
-		int ctgr_seq1 = Integer.parseInt(request.getParameter("ctgr_seq1"));
+//		int ctgr_seq1 = Integer.parseInt(request.getParameter("ctgr_seq1"));
 		String ctgr_name = request.getParameter("ctgr_name");
 		int ctgr_use = Integer.parseInt(request.getParameter("ctgr_use"));
-		
+		 
 			
 //		logger.debug("arameter : {}, {}", ctgr_name, ctgr_use);
-			   
+			    
 		// 사용자 정보 등록
-		CtgrVO ctgrVo = new CtgrVO(ctgr_seq1,ctgr_name, ctgr_use);
+		CtgrVO ctgrVo = new CtgrVO(ctgr_name, ctgr_use);
 		int insertCnt = ctgrService.insertCtgr(ctgrVo);
-			
+		
 		
 		// 1건이 입력되었을때 : 정상 - memberList 페이지로 이동
 		if(insertCnt == 1){

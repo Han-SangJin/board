@@ -19,11 +19,12 @@
 	
 <!-- Custom styles for this template -->
 <link href="${pageContext.request.contextPath }/css/signin.css" rel="stylesheet">
-	
+ 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/js.cookie-2.2.1.min.js"></script>
-	  
-<script>   
+<script src="/js/categoryupdate.js"></script>
+<script src="http://code.jquery.com/jquery-latest.js">    
 	$(function(){
 		// remember me cookie 확인
 	 	if(Cookies.get("REMEMBERME")=="Y"){
@@ -31,9 +32,9 @@
 			//$("input[type=checkbox]").attr("checked","checked");
 			$("#inputEmail").val(Cookies.get("mem_id"))
 			//console.log("체크");
-		}  
-   
-   	  
+		}    
+         
+   	       
 		// sign in b버튼이 클릭 되엇을때 이벤크 핸들러
 		$("button").on('click',function(){
 			console.log("button_click");
@@ -44,13 +45,12 @@
 			}else{
 				Cookies.remove("REMEMBERME");
 				Cookies.remove("mem_id");
-			} 
+			}
 			// submit 
 			$("form").submit();
 		})	   
-	})	  
-	      
-	    
+	})	    
+	
  	function getCookieValues(cookieName){
 		var cookieString = document.cookie.split("; ")
 		for(var i=0; i< cookies.length; i++){
@@ -59,15 +59,15 @@
 				if(cookieName == cookieArr[0]){
 				return cookieArr[1];
 			}
-		}   
+		}       
 		// 원하는 쿠키가 없는 경우	function setCookie(cookieName, cookieValue, expires){
 		//"USERNM=brown; path=/; expries=Wed, 07 Oct 2020 00:38:35 GMT;"
 		var today = new Date();
 
-		return "";
-	}	  
-       
-	   
+		return ""; 
+	}	    
+                    
+	        
 	// 쿠키 날짜 설정 
 		// 현재 날짜에서 미래로  + expires 만큼 한 날짜 구하기
 		today.setDate( today.getDate() + expires );
@@ -75,15 +75,15 @@
 		  
 		document.cookie = cookieName + "=" + cookieValue + "; path=/; expires=" + today.toGMTString();
 		console.log(document.cookie);
-	}
+	} 
 		// 해당 쿠키의 expires 속성을 과거 날짜로 변경
 	function deleteCookie(cookieName){
 		setCookie(cookieName, "", -1);	
-	}  
-</script>      
-</head>             
-                    
-<body>
+	}      
+</script>         
+</head>                      
+                                 
+<body>   
   <div class="container">
     <form action="${pageContext.request.contextPath}/login" method="post">
        <h2 class="form-signin-heading">Please sign in</h2>

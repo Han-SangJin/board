@@ -46,7 +46,7 @@ public class CtgrDao implements CtgrDaoI {
 	}
 
 	@Override
-	public int updateMember(CtgrVO ctgrVo) {
+	public int updateCtgr(CtgrVO ctgrVo) {
 		SqlSession sqlSession = MybatisUtil.getSession();
 		int updateCnt = sqlSession.delete("ctgr.updateCtgr", ctgrVo);
 		

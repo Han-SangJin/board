@@ -23,7 +23,7 @@
      
 <body>   
 <!-- 상단 네비게이션바 -->
- 
+  
       
      
 <div class="container-fluid">
@@ -34,8 +34,8 @@
 <div class="col-sm-3 col-md-2 sidebar">
 <%@ include file="/layout/left.jsp" %>
 </div>  
-         
-  
+           
+     
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 			  	     
 
@@ -53,10 +53,10 @@
 			<p class="blog-post-meta">
 				2017.10.30, room 201
 			</p>
- 	 
+ 	 	 	
 			<p>jsp를 통한 웹 프로그래밍 학습</p>
 			<hr>
-			           
+			            
 			<h3>상세내역</h3>
 			<p>JSP과정에서는 다음과 같은 내용을 학습한다.</p>
 			<ul>

@@ -7,6 +7,7 @@
 	<typeAliases>
 		<typeAlias type="kr.or.ddit.category.model.CtgrVO" alias="CtgrVO"/>
 		<typeAlias type="kr.or.ddit.member.model.MemberVO" alias="MemberVO"/>
+		<typeAlias type="kr.or.ddit.board.model.BoardVO" alias="BoardVO"/>
 	</typeAliases>
  
 	
@@ -26,5 +27,6 @@
   <mappers> 
     <mapper resource="kr/or/ddit/db/mapper/category.xml"/>
     <mapper resource="kr/or/ddit/db/mapper/member.xml"/>
+    <mapper resource="kr/or/ddit/db/mapper/board.xml"/>
   </mappers>
 </configuration>

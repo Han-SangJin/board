@@ -3,16 +3,18 @@ package kr.or.ddit.board.model;
 import java.sql.Date;
 
 public class BoardVO {
+	
+	
 	int board_seq1;			//	board_seq1		게시판 시퀸스
 	int parent_seq1;		//	parent_seq1		게시판의 부모 시퀸스값
 	String board_title;		//	board_title		제목
 	String board_cont;		//	board_cont		내용
 	Date board_date;		//	board_date		작성일
 	int board_dep;			//	board_dep		깊이 
+	int board_del;			//  BOARD_DEL		게시판 삭제여부
 	String mem_id;			//	mem_id			작성자 아이디
 	int ctgr_seq1;			//	ctgr_seq1		카테고리 번호
-	int board_del;			//  BOARD_DEL		게시판 삭제여부
-	
+
 	
 	public int getBoard_seq1() {
 		return board_seq1;
