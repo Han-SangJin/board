@@ -10,16 +10,6 @@ public interface MemberServiceI {
 
 	MemberVO getMember(String userId);
 
-	List<MemberVO> selectAllMember();
 	
-	Map<String, Object> selectMemberPageList(PageVO pageVo);
-	
-	int selectMemberTotalCnt();
-	
-	int insertMember(MemberVO memberVo);
-	
-	int deleteMember(String userid);
-	
-	int updateMember(MemberVO memberVo);
 }
  

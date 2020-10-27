@@ -11,8 +11,8 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/x
 	<properties>
 		<project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
 	</properties>
-
-
+	
+ 	
 	<build>
 		<plugins>
 			<plugin>
@@ -25,7 +25,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/x
 			</plugin>
 		</plugins>
 	</build> 
-
+	
 	<repositories>
 		<repository>
 			<id>oracle</id>
@@ -35,7 +35,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/x
 	</repositories>
  
  
-	<dependencies>
+	<dependencies>	
 
 		<!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
 		<dependency>

@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import kr.or.ddit.board.model.BoardVO;
+import kr.or.ddit.common.model.PageVO;
 import kr.or.ddit.db.MybatisUtil;
 
 public class BoardDao implements BoardDaoI {
@@ -26,6 +27,15 @@ public class BoardDao implements BoardDaoI {
 		return selectAllBoard;
 	}
 
+	@Override
+	public List<BoardVO> selectBoardPageList(SqlSession sqlSession, PageVO pageVo) {
+		return sqlSession.selectList("board.selectBoardPageList", pageVo);
+	}
+	
+	@Override
+	public int selectBoardTotalCnt(SqlSession sqlSession) {
+		return sqlSession.selectOne("board.selectBoardTotalCnt");
+	}
 	
 	@Override
 	public int insertBoard(BoardVO boardVo) {

@@ -73,61 +73,51 @@
 				<td></td>
 			</tr>
 		
-		<c:forEach var="i" begin="0" end="${boardsize-1}">
-			<tr id="cont">
-				<td>${ selectAllBoard.get(i).getBoard_seq1() }</td>
-				<td>${ selectAllBoard.get(i).getParent_seq1() }</td>
-				<td><a herf="#">${ selectAllBoard.get(i).getBoard_title() }</a></td>
-				<td>${ selectAllBoard.get(i).getBoard_cont() }</td>
-				<td>${ selectAllBoard.get(i).getBoard_date() }</td>
-				<td>${ selectAllBoard.get(i).getBoard_dep() }</td>
-				<td>${ selectAllBoard.get(i).getMem_id() }</td>
-				<td>${ selectAllBoard.get(i).getCtgr_seq1() }</td>
-				<td>${ selectAllBoard.get(i).getBoard_del() }</td>
-			</tr>
-		</c:forEach>
+		<c:choose>
+			<c:when test="${boardsize > 0}">
+				<c:forEach var="i" begin="0" end="${boardsize-1}">
+					<tr id="cont">
+						<td>${ selectAllBoard.get(i).getBoard_seq1() }</td>
+						<td>${ selectAllBoard.get(i).getParent_seq1() }</td>
+						<td><a herf="#">${ selectAllBoard.get(i).getBoard_title() }</a></td>
+						<td>${ selectAllBoard.get(i).getBoard_cont() }</td>
+						<td>${ selectAllBoard.get(i).getBoard_date() }</td>
+						<td>${ selectAllBoard.get(i).getBoard_dep() }</td>
+						<td>${ selectAllBoard.get(i).getMem_id() }</td>
+						<td>${ selectAllBoard.get(i).getCtgr_seq1() }</td>
+						<td>${ selectAllBoard.get(i).getBoard_del() }</td>
+					</tr>
+				</c:forEach>
+			</c:when>
+			<c:otherwise>
+				글 목록이 존재하지 않습니다.
+			</c:otherwise>
+		</c:choose>
 	</table>
 	
-	   
-	
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-<%-- 	 
-	 	<table>	
-	<% 	 
-		int memSize = selectAllBoard.size();
-		System.out.println(memSize);
+
+	<a href="#" class="btn btn-default pull-right">새로운 글 등록</a>
 		
-		if(memSize > 0){
-			for(int i=0; i<memSize; i++){
-	%>			 
-		<tr data-userid="<%= selectAllBoard.get(i).getBoard_seq1() %>">
-			<td><%= selectAllBoard.get(i).getBoard_seq1() %></td>
-		</tr>	  
-	<% 			  
-			}
-		}else{ // 회원정보가 존재하지 않을 경우...
-	%> 
-		<tr>
-			<td colspan="2">회원정보가 존재하지 않습니다.</td>
-		</tr>
-	<%	
-		}
-	%>	
-	</table>	  
 		 
- --%>
+ 	page : ${page}
+ 	pages : ${pages}
+ 	ctgr_seq1 : ${ctgr_seq1}
+	<div class="text-center">
+		<ul class="pagination">
+			<c:forEach var="i" begin="1" end="${pages }">
+				<c:choose>
+						 
+					<c:when test="${i == page}">
+						<li class="active"><span>${i}</span></li>
+					</c:when>
+					<c:otherwise>
+						<li><a href="/boardselectallservlet?page=${i}&ctgr_seq1=${ctgr_seq1}">${i}</a></li>
+					</c:otherwise>
+						 
+				</c:choose>				
+			</c:forEach>
+		</ul>
+	</div>
 
 
 </body>

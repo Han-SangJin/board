@@ -11,17 +11,7 @@ public interface MemberDaoI {
 	
 	MemberVO getMember(String memId);
 	
-	List<MemberVO> selectAllMember();
-	
-	List<MemberVO> selectMemberPageList(SqlSession sqlSession, PageVO pageVo);
-	
-	int selectMemberTotalCnt(SqlSession sqlSession);
-	
-	int insertMember(MemberVO memberVo);
-	
-	int deleteMember(String memId);
-	
-	int updateMember(MemberVO memberVo);
+
 	
 //	private String memId;		// 아이디		MEM_ID
 //	private String memPass;		// 비밀번호	MEM_PASS

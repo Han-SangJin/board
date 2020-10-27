@@ -8,8 +8,9 @@
 		<typeAlias type="kr.or.ddit.category.model.CtgrVO" alias="CtgrVO"/>
 		<typeAlias type="kr.or.ddit.member.model.MemberVO" alias="MemberVO"/>
 		<typeAlias type="kr.or.ddit.board.model.BoardVO" alias="BoardVO"/>
+		<typeAlias type="kr.or.ddit.common.model.PageVO" alias="PageVO"/>
 	</typeAliases>
- 
+  
 	
   <environments default="development">
     <environment id="development">

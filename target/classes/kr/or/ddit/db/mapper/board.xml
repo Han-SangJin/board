@@ -4,20 +4,42 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="board">
   
-  
-  <select id="selectAllBoard" resultType="BoardVO" parameterType="Int">
+  <!-- 4 단계로 답글 깊이 설정 하면서 전체 목록 가져오기 -->
+  <select id="selectAllBoard" resultType="BoardVO" parameterType="int">
 		<!-- select * from board1 -->
 	SELECT * 
-	FROM 
+	  FROM 
 	    (SELECT *
-	    FROM
+	       FROM
 	        (SELECT CONNECT_BY_ROOT(board_seq1) board_dep, board_seq1, LPAD(' ',(LEVEL-1)*4) || board_title board_title, board_cont, BOARD_DATE, MEM_ID, PARENT_SEQ1, BOARD_DEL, CTGR_SEQ1
-	          FROM board1
-	        START WITH parent_seq1 IS NULL
-	        CONNECT BY PRIOR board_seq1 = parent_seq1)
-	            ORDER BY board_dep DESC, board_seq1 ASC)
-	                where ctgr_seq1 = #{ ctgr_seq1 }
+	            FROM board1
+	          START WITH parent_seq1 IS NULL
+	          CONNECT BY PRIOR board_seq1 = parent_seq1)
+	              ORDER BY board_dep DESC, board_seq1 ASC)
+	   WHERE ctgr_seq1 = #{ctgr_seq1}
   </select> 
   
+  
+    <!--  페이지 설정  -->
+	<select id="selectBoardPageList" resultType="BoardVO" parameterType="PageVO">
+	   SELECT * 
+		  FROM 	
+			(SELECT * 
+			  FROM 
+				(SELECT ROWNUM rn, a.* 
+				 FROM
+				    (SELECT *
+				     FROM board1
+				     ORDER BY  board_seq1) a) 
+			WHERE rn BETWEEN (#{page} - 1) * #{pageSize} + 1 AND #{page} * #{pageSize})
+		 WHERE ctgr_seq1 = #{ctgr_seq1}
+	</select>
+	
+	
+	<select id="selectBoardTotalCnt" resultType="int">
+    	SELECT COUNT (*) FROM board1 <!-- WHERE ctgr_seq1 = #{ctgr_seq1}  -->
+   </select>
+   	
+   
 </mapper> 
  

@@ -2,6 +2,7 @@ package kr.or.ddit.board.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import kr.or.ddit.board.model.BoardVO;
 import kr.or.ddit.board.service.BoardService;
 import kr.or.ddit.board.service.BoardServiceI;
+import kr.or.ddit.common.model.PageVO;
 
 @WebServlet("/boardselectallservlet")
 public class BoardSelectAllServlet extends HttpServlet {
@@ -27,18 +29,35 @@ public class BoardSelectAllServlet extends HttpServlet {
  	 
 	 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//page
+		String page_str = request.getParameter("page");
+		int page = page_str == null ? 1 : Integer.parseInt(page_str);
+		request.setAttribute("page", page);
+		
+		//pageSize
+		String pageSize_str = request.getParameter("pageSize");
+		int pageSize = pageSize_str == null ? 10 : Integer.parseInt(pageSize_str);
+		request.setAttribute("pageSize", pageSize);
+		
+		// ctge_seq1
 		int ctgr_seq1 = Integer.parseInt(request.getParameter("ctgr_seq1"));
-		List<BoardVO> selectAllBoard = boardService.selectAllBoard(ctgr_seq1);
-		System.out.println("ctgr_seq1"+ctgr_seq1);
-		 
-		request.setAttribute("selectAllBoard", selectAllBoard);
+		System.out.println("boardselectallservlet : " +ctgr_seq1);
+		request.setAttribute("ctgr_seq1", ctgr_seq1);
+		
+		// pageVo : page, pageSize
+		PageVO pageVo = new PageVO(page, pageSize, ctgr_seq1);
+			
+		
+		// 결과를 화면(브라우져)에 출력하기
+		Map<String, Object> map = boardService.selectBoardPageList(pageVo);
+		request.setAttribute("selectAllBoard", map.get("selectAllBoard"));
+		request.setAttribute("pages", map.get("pages"));
+		
 		request.getRequestDispatcher("/board/selectAllBoard.jsp").forward(request, response);
 	}
-	   
-	  
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
-  
 } 
  
