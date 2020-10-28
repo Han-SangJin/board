@@ -33,7 +33,7 @@
 			$("#inputEmail").val(Cookies.get("mem_id"))
 			//console.log("체크");
 		}         
-              
+                     
 		// sign in b버튼이 클릭 되엇을때 이벤크 핸들러
 		$("button").on('click',function(){
 			console.log("button_click");
@@ -47,8 +47,8 @@
 			}
 			// submit 
 			$("form").submit();
-		})	   
-	})	    
+		})	     
+	})	              
 	         
  	function getCookieValues(cookieName){
 		var cookieString = document.cookie.split("; ")
@@ -80,8 +80,8 @@
 		setCookie(cookieName, "", -1);	
 	}        
 </script>            
-</head>                             
-                    
+</head>                                  
+                                
                                               
 <body>    
   <div class="container">

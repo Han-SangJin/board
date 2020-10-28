@@ -63,6 +63,8 @@
  	pages : ${pages}
  	ctgr_seq1 : ${ctgr_seq1}
  	
+ 	<c:set var="ctgr_seq1" value="${ctgr_seq1}" scope="session"/>
+ 	
 
  	 
 	<br><br>
@@ -74,7 +76,7 @@
 				<td>제목</td>
 				<td>내용</td>
 				<td>작성일</td>
-				<td>깊이</td>
+				<td>원글의 시퀸스</td>
 				<td>아이디</td>
 				<td>카테고리 번호</td>
 				<td>삭제여부</td>
@@ -100,7 +102,8 @@
 							<c:otherwise>
 								<td>${ selectAllBoard.get(i).getBoard_seq1() }</td>
 								<td>${ selectAllBoard.get(i).getParent_seq1() }</td>
-								<td><a href="/boardselectservlet?board_seq1=${selectAllBoard.get(i).getBoard_seq1()}&ctgr_seq1=${selectAllBoard.get(i).getCtgr_seq1()}">${selectAllBoard.get(i).getBoard_title()}</a></td>
+								<%-- <td><a href="/boardselectservlet?board_seq1=${selectAllBoard.get(i).getBoard_seq1()}&ctgr_seq1=${selectAllBoard.get(i).getCtgr_seq1()}">${selectAllBoard.get(i).getBoard_title()}</a></td>  --%>
+								<td><a href="/reviewselectallservlet?board_seq1=${selectAllBoard.get(i).getBoard_seq1()}">${selectAllBoard.get(i).getBoard_title()}</a></td>
 								<td>${ selectAllBoard.get(i).getBoard_cont() }</td>
 								<td>${ selectAllBoard.get(i).getBoard_date() }</td>
 								<td>${ selectAllBoard.get(i).getBoard_dep() }</td>
