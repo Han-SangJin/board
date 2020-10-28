@@ -17,4 +17,4 @@ var updateCtgr = function(ctgr_seq1, ctgr_use){
 			
 	})
 }
-	 
+	  

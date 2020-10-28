@@ -15,7 +15,7 @@ public interface BoardDaoI {
 	
 	List<BoardVO> selectBoardPageList(SqlSession sqlSession, PageVO pageVo);
 	
-	int selectBoardTotalCnt(SqlSession sqlSession);
+	int selectBoardTotalCnt(SqlSession sqlSession, int ctgr_seq1);
 	 
 	int insertBoard(BoardVO boardVo);
 	

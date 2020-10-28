@@ -43,8 +43,8 @@ public class CtgrInsertServlet extends HttpServlet {
 //		int ctgr_seq1 = Integer.parseInt(request.getParameter("ctgr_seq1"));
 		String ctgr_name = request.getParameter("ctgr_name");
 		int ctgr_use = Integer.parseInt(request.getParameter("ctgr_use"));
-		 
-			
+		
+		
 //		logger.debug("arameter : {}, {}", ctgr_name, ctgr_use);
 			    
 		// 사용자 정보 등록
@@ -56,6 +56,7 @@ public class CtgrInsertServlet extends HttpServlet {
 		if(insertCnt == 1){
 			List<CtgrVO> ctgrList = ctgrService.selectAllCtgr();
 			request.setAttribute("ctgrList", ctgrList);
+			
 			request.getRequestDispatcher("/category/ctgrinsert.jsp").forward(request, response);
 //			response.sendRedirect(request.getContextPath() + "/ctgrmake");
 		}

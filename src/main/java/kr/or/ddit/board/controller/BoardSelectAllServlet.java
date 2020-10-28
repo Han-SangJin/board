@@ -1,6 +1,7 @@
 package kr.or.ddit.board.controller;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -26,18 +27,21 @@ public class BoardSelectAllServlet extends HttpServlet {
 	public void init() throws ServletException {
 		boardService = new BoardService();
 	}
- 	 
-	 
+ 	
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//page
 		String page_str = request.getParameter("page");
 		int page = page_str == null ? 1 : Integer.parseInt(page_str);
 		request.setAttribute("page", page);
+		System.out.println("page : " + page);
 		
 		//pageSize
 		String pageSize_str = request.getParameter("pageSize");
-		int pageSize = pageSize_str == null ? 10 : Integer.parseInt(pageSize_str);
+		System.out.println("pageSize_str : " + pageSize_str);
+		int pageSize = pageSize_str == null ? 5 : Integer.parseInt(pageSize_str);
 		request.setAttribute("pageSize", pageSize);
+		System.out.println("pageSize : " + pageSize);
 		
 		// ctge_seq1
 		int ctgr_seq1 = Integer.parseInt(request.getParameter("ctgr_seq1"));
@@ -46,7 +50,6 @@ public class BoardSelectAllServlet extends HttpServlet {
 		
 		// pageVo : page, pageSize
 		PageVO pageVo = new PageVO(page, pageSize, ctgr_seq1);
-			
 		
 		// 결과를 화면(브라우져)에 출력하기
 		Map<String, Object> map = boardService.selectBoardPageList(pageVo);
@@ -54,6 +57,7 @@ public class BoardSelectAllServlet extends HttpServlet {
 		request.setAttribute("pages", map.get("pages"));
 		
 		request.getRequestDispatcher("/board/selectAllBoard.jsp").forward(request, response);
+		
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

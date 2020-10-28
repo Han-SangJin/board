@@ -58,6 +58,7 @@
    
     <div class="col-sm-3 sidenav">
       <h4>블로그</h4>
+      <%= session.getAttribute("S_MEMBER") %>
       
       
       <%-- <c:forEach var="i" begin="0" end="${fn:length(ctgrList)-1}">

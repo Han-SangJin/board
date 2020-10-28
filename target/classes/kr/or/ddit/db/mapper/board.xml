@@ -3,43 +3,77 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="board">
-  
-  <!-- 4 단계로 답글 깊이 설정 하면서 전체 목록 가져오기 -->
-  <select id="selectAllBoard" resultType="BoardVO" parameterType="int">
-		<!-- select * from board1 -->
-	SELECT * 
-	  FROM 
-	    (SELECT *
-	       FROM
-	        (SELECT CONNECT_BY_ROOT(board_seq1) board_dep, board_seq1, LPAD(' ',(LEVEL-1)*4) || board_title board_title, board_cont, BOARD_DATE, MEM_ID, PARENT_SEQ1, BOARD_DEL, CTGR_SEQ1
-	            FROM board1
-	          START WITH parent_seq1 IS NULL
-	          CONNECT BY PRIOR board_seq1 = parent_seq1)
-	              ORDER BY board_dep DESC, board_seq1 ASC)
-	   WHERE ctgr_seq1 = #{ctgr_seq1}
-  </select> 
+	 
+	<!-- 게시판 들어가기 --> 
+	<select id="selectBoard" resultType="BoardVO" parameterType="int">
+		SELECT * FROM board1 WHERE board_seq1 = #{board_seq1}
+	</select>
   
   
-    <!--  페이지 설정  -->
+    <!-- 계층형식 리스트 가져오기 페이지 설정은 안됨 -->
+	<select id="selectAllBoard" resultType="BoardVO" parameterType="int">
+		SELECT * 
+			FROM 
+			    (SELECT *
+			    FROM
+			        (SELECT CONNECT_BY_ROOT(board_seq1) board_dep, board_seq1, LPAD(' ',(LEVEL-1)*4) || board_title board_title, board_cont, board_date, mem_id, parent_seq1, board_del, ctgr_seq1
+			          FROM board1
+			        START WITH parent_seq1 IS NULL
+			        CONNECT BY PRIOR board_seq1 = parent_seq1)
+			            ORDER BY board_dep DESC, board_seq1 ASC)
+			 where ctgr_seq1 = #{ctgr_seq1}
+	</select> 
+    
+    
+  	<!-- 계단 형식 페이지 리스트 가져오기 -->
 	<select id="selectBoardPageList" resultType="BoardVO" parameterType="PageVO">
-	   SELECT * 
-		  FROM 	
-			(SELECT * 
-			  FROM 
-				(SELECT ROWNUM rn, a.* 
-				 FROM
-				    (SELECT *
-				     FROM board1
-				     ORDER BY  board_seq1) a) 
-			WHERE rn BETWEEN (#{page} - 1) * #{pageSize} + 1 AND #{page} * #{pageSize})
-		 WHERE ctgr_seq1 = #{ctgr_seq1}
+		   SELECT * 
+		        FROM 
+		        (SELECT ROWNUM rn, a.* 
+		            FROM
+		        (SELECT *
+		            FROM
+		            (SELECT CONNECT_BY_ROOT(board_seq1) board_dep, board_seq1, LPAD(' ',(LEVEL-1)*4) || board_title board_title, board_cont, board_date, mem_id, parent_seq1, board_del, ctgr_seq1
+		                FROM board1
+		                WHERE ctgr_seq1 = #{ctgr_seq1} 
+		                START WITH parent_seq1 IS NULL
+		                CONNECT BY PRIOR board_seq1 = parent_seq1)
+		        ORDER BY board_dep DESC, board_seq1 ASC) a) 
+		    WHERE rn BETWEEN (#{page} - 1) * #{pageSize} + 1 AND #{page} * #{pageSize}
 	</select>
 	
 	
-	<select id="selectBoardTotalCnt" resultType="int">
-    	SELECT COUNT (*) FROM board1 <!-- WHERE ctgr_seq1 = #{ctgr_seq1}  -->
-   </select>
+	<!-- 게시글 총 갯수 -->
+	<select id="selectBoardTotalCnt" resultType="int" parameterType="int"> 
+    	SELECT COUNT (*) FROM board1 WHERE ctgr_seq1 = #{ctgr_seq1} 
+    </select>
+    
+    
+    <!-- 게시판 등록 -->
+	<insert id="insertBoard" parameterType="BoardVO">
+   		INSERT INTO board1 VALUES(board_seq.nextval, null, #{board_title}, #{board_cont}, sysdate , board_seq.nextval , 1 , #{mem_id} , #{ctgr_seq1})
+   	</insert>  
    	
-   
-</mapper> 
- 
+   	 
+   	 <!-- 게시판 삭제   board_del 값 2로 변경 -->
+   	<update id="deleteBoard" parameterType="int" >
+   		 UPDATE board1 SET board_del = 2 WHERE board_seq1 = #{board_seq1}
+    </update>
+   	 
+   	 
+   	
+<!--    	insert into board1 values(board_seq.nextval,null,'21째글입니다','내용',sysdate,1,1,'a001',1);
+	   int board_seq1; // board_seq1 게시판 시퀸스 						sys
+	 * int parent_seq1; // parent_seq1 답글 달때 부모 시퀸스값  			새로글작성 할때 null, 답글달때 board_seq1 값 가져오기
+	 * String board_title; // board_title 제목 
+	 * String board_cont; // board_cont 내용 
+	  Date board_date; // board_date 작성일 							sys	
+	  int board_dep; // board_dep 답글 작성한 부모 시퀸스  4까지 가능	새로작성시는 본인 게시판 시퀸스 / 답글 작성시 - 답글1 = 1,  답글의 답글 =2, 답글의 답글의 답글 =3				
+	  int board_del; // BOARD_DEL 게시판 삭제여부 						1 사용  2 삭제
+	  String mem_id; // mem_id 작성자 아이디 							세션값 가져오기
+	  int ctgr_seq1; // ctgr_seq1 카테고리 번호							세션값 가져오기
+	 
+	 * getBoard_seq1() getParent_seq1() getBoard_title() getBoard_cont()
+	 * getBoard_date() getBoard_dep() getMem_id() getCtgr_seq1() getBoard_del()
+   	 -->
+</mapper>

@@ -7,34 +7,46 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class BoardDeleteServlet
- */
+import kr.or.ddit.board.model.BoardVO;
+import kr.or.ddit.board.service.BoardService;
+import kr.or.ddit.board.service.BoardServiceI;
+
 @WebServlet("/boarddeleteservlet")
 public class BoardDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public BoardDeleteServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	
+	private BoardServiceI boardService;
+	
+	  
+ 	@Override
+	public void init() throws ServletException {
+		boardService = new BoardService();
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
+		int board_seq1 = Integer.parseInt(request.getParameter("board_seq1"));
+		System.out.println(board_seq1);
+		
+		int insertCnt = boardService.deleteBoard(board_seq1);
+		
+		 
+		if(insertCnt == 1){
+			int ctgr_seq1 = Integer.parseInt(request.getParameter("ctgr_seq1"));
+			request.getRequestDispatcher("/boardselectallservlet").forward(request, response);
+		}
+			
+		// 1건이 아닐때 : 비정상 - 사용자가 데이터를 다시 업력할 수 있도록 등록페이지로 이동
+		
+		else {
+			doGet(request,response);
+		}
+		
+		
+		
+	}
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

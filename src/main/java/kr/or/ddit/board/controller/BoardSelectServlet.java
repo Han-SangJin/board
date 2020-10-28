@@ -7,34 +7,37 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Servlet implementation class BoardGetServlet
- */
+import kr.or.ddit.board.model.BoardVO;
+import kr.or.ddit.board.service.BoardService;
+import kr.or.ddit.board.service.BoardServiceI;
+
 @WebServlet("/boardselectservlet")
 public class BoardSelectServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public BoardSelectServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	
+	private BoardServiceI boardService;
+	
+	  
+ 	@Override
+	public void init() throws ServletException {
+		boardService = new BoardService();
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+ 	 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	
+		int board_seq1 = Integer.parseInt(request.getParameter("board_seq1"));
+		BoardVO boardVo = boardService.selectBoard(board_seq1);
+		
+		if(board_seq1 > 0) {	
+			int ctgr_seq1 = Integer.parseInt(request.getParameter("board_seq1"));
+			request.setAttribute("ctgr_seq1", ctgr_seq1);
+		}
+		
+		request.setAttribute("boardVo", boardVo);
+		request.getRequestDispatcher("/board/selectBoard.jsp").forward(request, response);
+	}
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

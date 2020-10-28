@@ -23,10 +23,9 @@ public class BoardService implements BoardServiceI {
 	
 	@Override
 	public BoardVO selectBoard(int board_seq1) {
-		// TODO Auto-generated method stub
-		return null;
+		return boardDao.selectBoard(board_seq1);
 	}
- 
+	
 	@Override
 	public List<BoardVO> selectAllBoard(int ctgr_seq1) {
 		return boardDao.selectAllBoard(ctgr_seq1);
@@ -42,8 +41,8 @@ public class BoardService implements BoardServiceI {
 			 
 		// 15건 ==(페이지사이즈 7)==> 3페이지
 		// 15/7 ==  2.14.. ==(올림)==> 3페이지 
-		int totalCnt = boardDao.selectBoardTotalCnt(sqlSession);
-		int pages = (int)Math.ceil((double)totalCnt/10);
+		int totalCnt = boardDao.selectBoardTotalCnt(sqlSession, ctgr_seq1);
+		int pages = (int)Math.ceil((double)totalCnt/5);
 		System.out.println("pages" + pages);
 		map.put("pages", pages);
 		
@@ -52,21 +51,21 @@ public class BoardService implements BoardServiceI {
 	} 
  
 	@Override
-	public int selectBoardTotalCnt() {
+	public int selectBoardTotalCnt(int ctgr_seq1) {
 		SqlSession sqlSession = MybatisUtil.getSession();
-		return boardDao.selectBoardTotalCnt(sqlSession);
+		return boardDao.selectBoardTotalCnt(sqlSession, ctgr_seq1);
 	}
 	
 	@Override
 	public int insertBoard(BoardVO boardVo) {
-		// TODO Auto-generated method stub
-		return 0;
+		SqlSession sqlSession = MybatisUtil.getSession();
+		return boardDao.insertBoard(boardVo); 
 	}
 
 	@Override
 	public int deleteBoard(int board_seq1) {
-		// TODO Auto-generated method stub
-		return 0;
+		SqlSession sqlSession = MybatisUtil.getSession();
+		return boardDao.deleteBoard(board_seq1);
 	}
 
 	@Override

@@ -66,10 +66,11 @@ public class LoginServlet extends HttpServlet {
 		else if(memberVo.getMem_pass().equals(mem_pass)) {
 			 
 			System.out.println("접속성공!!!");
+			request.getSession().setAttribute("mem_id", mem_id);
 			request.getSession().setAttribute("S_MEMBER", memberVo);
 			request.getRequestDispatcher("/board/board.jsp").forward(request, response);
 		}
-		   
+		
 		// 쿠키정보
 		Cookie[] cookies = request.getCookies();
 		for(Cookie cookie : cookies) {

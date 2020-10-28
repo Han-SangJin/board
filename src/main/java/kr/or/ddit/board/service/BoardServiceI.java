@@ -14,7 +14,7 @@ public interface BoardServiceI {
 	
 	Map<String, Object> selectBoardPageList(PageVO pageVo);
 	
-	int selectBoardTotalCnt();
+	int selectBoardTotalCnt(int ctgr_seq1);
 	
 	int insertBoard(BoardVO boardVo);
 	
