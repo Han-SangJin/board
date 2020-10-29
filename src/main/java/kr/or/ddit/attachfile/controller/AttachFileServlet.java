@@ -1,5 +1,6 @@
-package kr.or.ddit.fileUpload;
+package kr.or.ddit.attachfile.controller;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -19,10 +20,12 @@ import org.slf4j.LoggerFactory;
 // 10MB = 1024 * 1024 * 15
 @WebServlet("/fileUpload")
 @MultipartConfig(maxFileSize = 1024*1024*5, maxRequestSize = 1024*1024*26 )
-public class FileUploadServlet extends HttpServlet {
+public class AttachFileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	private static final Logger logger = LoggerFactory.getLogger(FileUploadServlet.class);
+	private static final Logger logger = LoggerFactory.getLogger(AttachFileServlet.class);
+	
+	
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -30,37 +33,17 @@ public class FileUploadServlet extends HttpServlet {
 		request.getRequestDispatcher("/fileUpload/uploadView.jsp").forward(request, response);
 	}
 
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		logger.debug("post request.getContentType() : {}", request.getContentType());
-		
 		String userid = request.getParameter("userid");
 		String img = request.getParameter("img");
-		 
- 
-//		BufferedReader br = request.getReader();
-//		char[] buffer = new char[512];
-//		while( br.read(buffer) != -1 ) {
-//			for(int i = 0; i < buffer.length; i++) {
-//				System.out.print(buffer[i]);
-//			}
-//		}
-		 
-		
-		 
-		logger.debug("userid : {}", userid);
-		logger.debug("img : {}", img);
-		
 		Part imgPart = request.getPart("img");
-		logger.debug("getName() : {}", imgPart.getName());
-		logger.debug("getSize() : {}", imgPart.getSize());
-		logger.debug("getContentType() : {}", imgPart.getContentType());
-		logger.debug("content-Disposition : {}", imgPart.getHeader("Content-Disposition"));
 		
-		String fileName = FileUploadUtil.getFilename(imgPart.getHeader("Content-Disposition"));
+		String fileName = AttachFileUtil.getFilename(imgPart.getHeader("Content-Disposition"));
 		
 		imgPart.write("D:\\upload\\" + fileName);
 		imgPart.delete();
-
+		
 	}
 
 }

@@ -12,6 +12,17 @@ public class ReviewVO {
 	private int board_seq1;		// 리뷰가 달린 게시글의 번호
 	
 	
+	public ReviewVO() {
+		
+	}
+	
+	
+	public ReviewVO(String revw_cont, String mem_id, int board_seq1) {
+		this.revw_cont = revw_cont;
+		this.mem_id = mem_id;
+		this.board_seq1 = board_seq1;
+	}
+	
 	
 	public int getRevw_seq1() {
 		return revw_seq1;

@@ -1,3 +1,4 @@
+<%@page import="kr.or.ddit.attachfile.model.AttachVO"%>
 <%@page import="kr.or.ddit.review.model.ReviewVO"%>
 <%@page import="java.util.List"%>
 <%@page import="kr.or.ddit.member.model.MemberVO"%>
@@ -7,19 +8,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%> 
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-
- 
-<% 
-    List<ReviewVO> reviewList = (List<ReviewVO>) session.getAttribute("reviewList");
-	int board_seq1 = Integer.parseInt(request.getParameter("board_seq1"));
-%>   
- 
-	<c:set var="mem_id" scope="session" value="<%= session.getAttribute("mem_id") %>"/>  
-	<c:out value="${mem_id}"/> 
-	
-	<c:set var="boardsize" value="<%= reviewList.size() %>"/>
-	<fmt:formatNumber value="${boardsize}" type="number" var="numberType" />
-	
+	  
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,6 +28,24 @@
 	#contdiv{
 		height : 400px;
 	}
+	#revwBtn{
+		margin-left : 480px;
+	}
+	#revw_cont{
+		width : 550px;
+		height : 150px;
+	}
+	table {
+		width: 60%;
+		border-top: 1px solid #444444;
+    	border-collapse: collapse;
+	}
+	tr, td{
+		font-size :22px;
+		border-bottom: 1px solid #444444;
+    	padding: 10px;
+	}
+
 </style>
 </head>
 <body>
@@ -79,11 +86,9 @@
 			</div>
 		</div> --%> 
 		<h2>게시판 조회</h2>
-			mem_id : <%= session.getAttribute("mem_id") %>
-			ctgr_seq1 : <%= request.getParameter("ctgr_seq1") %>
-						<c:set scope="request" var="ctgr_seq1" value="<%= request.getParameter("ctgr_seq1") %>"/>
-						
+		<c:set scope="request" var="ctgr_seq1" value="<%= request.getParameter("ctgr_seq1") %>"/>
 		<hr>
+		
 		  
 		<div class="boarddiv">
 			<label for="board_seq1" class="dlabel">게시글 번호 : </label>
@@ -153,11 +158,89 @@
 
 
 
-	<div>
 
-	
-	<table border="1">
-		<tr id=title>
+
+
+
+
+
+
+
+				<!--		 파 	  		일	   		목	  		록		 	-->
+
+
+<h3> 파 일 목 록 </h3>
+<div>
+	<table>
+		<tr>
+			<td>파일 시퀀스</td>
+			<td>시퀸스 이름</td>
+			<td>파일 이름</td>
+			<td>게시판 번호</td>
+		</tr>
+		
+		<c:choose>
+			
+			<c:when test="${attachList.size() > 0}">
+				<c:forEach var="i" begin="0" end="${attachList.size()-1}">
+					<tr>
+
+						<td>${attachList.get(i).getFile_seq1()}</td>
+						<td>${attachList.get(i).getFile_name()}</td>
+						<td>${attachList.get(i).getFile_real_name()}</td>
+						<td>${attachList.get(i).getBoard_seq1()}</td>
+					
+					</tr>	
+				</c:forEach>
+			</c:when>
+			<c:otherwise>
+				파일 목록이 존재하지 않습니다.
+			</c:otherwise>
+		
+		</c:choose>
+	</table>
+</div>
+<br><br><br><br><br><br>
+<hr>
+
+
+
+
+
+
+
+
+
+
+
+					<!-- 		댓 	 	 글   		목   		록   -->
+
+
+	<div>
+		<h3> 댓 글 작 성</h3>
+						<!-- 댓  글  작  성 -->
+						
+		<form action="reviewinsertservlet" method="post">
+		
+			<!-- <input type="text" name="revw_cont" id="revw_cont" value=""/>	 -->
+			<textarea id="revw_cont" name="revw_cont"></textarea>
+			<input type="text" name="mem_id" value="<%= session.getAttribute("mem_id") %>" style="display:none">
+			<input type="text" name="board_seq1" value="<%= request.getParameter("board_seq1") %>" style="display:none">
+			
+			<br><br>					
+			<input id="revwBtn" type="submit" value="작성완료">							
+			<br><br><br><br><br><br>
+			 
+		</form>
+		
+		
+		
+		
+		
+		
+						<!-- 댓  글  목  록 -->
+	<table>
+		<tr>
 			<td>댓글 시퀀스</td>
 			<td>댓글 내용</td>
 			<td>작성 날짜</td>
@@ -166,14 +249,14 @@
 			<td>게시판 번호</td>
 			<td>삭제</td>
 		</tr>
-		
+		<h3> 댓 글 목 록</h3>
 		<c:choose>
 			
-			<c:when test="${boardsize > 0}">
-				<c:forEach var="i" begin="0" end="${boardsize-1}">
-					<tr id="cont">
+			<c:when test="${reviewList.size() > 0}">
+				<c:forEach var="i" begin="0" end="${reviewList.size()-1}">
+					<tr>
 						<c:choose>
-	
+							
 							<c:when test="${reviewList.get(i).getRevw_del() == 2}">
 								<td>${reviewList.get(i).getRevw_seq1()}</td>
 								<td> -- 삭제된 댓글 입니다. -- </td>
@@ -195,7 +278,7 @@
 									<td><a href="/reviewdeleteservlet?revw_seq1=${reviewList.get(i).getRevw_seq1()}&board_seq1=${reviewList.get(i).getBoard_seq1()}"><input type="button" value="삭제"></a></td>
 								</c:if>
 							</c:otherwise>
-	
+		
 						</c:choose>
 					</tr>	
 				</c:forEach>
@@ -208,6 +291,7 @@
 		</c:choose>
 	</table>
 	</div>
-
+<br><br><br><br><br><br>
+<hr>
 </body>
 </html>

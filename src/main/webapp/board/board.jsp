@@ -5,10 +5,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
     
-<%-- <%
+ <%
     	List<CtgrVO> ctgrList = (List<CtgrVO>) request.getAttribute("ctgrList");
     %>        
-<c:set var="ctgrList" value="<%=ctgrList %>"/> --%>     
+<c:set var="ctgrList" value="<%=ctgrList %>"/>    
      
 <!DOCTYPE html>
 <html lang="UTF-8">

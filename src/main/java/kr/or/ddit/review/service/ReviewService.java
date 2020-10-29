@@ -22,9 +22,17 @@ public class ReviewService implements ReviewServiceI {
 		return reviewDao.selectAllReview(board_seq1);
 	}
 
+	
 	@Override
 	public int deleteReview(int revw_seq1) {
 		SqlSession sqlSession = MybatisUtil.getSession();
 		return reviewDao.deleteReview(revw_seq1);
+	}
+
+	
+	@Override
+	public int insertReview(ReviewVO reviewVo) {
+		SqlSession sqlSession = MybatisUtil.getSession();
+		return reviewDao.insertReview(reviewVo); 
 	}
 }

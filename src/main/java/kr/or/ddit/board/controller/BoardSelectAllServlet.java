@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kr.or.ddit.board.model.BoardVO;
 import kr.or.ddit.board.service.BoardService;
@@ -30,6 +31,7 @@ public class BoardSelectAllServlet extends HttpServlet {
  	
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		//page
 		String page_str = request.getParameter("page");
 		int page = page_str == null ? 1 : Integer.parseInt(page_str);
@@ -42,12 +44,12 @@ public class BoardSelectAllServlet extends HttpServlet {
 		int pageSize = pageSize_str == null ? 5 : Integer.parseInt(pageSize_str);
 		request.setAttribute("pageSize", pageSize);
 		System.out.println("pageSize : " + pageSize);
-		
+		 
 		// ctge_seq1
 		int ctgr_seq1 = Integer.parseInt(request.getParameter("ctgr_seq1"));
 		System.out.println("boardselectallservlet : " +ctgr_seq1);
 		request.setAttribute("ctgr_seq1", ctgr_seq1);
-		
+			    
 		// pageVo : page, pageSize
 		PageVO pageVo = new PageVO(page, pageSize, ctgr_seq1);
 		

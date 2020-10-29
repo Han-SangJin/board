@@ -10,5 +10,6 @@ public interface ReviewServiceI {
 	
 	int deleteReview(int revw_seq1);
 
+	int insertReview(ReviewVO reviewVo);
 }
  

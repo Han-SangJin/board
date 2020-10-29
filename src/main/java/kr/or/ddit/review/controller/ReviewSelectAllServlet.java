@@ -35,9 +35,14 @@ public class ReviewSelectAllServlet extends HttpServlet {
 		List<ReviewVO> reviewList = reviewService.selectAllReview(board_seq1);
 		System.out.println("reviewList.size() : " +reviewList.size());
 		
-		request.getSession().setAttribute("board_seq1", board_seq1);
-		request.getSession().setAttribute("reviewList", reviewList);
-		request.getRequestDispatcher("/boardselectservlet").forward(request, response);
+		request.setAttribute("reviewList", reviewList);
+		request.getRequestDispatcher("/attachselectallservlet").forward(request, response);
 	}
+ 	
+ 	
+ 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+ 	
 
 }

@@ -33,6 +33,24 @@ public class ReviewDao implements ReviewDaoI {
 		sqlSession.close();
 		return deleteCnt;
 	}
+
+	
+	@Override
+	public int insertReview(ReviewVO reviewVo) {
+		SqlSession sqlSession = MybatisUtil.getSession();
+		int insertCnt = 0;
+
+		insertCnt = sqlSession.insert("review.insertReview", reviewVo);
+		
+		if(insertCnt == 1) {
+			sqlSession.commit();
+		}else {
+			sqlSession.rollback();
+		}
+			
+		sqlSession.close();
+		return insertCnt;
+	}
 	
 
 }
