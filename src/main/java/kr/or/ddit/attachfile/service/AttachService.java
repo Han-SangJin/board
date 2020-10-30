@@ -32,9 +32,9 @@ public class AttachService implements AttachServiceI {
 	}
 
 	@Override
-	public int insertAttach(AttachVO attachVo) {
+	public int insertAttach(List<AttachVO> attachList) {
 		SqlSession sqlSession = MybatisUtil.getSession();
-		return attachDao.insertAttach(attachVo);
+		return attachDao.insertAttach(attachList);
 	}
-
+	
 }

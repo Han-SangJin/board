@@ -17,9 +17,11 @@ public class AttachVO {
 		
 	}
 	
-	public AttachVO(String filePath, String realFilename) {
-		
+	public AttachVO(String file_name, String file_real_name) {
+		this.file_name = file_name;
+		this.file_real_name = file_real_name;
 	}
+	
 	
 	public int getFile_seq1() {
 		return file_seq1;

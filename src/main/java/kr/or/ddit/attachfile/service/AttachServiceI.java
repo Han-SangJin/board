@@ -10,5 +10,5 @@ public interface AttachServiceI {
 	
 	int deleteAttach(int board_seq1);
 
-	int insertAttach(AttachVO attachVo);
+	int insertAttach(List<AttachVO> attachList);
 }

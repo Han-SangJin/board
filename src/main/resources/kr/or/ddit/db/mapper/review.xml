@@ -15,6 +15,6 @@
     <insert id="insertReview" parameterType="ReviewVO">
    		INSERT INTO review1 VALUES(review_seq.nextval, #{revw_cont}, sysdate, 1, #{mem_id}, #{board_seq1})
    	</insert> 
-   	
+ 
 </mapper> 
  

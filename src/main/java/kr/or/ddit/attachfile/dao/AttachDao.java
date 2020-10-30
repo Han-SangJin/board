@@ -37,13 +37,13 @@ public class AttachDao implements AttachDaoI {
 
 	
 	@Override
-	public int insertAttach(AttachVO attachVo) {
+	public int insertAttach(List<AttachVO> attachList) {
 		SqlSession sqlSession = MybatisUtil.getSession();
 		int insertCnt = 0;
-
-		insertCnt = sqlSession.insert("attach.insertAttach", attachVo);
 		
-		if(insertCnt == 1) {
+		insertCnt = sqlSession.insert("attach.insertAttach", attachList);
+		
+		if(insertCnt >= 1) {
 			sqlSession.commit();
 		}else {
 			sqlSession.rollback();

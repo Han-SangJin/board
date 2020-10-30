@@ -1,4 +1,4 @@
-package kr.or.ddit.attachfile.controller;
+package kr.or.ddit.board.controller;
 
 public class FileUploadUtil {
 	

@@ -13,10 +13,39 @@
    		 delete from attachfile1 where file_seq1 = #{file_seq1}
     </delete>
     
-    
-    <insert id="insertAttach" parameterType="AttachVO">
+<!--     
+     insert 쿼리 list 넣기 변경
+ 	<insert id="insertAttach" parameterType="AttachVO">
+    	<selectKey keyProperty="board_seq1" order="BEFORE" resultType="int">
+   			select board_seq.currval from dual
+   		</selectKey>
+   		
    		insert into attachfile1 values(file_seq.nextval, #{file_name}, #{file_real_name}, #{board_seq1})
-   	</insert> 
+   	</insert>  
+-->
+   	 
+   	
+   	
+   	 <insert id="insertAttach" parameterType="java.util.List">
+   	 	<selectKey keyProperty="board_seq1" order="BEFORE" resultType="int">
+   			select board_seq.currval from dual
+   		</selectKey>
+   	 	
+		INSERT INTO attachfile1 ( FILE_SEQ1, FILE_NAME, FILE_REAL_NAME, BOARD_SEQ1 ) 
+		   	SELECT file_seq.nextval as file_seq1, T.* , #{board_seq1} as board_seq1
+		   		FROM ( 
+			   		<foreach collection="list" item="item" index="index" separator="union all"> 
+			   			SELECT #{item.file_name} as file_name 
+			   				 , #{item.file_real_name} as file_real_name  
+			   			 FROM dual
+			   		</foreach> 
+		 		) T 
+   	 </insert> 
+   	 	
+  	 
+   	
+   	
+   	
    	
 </mapper> 
  

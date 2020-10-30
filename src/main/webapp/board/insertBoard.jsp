@@ -100,7 +100,7 @@ $(document).ready(function() {
 		-->
 	
 	 
-	<form id="frm" class="form-horizontal" role="form" action="/boardinsertservlet" method="POST">
+	<form id="frm" class="form-horizontal" role="form" action="/boardinsertservlet" method="POST" enctype="multipart/form-data">
 		<%-- 
 			이미지 파일 보여주기
 			다운로드 버튼
@@ -118,8 +118,8 @@ $(document).ready(function() {
 		<h2>게시글 작성</h2>
 		<input type="submit" value="작성완료" id="sub">
 		<hr>
-		<label for="board_title" class="dlabel"><h3>제목 : </h3></label>
-		<input type="text" id="board_title" name="board_title" placeholder="" value="">
+		<label for="board_title" class="dlabel" value="파일등록"><h3>제목 : </h3></label>
+		<input type="text" id="board_title" name="board_title" placeholder="파일등록" value="파일등록">
 		<hr>
 		
 		
@@ -147,25 +147,20 @@ $(document).ready(function() {
 			<label class="label">${boardVo.ctgr_seq1}</label>
 			<input type="text" name="ctgr_seq1" value="<%= request.getParameter("ctgr_seq1") %>">
 		</div>
-	</form>
-	
-	
-	
-	<form action="/attachinsertservlet" method="POST" enctype="multipart/form-data">
-		<div>
-			<t> 파일 추가  
-				<input type="submit" value="등록" id="filesub">
-		 	<!-- <input type="button" id="plus" value="+"> -->
-			</t>
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br><br><br>
-			
-			<input type="file" class="file_real_name" id="file_real_name1" name="file_real_name" value=""><br>
-			<input type="file" class="file_real_name" id="file_real_name2" name="file_real_name" value=""><br>
-			<input type="file" class="file_real_name" id="file_real_name3" name="file_real_name" value=""><br>
-			<input type="file" class="file_real_name" id="file_real_name4" name="file_real_name" value=""><br>
-			<input type="file" class="file_real_name" id="file_real_name5" name="file_real_name" value=""><br>
-		</div>
 		
+	
+	
+		
+		<t> 파일 추가 </t>
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br><br><br>
+			
+		<input type="file" name="file_real_name"><br>
+		<input type="file" name="file_real_name"><br>
+		<input type="file" name="file_real_name"><br>
+		<input type="file" name="file_real_name"><br>
+		<input type="file" name="file_real_name"><br>
+		
+
 	</form>
 	
 	

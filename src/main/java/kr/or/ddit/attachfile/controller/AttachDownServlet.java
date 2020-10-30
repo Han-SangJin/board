@@ -25,7 +25,7 @@ public class AttachDownServlet extends HttpServlet {
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			
+		
 //		// 사용자 아이디 파라미터 확인하고
 //		String userid = request.getParameter("userid");
 //		
@@ -36,8 +36,8 @@ public class AttachDownServlet extends HttpServlet {
 //		response.setHeader("Content-Disposition", "attachment; filename=\"" + memberVo.getRealFilename() + "\"");
 //		response.setContentType("application/octet-stream");	
 //		// mozila 사이트 에서 Content-Type - media type - Media Types의 종류 - octet 검색 내용 참고
-//
-//		 
+//		
+//		
 //		// 경로 확인 후 파일 입츌룍울 통해 응답생성
 //		// 파일 읽기
 //		// 응답 생성 
