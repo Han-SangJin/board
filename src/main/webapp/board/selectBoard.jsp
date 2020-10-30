@@ -116,7 +116,7 @@
 					<a href="/boardupdateservlet?board_seq1=${boardVo.board_seq1}">
 						<button id="modiBtn" type="button">수정</button>
 					</a>
-					<a href="/boarddeleteservlet?board_seq1=${boardVo.board_seq1}&ctgr_seq1=<%= request.getParameter("ctgr_seq1") %>">
+					<a href="/boarddeleteservlet?board_seq1=${boardVo.board_seq1}&ctgr_seq1=${boardVo.ctgr_seq1}">
 						<button id="delBtn" type="button">삭제</button>
 					</a>
 				</c:when>

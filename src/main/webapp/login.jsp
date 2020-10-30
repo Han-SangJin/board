@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,7 +34,7 @@
 			$("#inputEmail").val(Cookies.get("mem_id"))
 			//console.log("체크");
 		}                                         
-                                                    
+                                                     
 		// sign in b버튼이 클릭 되엇을때 이벤크 핸들러
 		$("button").on('click',function(){
 			console.log("button_click");
@@ -44,7 +45,7 @@
 			}else{
 				Cookies.remove("REMEMBERME");
 				Cookies.remove("mem_id");
-			}
+			} 
 			// submit 
 			$("form").submit();
 		})	     
@@ -79,9 +80,9 @@
 	function deleteCookie(cookieName){
 		setCookie(cookieName, "", -1);	
 	}         
-</script>                
+</script>                 
 </head>                                            
-                                                   
+                                                    
                                                  
 <body>    
   <div class="container">

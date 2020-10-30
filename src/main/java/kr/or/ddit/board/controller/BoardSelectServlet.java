@@ -29,6 +29,7 @@ public class BoardSelectServlet extends HttpServlet {
 	}
  	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("utf-8");
 		int board_seq1 = Integer.parseInt(request.getParameter("board_seq1"));
 		System.out.println("boardselectservlet board_seq1 : " + board_seq1);
 		BoardVO boardVo = boardService.selectBoard(board_seq1);

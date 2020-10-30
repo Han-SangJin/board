@@ -53,6 +53,10 @@
 	#filesub{
 		margin-left : 15%; 
 	}
+	#filedel{
+		margin-left : 15%; 
+	
+	}
 </style>
 
 <script>
@@ -71,7 +75,21 @@ $(document).ready(function() {
 		$('#filediv').append("")
 		
 	});
+
+	
+
+
+    
 });
+    // 파일 초기화
+ 	function fileReset(form){
+ 		document.getElementById("a").value = ""
+ 		document.getElementById("b").value = ""
+ 		document.getElementById("c").value = ""
+ 		document.getElementById("d").value = ""
+ 		document.getElementById("e").value = ""
+
+    }
 </script>
 
 </head>
@@ -148,17 +166,18 @@ $(document).ready(function() {
 			<input type="text" name="ctgr_seq1" value="<%= request.getParameter("ctgr_seq1") %>">
 		</div>
 		
-	
-	
+	 
+	 	
 		
-		<t> 파일 추가 </t>
+		<t> 파일 추가 </t>	<br>
+		<input id="filedel" type="button" value="목록 초기화" onclick="fileReset(this.form);">
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br><br><br>
 			
-		<input type="file" name="file_real_name"><br>
-		<input type="file" name="file_real_name"><br>
-		<input type="file" name="file_real_name"><br>
-		<input type="file" name="file_real_name"><br>
-		<input type="file" name="file_real_name"><br>
+		<input type="file" id="a" class="infile" name="file_real_name"><br>
+		<input type="file" id="b" class="infile" name="file_real_name"><br>
+		<input type="file" id="c" class="infile" name="file_real_name"><br>
+		<input type="file" id="d" class="infile" name="file_real_name"><br>
+		<input type="file" id="e" class="infile" name="file_real_name"><br>
 		
 
 	</form>
