@@ -34,13 +34,14 @@ public class BoardInsertServlet extends HttpServlet {
 		boardService = new BoardService();
 		reviewService = new AttachService();
 	}
-    
+ 	
  	
  	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.getRequestDispatcher("/board/insertBoard.jsp").forward(request, response);
 	}
-
+ 	
+ 	
 	/*
 	  int board_seq1; // board_seq1 게시판 시퀸스 						sys
 	 * int parent_seq1; // parent_seq1 답글 달때 부모 시퀸스값  			새로글작성 할때 null, 답글달때 board_seq1 값 가져오기
@@ -70,8 +71,8 @@ public class BoardInsertServlet extends HttpServlet {
 		int ctgr_seq1 = Integer.parseInt(request.getParameter("ctgr_seq1"));
 		System.out.println(ctgr_seq1);
 			  
-
-		// 파일정보 가져오기
+		
+		// 파일정보 보내기
 		int i = 0;
 		List<AttachVO> attachList = new ArrayList<>();
 		
@@ -100,13 +101,13 @@ public class BoardInsertServlet extends HttpServlet {
 //		System.out.println(attachList.size());
 		
 		
-		// 파일 정보 등록
+		// 게시판 정보 등록
 		BoardVO boardVo = new BoardVO(board_title,board_cont,mem_id,ctgr_seq1);
 		int insertCnt = boardService.insertBoard(boardVo);
 		System.out.println("insertCnt : " + insertCnt);
 
 		
-		// 게시판 정보 등록
+		// 파일 정보 등록
 		int fileCnt = reviewService.insertAttach(attachList);
 		System.out.println("fileCnt : " + fileCnt);
 		

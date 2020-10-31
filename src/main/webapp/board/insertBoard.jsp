@@ -75,10 +75,10 @@ $(document).ready(function() {
 		$('#filediv').append("")
 		
 	});
-
 	
-
-
+	
+	
+	
     
 });
     // 파일 초기화
@@ -136,8 +136,8 @@ $(document).ready(function() {
 		<h2>게시글 작성</h2>
 		<input type="submit" value="작성완료" id="sub">
 		<hr>
-		<label for="board_title" class="dlabel" value="파일등록"><h3>제목 : </h3></label>
-		<input type="text" id="board_title" name="board_title" placeholder="파일등록" value="파일등록">
+		<label for="board_title" class="dlabel" value=""><h3>제목 : </h3></label>
+		<input type="text" id="board_title" name="board_title" placeholder="" value="">
 		<hr>
 		
 		
@@ -173,11 +173,11 @@ $(document).ready(function() {
 		<input id="filedel" type="button" value="목록 초기화" onclick="fileReset(this.form);">
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br><br><br>
 			
-		<input type="file" id="a" class="infile" name="file_real_name"><br>
-		<input type="file" id="b" class="infile" name="file_real_name"><br>
-		<input type="file" id="c" class="infile" name="file_real_name"><br>
-		<input type="file" id="d" class="infile" name="file_real_name"><br>
-		<input type="file" id="e" class="infile" name="file_real_name"><br>
+		<input type="file" id="a" class="infile" name="file_real_name" value=""><br>
+		<input type="file" id="b" class="infile" name="file_real_name" value=""><br>
+		<input type="file" id="c" class="infile" name="file_real_name" value=""><br>
+		<input type="file" id="d" class="infile" name="file_real_name" value=""><br>
+		<input type="file" id="e" class="infile" name="file_real_name" value=""><br>
 		
 
 	</form>

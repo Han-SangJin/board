@@ -1,3 +1,5 @@
+<%@page import="kr.or.ddit.attachfile.model.AttachVO"%>
+<%@page import="java.util.List"%>
 <%@page import="kr.or.ddit.member.model.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -62,6 +64,9 @@
 <script>
 $(document).ready(function() {
 	//여기 아래 부분
+	//$('#board_content').summernote('code', '${board_data.BOARD_CONTENT}');
+	$('#board_cont').summernote('editor.insertText', "${board_data.BOARD_CONTENT}")
+	
 	$('#board_cont').summernote({
 		  height: 400,                 // 에디터 높이
 		  minHeight: 400,             // 최소 높이
@@ -70,16 +75,6 @@ $(document).ready(function() {
 		  lang: "ko-KR",					// 한글 설정
 		  placeholder: "최대 2048자까지 쓸 수 있습니다"	//placeholder 설정
 	});
-
-	$('#plus').click(function(){
-		$('#filediv').append("")
-		
-	});
-
-	
-
-
-    
 });
     // 파일 초기화
  	function fileReset(form){
@@ -94,95 +89,59 @@ $(document).ready(function() {
 
 </head>
 <body>
-		<!-- 	
-			int board_seq1;			//	board_seq1		게시판 시퀸스
-			int parent_seq1;		//	parent_seq1		게시판의 부모 시퀸스값
-			String board_title;		//	board_title		제목
-			String board_cont;		//	board_cont		내용
-			Date board_date;		//	board_date		작성일
-			int board_dep;			//	board_dep		깊이 
-			int board_del;			//  BOARD_DEL		게시판 삭제여부
-			String mem_id;			//	mem_id			작성자 아이디
-			int ctgr_seq1;			//	ctgr_seq1		카테고리 번호
-			
-			
-			getBoard_seq1()
-			getParent_seq1()
-			getBoard_title()
-			getBoard_cont()
-			getBoard_date()
-			getBoard_dep()
-			getMem_id()
-			getCtgr_seq1()
-			getBoard_del()
-		-->
-	
-	 
-	<form id="frm" class="form-horizontal" role="form" action="/boardinsertservlet" method="POST" enctype="multipart/form-data">
-		<%-- 
-			이미지 파일 보여주기
-			다운로드 버튼
-		<div class="form-group">
-			<label for="userNm" class="col-sm-2 control-label">사용자 사진</label>
-			<div class="col-sm-10">
-				<img src="${cp}/profile/${memberVo.filename}"/>
-
-				<img src="${cp}/profileImg?userid=${memberVo.userid}" /><br>
-				<button id="profileDownBtn" type="button" class="btn btn-default">다운로드
-					:${memberVo.realFilename}</button>
-				</a>
-			</div>
-		</div> --%> 
-		<h2>게시글 수정</h2>
+	<form id="frm" class="form-horizontal" role="form" action="/boardupdateservlet?board_seq1=${boardVo.board_seq1}" method="POST" enctype="multipart/form-data">
+		
+		<h2>${boardVo.board_seq1} 번 게시글 수정</h2>
+		
 		<input type="submit" value="작성완료" id="sub">
 		<hr>
-		<label for="board_title" class="dlabel" value=""><h3>제목 : </h3></label>
-		<input type="text" id="board_title" name="board_title" placeholder="" value="">
+		<label for="board_title" class="dlabel" value=""><h3>제목 수정 : </h3></label>
+		<input type="text" id="board_title" name="board_title" placeholder="${boardVo.board_title}" value="">
 		<hr>
 		
 		
-		
-		<h3> 내 용 </h3>
-		<textarea id="board_cont" name="board_cont"></textarea>
+		<h3> 내 용 수 정</h3>
+		<textarea id="board_cont" name="board_cont" placeholder="" value="">${boardVo.board_cont}</textarea>
 		<hr>
 		
 		
-		<div class="boarddiv" style="display:none">
-			<label for="board_seq1" class="dlabel" style="display:none">게시글 번호 : </label>
-			
-			<input type="text" id="mem_id" name="mem_id" placeholder="사용자 아이디" value="<%= session.getAttribute("mem_id") %>">
-			
-			<label for="parent_seq1" class="dlabel">부모의 시퀸스 값 : </label>
-			<label class="label">${boardVo.parent_seq1}</label>
-			
-			<label for="board_dep" class="dlabel">깊이 : </label>
-			<label class="label">${boardVo.board_dep}</label>
-			
-			<label for="board_del" class="dlabel">삭제여부 : </label>
-			<label class="label">${boardVo.board_del}</label>
-			
-			<label for="ctgr_seq1" class="dlabel">카테고리 : </label>
-			<label class="label">${boardVo.ctgr_seq1}</label>
-			<input type="text" name="ctgr_seq1" value="<%= request.getParameter("ctgr_seq1") %>">
-		</div>
-		
-	 
+		<t> 파일 수정 </t>	<br>
+	 	<%
+    		List<AttachVO> attachList = (List<AttachVO>) request.getAttribute("attachList");
+    	%>   
 	 	
-		
-		<t> 파일 추가 </t>	<br>
 		<input id="filedel" type="button" value="목록 초기화" onclick="fileReset(this.form);">
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br><br><br>
-			
-		<input type="file" id="a" class="infile" name="file_real_name"><br>
-		<input type="file" id="b" class="infile" name="file_real_name"><br>
-		<input type="file" id="c" class="infile" name="file_real_name"><br>
-		<input type="file" id="d" class="infile" name="file_real_name"><br>
-		<input type="file" id="e" class="infile" name="file_real_name"><br>
+	
 		
+		<% 	 
+			int attachsize = attachList.size();
+		%>
+				
+				<input type="text" name="attachsize" value="<%= attachsize %>">
+		<%		
+			if(attachsize > 0){
+				for(int i=0; i<attachsize; i++){
+		%>
+				<input type="file" id="file + ${i}" class="infile" name="file_real_name" value="<%= attachList.get(i).getFile_name() %>"><%= attachList.get(i).getFile_real_name() %>
+				<input data-userid="<%= attachList.get(i).getFile_seq1() %>" type="button" id="del + ${i}" class="infile" name="file_real_name" value="삭제"><br><hr>
+			 
+		<%
+				}	
+			}else{ // 회원정보가 존재하지 않을 경우...
+		%>
+						<a>등록된 파일이 존재하지 않습니다.</a>
+			<%	
+				}
+			%>
 
+ 
+		
+		<div class="boarddiv" style="display:none">
+			<input type="text" name="board_seq1" value="${boardVo.board_seq1}">
+			<input type="text" name="ctgr_seq1" value="<%= request.getParameter("ctgr_seq1") %>">
+		</div>
+	
 	</form>
-	
-	
-	
 </body>
 </html>

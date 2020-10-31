@@ -6,7 +6,6 @@ import org.apache.ibatis.session.SqlSession;
 
 import kr.or.ddit.attachfile.model.AttachVO;
 import kr.or.ddit.db.MybatisUtil;
-import kr.or.ddit.review.model.ReviewVO;
 
 public class AttachDao implements AttachDaoI {
 
@@ -51,6 +50,21 @@ public class AttachDao implements AttachDaoI {
 			
 		sqlSession.close();
 		return insertCnt;
+	}
+
+	
+	@Override
+	public int updateBoard(List<AttachVO> attachList) {
+		SqlSession sqlSession = MybatisUtil.getSession();
+		int updateCnt = sqlSession.update("attach.updateAttach", attachList);
+		
+		if(updateCnt ==1){
+			sqlSession.commit();
+		}else{
+			sqlSession.rollback();
+		}
+		sqlSession.close();
+		return updateCnt;
 	}
 
 }

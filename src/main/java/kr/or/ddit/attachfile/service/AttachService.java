@@ -36,5 +36,12 @@ public class AttachService implements AttachServiceI {
 		SqlSession sqlSession = MybatisUtil.getSession();
 		return attachDao.insertAttach(attachList);
 	}
+
+
+	@Override
+	public int updateBoard(List<AttachVO> attachList) {
+		SqlSession sqlSession = MybatisUtil.getSession();
+		return attachDao.updateBoard(attachList);
+	}
 	
 }

@@ -77,8 +77,16 @@ public class BoardDao implements BoardDaoI {
 	
 	@Override
 	public int updateBoard(BoardVO boardVo) {
-		// TODO Auto-generated method stub
-		return 0;
+		SqlSession sqlSession = MybatisUtil.getSession();
+		int updateCnt = sqlSession.update("board.updateBoard", boardVo);
+		
+		if(updateCnt ==1){
+			sqlSession.commit();
+		}else{
+			sqlSession.rollback();
+		}
+		sqlSession.close();
+		return updateCnt;
 	}
 
 }

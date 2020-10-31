@@ -3,6 +3,7 @@ package kr.or.ddit.attachfile.service;
 import java.util.List;
 
 import kr.or.ddit.attachfile.model.AttachVO;
+import kr.or.ddit.board.model.BoardVO;
 
 public interface AttachServiceI {
 
@@ -11,4 +12,6 @@ public interface AttachServiceI {
 	int deleteAttach(int board_seq1);
 
 	int insertAttach(List<AttachVO> attachList);
+
+	int updateBoard(List<AttachVO> attachList);
 }

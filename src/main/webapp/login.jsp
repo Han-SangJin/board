@@ -26,7 +26,7 @@
 <script type="text/javascript" src="${pageContext.request.contextPath }/js/js.cookie-2.2.1.min.js"></script>
 <script src="/js/categoryupdate.js"></script>
 <script src="http://code.jquery.com/jquery-latest.js">    
-	$(function(){           
+	$(function(){                 
 		// remember me cookie 확인
 	 	if(Cookies.get("REMEMBERME")=="Y"){
 			$("input[type=checkbox]").prop("checked",true);
@@ -81,9 +81,9 @@
 		setCookie(cookieName, "", -1);	
 	}         
 </script>                 
-</head>                                            
-                                                    
-                                                 
+</head>                                             
+                                                              
+                                                  
 <body>    
   <div class="container">
     <form action="${pageContext.request.contextPath}/login" method="post">

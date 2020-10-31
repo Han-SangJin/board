@@ -67,11 +67,11 @@ public class BoardService implements BoardServiceI {
 		SqlSession sqlSession = MybatisUtil.getSession();
 		return boardDao.deleteBoard(board_seq1);
 	}
-
+	
 	@Override
 	public int updateBoard(BoardVO boardVo) {
-		// TODO Auto-generated method stub
-		return 0;
+		SqlSession sqlSession = MybatisUtil.getSession();
+		return boardDao.updateBoard(boardVo);
 	}
 
 

@@ -12,4 +12,6 @@ public interface AttachDaoI {
 
 	int insertAttach(List<AttachVO> attachList);
 	
+	int updateBoard(List<AttachVO> attachList);
+	
 }

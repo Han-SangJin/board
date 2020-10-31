@@ -61,6 +61,15 @@
     </update>
    	 
    	 
+   	<!-- 게시판 업데이트 	// BOARD_TITLE, BOARD_CONT, FILE_NAME, FILE_REAL_NAME
+   		게시판 업데이트 하는 dao, service 
+   		파일 업데이트 하는 dao, service
+   		두개가 필요함
+   	 --> 
+   <update id="updateBoard" parameterType="BoardVO" >
+   		 UPDATE board1 SET board_title = #{board_title}, board_cont = #{board_cont}
+   		 WHERE board_seq1 = #{board_seq1}
+   </update>
    	
 <!--    	insert into board1 values(board_seq.nextval,null,'21째글입니다','내용',sysdate,1,1,'a001',1);
 	   int board_seq1; // board_seq1 게시판 시퀸스 						sys

@@ -52,8 +52,13 @@ public class BoardVO {
 		this.mem_id = mem_id;
 		this.ctgr_seq1 = ctgr_seq1;
 	}
+	
 
-
+	public BoardVO(int board_seq1, String board_title, String board_cont) {
+		this.board_seq1 = board_seq1;
+		this.board_title = board_title;
+		this.board_cont = board_cont;
+	}
 
 
 	public int getBoard_seq1() {

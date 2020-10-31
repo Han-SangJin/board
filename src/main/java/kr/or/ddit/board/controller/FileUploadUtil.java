@@ -26,9 +26,19 @@ public class FileUploadUtil {
 		}else {
 			return filename.split("\\.")[1];
 		}
-		
-		
-		
 	}
+	
+	
+	
+	// file_seq : sally.png ==> png
+		public static String getfile_seq(String file_seq) {
+			if(file_seq == null || file_seq.indexOf(".") == -1) {
+				return "";
+			}else {
+				return file_seq.split("\\.")[1];
+			}
+		}
+	
+	
 } 
 

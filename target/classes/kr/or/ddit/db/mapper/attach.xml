@@ -42,9 +42,20 @@
 		 		) T 
    	 </insert> 
    	 	
-  	 
-   	
-   	
+   	 	
+   	<!-- 게시판 업데이트 	// BOARD_TITLE, BOARD_CONT, FILE_NAME, FILE_REAL_NAME
+   		게시판 업데이트 하는 dao, service 
+   		파일 업데이트 하는 dao, service
+   		두개가 필요함
+   	 -->
+	<update id="updateAttach" parameterType="java.util.List">
+		
+		<foreach item="attch" collection="list" index="index" separator="union all">
+				UPDATE attachfile1 SET file_name = #{attch.file_name}, file_real_name = #{attch.file_real_name}
+				WHERE file_seq1 = #{attch.file_seq1}
+
+		</foreach>
+	</update>
    	
    	
 </mapper> 
