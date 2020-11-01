@@ -2,6 +2,7 @@ package kr.or.ddit.board.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -70,72 +71,92 @@ public class BoardUpdateServlet extends HttpServlet {
  	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
  		request.setCharacterEncoding("utf-8");
- 		int board_seq1 = Integer.parseInt(request.getParameter("board_seq1"));
- 		System.out.println("board_seq1 + " +board_seq1);
+ 		
+	 	int board_seq1 = Integer.parseInt(request.getParameter("board_seq1"));
+	 	System.out.println("board_seq1 + " +board_seq1);
 		String board_title = (String) request.getParameter("board_title");
 		System.out.println("board_title + " +board_title);
 		String board_cont = request.getParameter("board_cont");
 		System.out.println("board_cont + " +board_cont);
 		int attachsize = Integer.parseInt(request.getParameter("attachsize"));
-
-		
+//		String attachList1 = request.getParameter("attachList");
+	//	int file = Integer.parseInt(request.getParameter("file_seq1"));
 		// 게시판 정보 등록
 		BoardVO boardVo = new BoardVO(board_seq1,board_title,board_cont);
 		int boardCnt = boardService.updateBoard(boardVo);
 		
-	
-		
 		System.out.println("attachsize : " +attachsize);
-		// 파일이 없으면 실행하지 않음
-		if(attachsize == 0) {
-			System.out.println("수정 파일 없음");
+//		String arr[] = request.getParameterValues("arr");
+//		System.out.println("arr.length : " + arr.length);
+//
+//		for(int i=0; i<arr.length; i++) {
+//			System.out.println("arr[i].toString() : " + arr[i].toString());
+//		}	
 		
+		// 파일이 없으면 실행하지 않음
+		if(attachsize <= 0) {
+			System.out.println("수정 파일 없음");
+			
+			
 		// 파일이 있는 경우에만 실행	
 		}else {
 			
 			// 파일정보 보내기
-			int i = 0;
-			List<AttachVO> attachList = new ArrayList<>();
+			List<AttachVO> attUpList = new ArrayList<>();
 			
+			int u = 0;
 			for (Part profile : request.getParts()) {
 				String file_real_name = FileUploadUtil.getFilename(profile.getHeader("Content-Disposition"));
-				System.out.println("profile.getHeader(\"Content-Disposition\")"+ profile.getHeader("Content-Disposition"));
-				String file_seq = FileUploadUtil.getfile_seq(profile.getHeader("Content-Disposition"));
-				int file_seq1 = Integer.parseInt(file_seq);
 				String ext = (".").concat(FileUploadUtil.getExtension(file_real_name));
 				String fileName = UUID.randomUUID().toString();
-				String file_name = "";
-				
+				String file_name = ""; 
 				
 				if(profile.getSize() > 0) {
 					file_name = "D:\\attachfile\\" + fileName + ext;
 					profile.write(file_name);
 				}
+					
 				
 				if (profile.getSize()>0 && !file_name.equals("") && !file_real_name.equals("") ){
-					i++;
-//					System.out.println(i);
-					System.out.println("file_name : " + file_name);
-					System.out.println("realFilename : " + file_real_name);
-					System.out.println("file_seq1 : " + file_seq);
+					u++;
+					String arr = request.getParameter("arr");
+					String[] array = arr.split(",");
 					
-					AttachVO attachVo = new AttachVO(file_name,file_real_name);
-					attachList.add(attachVo);
+					if(Integer.parseInt(array[0].toString())>0 && u==0){
+						AttachVO attachVo = new AttachVO(Integer.parseInt(array[0].toString()),file_name,file_real_name);
+						attUpList.add(attachVo);
+					}
+					if(Integer.parseInt(array[1].toString())>0 && u==1){
+						AttachVO attachVo = new AttachVO(Integer.parseInt(array[1].toString()),file_name,file_real_name);
+						attUpList.add(attachVo);
+					}
+					if(Integer.parseInt(array[2].toString())>0 && u==2){
+						AttachVO attachVo = new AttachVO(Integer.parseInt(array[2].toString()),file_name,file_real_name);
+						attUpList.add(attachVo);
+					}
+					if(Integer.parseInt(array[3].toString())>0 && u==3){
+						AttachVO attachVo = new AttachVO(Integer.parseInt(array[3].toString()),file_name,file_real_name);
+						attUpList.add(attachVo);
+					}
+					if(Integer.parseInt(array[4].toString())>0 && u==4){
+						AttachVO attachVo = new AttachVO(Integer.parseInt(array[4].toString()),file_name,file_real_name);
+						attUpList.add(attachVo);
+					}
 				}
 		    }
-			
+			 
 			// 파일 정보 업뎃
-			int attachCnt = attchService.updateBoard(attachList);
+			int attachCnt = attchService.updateBoard(attUpList);
 			
 			
 			if(boardCnt >= 1 && attachCnt >= 1){
 //			response.sendRedirect(request.getContextPath() + "/board/boardselectservlet?board_seq1=" + board_seq1);
-				request.getRequestDispatcher("/board/boardselectservlet?board_seq1=\" + board_seq1").forward(request, response);
+				request.getRequestDispatcher("/reviewselectallservlet?board_seq1="+board_seq1).forward(request, response);
 			}else {
 				doGet(request,response);
 			}
 		}
-		
+		// http://localhost/reviewselectallservlet?board_seq1=27
 		
 		
 	}

@@ -194,7 +194,11 @@
 				</c:forEach>
 			</c:when>
 			<c:otherwise>
-				파일 목록이 존재하지 않습니다.
+				<tr>
+					<td>
+						파일 목록이 존재하지 않습니다.
+					<td>
+				</tr>
 			</c:otherwise>
 		
 		</c:choose>

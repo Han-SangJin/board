@@ -1,3 +1,5 @@
+<%@page import="ch.qos.logback.core.recovery.ResilientSyslogOutputStream"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="kr.or.ddit.attachfile.model.AttachVO"%>
 <%@page import="java.util.List"%>
 <%@page import="kr.or.ddit.member.model.MemberVO"%>
@@ -16,6 +18,7 @@
 <script src="/js/summernote/summernote-lite.js"></script>
 <script src="/js/summernote/lang/summernote-ko-KR.js"></script>
 <link rel="stylesheet" href="/css/summernote/summernote-lite.css">
+<script src="/js/fileupdate.js"></script> 
 <title>Insert title here</title>
 <style>
 	.dlabel{
@@ -63,6 +66,14 @@
 
 <script>
 $(document).ready(function() {
+
+
+	/* alert("file_seq0 : " + $('input[name=index1]').val())
+	
+	var file_seq1 = document.getElementByName("file_seq1").value
+	alert("file_seq1 : " + file_seq1) */
+
+	
 	//여기 아래 부분
 	//$('#board_content').summernote('code', '${board_data.BOARD_CONTENT}');
 	$('#board_cont').summernote('editor.insertText', "${board_data.BOARD_CONTENT}")
@@ -75,6 +86,65 @@ $(document).ready(function() {
 		  lang: "ko-KR",					// 한글 설정
 		  placeholder: "최대 2048자까지 쓸 수 있습니다"	//placeholder 설정
 	});
+
+
+
+
+	
+	var board_seq1 = 0;
+	var arrNumber = new Array(0,0,0,0,0);
+	
+	$("#attachList li:nth-child(1)").on("click", function(){
+		
+		var file_seq1 = $(this).data("fileseq1");
+		arrNumber[0]= file_seq1
+		document.getElementById("di").innerHTML=arrNumber;
+		
+		 $('#di').val(arrNumber);
+		 
+	})
+	
+	$("#attachList li:nth-child(2)").on("click", function(){
+		
+		var file_seq1 = $(this).data("fileseq1");
+		arrNumber[1]= file_seq1
+		document.getElementById("di").innerHTML=arrNumber;
+		 $('#di').val(arrNumber);
+	})
+	  
+	$("#attachList li:nth-child(3)").on("click", function(){
+		
+		var file_seq1 = $(this).data("fileseq1");
+		arrNumber[2]= file_seq1
+		document.getElementById("di").innerHTML=arrNumber;
+		 $('#di').val(arrNumber);
+	})
+	  
+	$("#attachList li:nth-child(4)").on("click", function(){
+		
+		var file_seq1 = $(this).data("fileseq1");
+		arrNumber[3]= file_seq1
+		document.getElementById("di").innerHTML=arrNumber;
+		 $('#di').val(arrNumber);
+	})
+	
+	$("#attachList li:nth-child(5)").on("click", function(){
+		
+		var file_seq1 = $(this).data("fileseq1");
+		arrNumber[4]= file_seq1
+		document.getElementById("di").innerHTML=arrNumber;
+		 $('#di').val(arrNumber);
+	})
+	
+	
+	
+	 $("#attachList li").on("click", function(){
+		var file_seq1 = $(this).data("fileseq1");
+		 document.getElementById("i_result").innerHTML=file_seq1;
+		 $('#i_result').val(file_seq1);
+	})
+	 
+	
 });
     // 파일 초기화
  	function fileReset(form){
@@ -83,8 +153,9 @@ $(document).ready(function() {
  		document.getElementById("c").value = ""
  		document.getElementById("d").value = ""
  		document.getElementById("e").value = ""
-
+	
     }
+
 </script>
 
 </head>
@@ -92,11 +163,12 @@ $(document).ready(function() {
 	<form id="frm" class="form-horizontal" role="form" action="/boardupdateservlet?board_seq1=${boardVo.board_seq1}" method="POST" enctype="multipart/form-data">
 		
 		<h2>${boardVo.board_seq1} 번 게시글 수정</h2>
+		<c:set var="board_seq1" scope="request" value="${boardVo.board_seq1}"/>
 		
-		<input type="submit" value="작성완료" id="sub">
+		<input id="sub" type="submit" value="작성완료">
 		<hr>
 		<label for="board_title" class="dlabel" value=""><h3>제목 수정 : </h3></label>
-		<input type="text" id="board_title" name="board_title" placeholder="${boardVo.board_title}" value="">
+		<input type="text" id="board_title" name="board_title" placeholder="" value="${boardVo.board_title}">
 		<hr>
 		
 		
@@ -109,36 +181,52 @@ $(document).ready(function() {
 	 	<%
     		List<AttachVO> attachList = (List<AttachVO>) request.getAttribute("attachList");
     	%>   
-	 	
+		
+			 	
 		<input id="filedel" type="button" value="목록 초기화" onclick="fileReset(this.form);">
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br><br><br>
-	
+		 
 		
 		<% 	 
 			int attachsize = attachList.size();
-		%>
+		%>	
+				<!-- file_seq 담기 -->				
+				<input type="text" name="afile" id="i_result" value="0"/>
 				
-				<input type="text" name="attachsize" value="<%= attachsize %>">
+				<input type="text" name="arr" id="di" value="0"/>
+				<input type="text" name="arr" id="li" value="0"/>
+
+				<input type="text" name="attachsize" value="<%= attachsize %>" style="display:none">
+				<ul id="attachList">
 		<%		
 			if(attachsize > 0){
 				for(int i=0; i<attachsize; i++){
-		%>
-				<input type="file" id="file + ${i}" class="infile" name="file_real_name" value="<%= attachList.get(i).getFile_name() %>"><%= attachList.get(i).getFile_real_name() %>
-				<input data-userid="<%= attachList.get(i).getFile_seq1() %>" type="button" id="del + ${i}" class="infile" name="file_real_name" value="삭제"><br><hr>
-			 
-		<%
-				}	
+		%>		
+				<li data-fileseq1="<%= attachList.get(i).getFile_seq1() %>" >
+					<c:set var="fiseq" scope="request" value="<%= attachList.get(i).getFile_seq1() %>"/>
+					<c:out value="${fiseq }"/>
+					<fmt:formatNumber value="${fiseq }" type="number" var="numberType"/>
+					<c:set var="file_seq1" scope="request" value="${fiseq }"/>
+					<input type="text" id="files${i}" name="file_seq1" data-fileseq1="<c:out value="${file_seq1 }"/>" value="<%= attachList.get(i).getFile_seq1() %>" style="display:none">
+					<input type="file" name="file_real_name" value="<%= attachList.get(i).getFile_name() %>"><%= attachList.get(i).getFile_real_name() %>
+					<input data-del="<%= attachList.get(i).getFile_seq1() %>" type="button" id="del" class="infile" name="file_real_name" value="삭제"><br><hr>
+			 	</li>  
+		<% }	%> 
+				</ul>	
+				
+		<%		 
+				
 			}else{ // 회원정보가 존재하지 않을 경우...
 		%>
 						<a>등록된 파일이 존재하지 않습니다.</a>
 			<%	
 				}
 			%>
-
- 
-		
+		  
+ 		
+		${boardVo.board_seq1}
 		<div class="boarddiv" style="display:none">
-			<input type="text" name="board_seq1" value="${boardVo.board_seq1}">
+			<input type="text" name="board_seq1" value="${boardVo.board_seq1}" data-boardseq1="${boardVo.board_seq1}">
 			<input type="text" name="ctgr_seq1" value="<%= request.getParameter("ctgr_seq1") %>">
 		</div>
 	

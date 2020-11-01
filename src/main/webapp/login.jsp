@@ -34,7 +34,7 @@
 			$("#inputEmail").val(Cookies.get("mem_id"))
 			//console.log("체크");
 		}                                         
-                                                     
+                                                         
 		// sign in b버튼이 클릭 되엇을때 이벤크 핸들러
 		$("button").on('click',function(){
 			console.log("button_click");
@@ -45,12 +45,12 @@
 			}else{
 				Cookies.remove("REMEMBERME");
 				Cookies.remove("mem_id");
-			} 
+			}  
 			// submit 
 			$("form").submit();
 		})	     
-	})	                 
-	
+	})	                  
+	                        
 	function getCookieValues(cookieName){
 		var cookieString = document.cookie.split("; ")
 		for(var i=0; i< cookies.length; i++){
@@ -58,32 +58,32 @@
 			var cookieArr = cookie.splie("=");
 				if(cookieName == cookieArr[0]){
 				return cookieArr[1];
-			} 
-		}            
+			}  
+		}             
 		// 원하는 쿠키가 없는 경우	function setCookie(cookieName, cookieValue, expires){
 		//"USERNM=brown; path=/; expries=Wed, 07 Oct 2020 00:38:35 GMT;"
 		var today = new Date();
     
 		return "";  
-	}	          
-                             
-	                 
+	}	                 
+                                
+	                       
 	// 쿠키 날짜 설정 
 		// 현재 날짜에서 미래로  + expires 만큼 한 날짜 구하기
 		today.setDate( today.getDate() + expires );
       
-		    
+		       
 		document.cookie = cookieName + "=" + cookieValue + "; path=/; expires=" + today.toGMTString();
 		console.log(document.cookie);
 	}  
 		// 해당 쿠키의 expires 속성을 과거 날짜로 변경
 	function deleteCookie(cookieName){
 		setCookie(cookieName, "", -1);	
-	}         
-</script>                 
-</head>                                             
-                                                              
-                                                  
+	}            
+</script>                           
+</head>                                                
+                                                                                    
+                                                                                               
 <body>    
   <div class="container">
     <form action="${pageContext.request.contextPath}/login" method="post">

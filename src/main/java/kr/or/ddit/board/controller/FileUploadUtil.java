@@ -31,12 +31,10 @@ public class FileUploadUtil {
 	
 	
 	// file_seq : sally.png ==> png
-		public static String getfile_seq(String file_seq) {
-			if(file_seq == null || file_seq.indexOf(".") == -1) {
-				return "";
-			}else {
-				return file_seq.split("\\.")[1];
-			}
+		public static int getfile_seq(String file_seq1) {
+		
+				return Integer.parseInt(file_seq1);
+			
 		}
 	
 	

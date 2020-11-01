@@ -23,6 +23,12 @@ public class AttachVO {
 	}
 	
 	
+	public AttachVO(int file_seq1, String file_name, String file_real_name) {
+		this.file_seq1 = file_seq1;
+		this.file_name = file_name;
+		this.file_real_name = file_real_name;
+	}
+
 	public int getFile_seq1() {
 		return file_seq1;
 	}
