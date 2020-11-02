@@ -75,8 +75,11 @@ $(document).ready(function() {
 		$('#filediv').append("")
 		
 	});
-	
-	
+
+	cnt = 0;
+	$('.infile').click(function(){
+		$('#filecnt').val(++cnt);	
+	});
 	
 	
     
@@ -166,7 +169,7 @@ $(document).ready(function() {
 			<input type="text" name="ctgr_seq1" value="<%= request.getParameter("ctgr_seq1") %>">
 		</div>
 		
-	 
+	 	
 	 	
 		
 		<t> 파일 추가 </t>	<br>
@@ -179,7 +182,8 @@ $(document).ready(function() {
 		<input type="file" id="d" class="infile" name="file_real_name" value=""><br>
 		<input type="file" id="e" class="infile" name="file_real_name" value=""><br>
 		
-
+		del : <input type="text" name="filecnt" id="filecnt" value="0"/>
+	
 	</form>
 	
 	

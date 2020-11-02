@@ -75,38 +75,48 @@ public class BoardUpdateServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
  		request.setCharacterEncoding("utf-8");
  		
-	 	int board_seq1 = Integer.parseInt(request.getParameter("board_seq1"));
-	 	System.out.println("board_seq1 + " +board_seq1);
-		String board_title = (String) request.getParameter("board_title");
-		System.out.println("board_title + " +board_title);
-		String board_cont = request.getParameter("board_cont");
-		System.out.println("board_cont + " +board_cont);
-		int attachsize = Integer.parseInt(request.getParameter("attachsize"));
-//		String attachList1 = request.getParameter("attachList");
-	//	int file = Integer.parseInt(request.getParameter("file_seq1"));
-		// 게시판 정보 등록
-		BoardVO boardVo = new BoardVO(board_seq1,board_title,board_cont);
-		int boardCnt = boardService.updateBoard(boardVo);
+ 		int board_seq1 = Integer.parseInt(request.getParameter("board_seq1"));
+ 		System.out.println("board_seq1 + " +board_seq1);
+ 		String board_title = (String) request.getParameter("board_title");
+ 		System.out.println("board_title + " +board_title);
+ 		String board_cont = request.getParameter("board_cont");
+ 		System.out.println("board_cont + " +board_cont);
+ 		int attachsize = Integer.parseInt(request.getParameter("attachsize"));
+ 		// 게시판 정보 등록
+ 		BoardVO boardVo = new BoardVO(board_seq1,board_title,board_cont);
+ 		int boardCnt = boardService.updateBoard(boardVo);
+ 		System.out.println("attachsize : " +attachsize);
+ 		
+ 		
+ 		
+ 		String arr1 = request.getParameter("arr");
+		String[] cntarray = arr1.split(",");
+		int[] ctarray = {0,0,0,0,0};
+		int intcnt = 0;
 		
-		System.out.println("attachsize : " +attachsize);
-//		String arr[] = request.getParameterValues("arr");
-//		System.out.println("arr.length : " + arr.length);
-//
-//		for(int i=0; i<arr.length; i++) {
-//			System.out.println("arr[i].toString() : " + arr[i].toString());
-//		}	
+		// String 형 arr를 int형으로 바꿈
+		for(int i=0; i<cntarray.length; i++) {
+			ctarray[i] = Integer.parseInt(cntarray[i]);
+		}
 		
-		
-		
-		/*  업데이트 
-		// 파일이 없으면 실행하지 않음
-		if(attachsize <= 0) {
+		// ctarray 길이 계산
+		for(int i=0; i<ctarray.length; i++) {
+			if(ctarray[i] > 0) {
+				intcnt++;
+			}
+		}
+ 		
+ 		System.out.println(intcnt);
+ 		
+ 		
+ 		// 파일이 없으면 실행하지 않음
+		if(intcnt <= 0) {
 			System.out.println("수정 파일 없음");
 			
 			
 		// 파일이 있는 경우에만 실행	
 		}else {
-			
+ 		
 			// 파일정보 보내기
 			List<AttachVO> attUpList = new ArrayList<>();
 			
@@ -173,12 +183,14 @@ public class BoardUpdateServlet extends HttpServlet {
 		}
 		// http://localhost/reviewselectallservlet?board_seq1=27
 		
-		*/
 		
+		
+		// 파일삭제
 		String delarr = request.getParameter("delarr");
 		String[] delarray = delarr.split(",");
 		int[] dellarray = {0,0,0,0,0};
 		int delcnt = 0;
+		int dellcnt = 0;
 		List<AttachVO> delList = new ArrayList();
 		
 		// String 형 delarray를 int형으로 바꿈
@@ -186,7 +198,8 @@ public class BoardUpdateServlet extends HttpServlet {
 			dellarray[i] = Integer.parseInt(delarray[i]);
 			if(dellarray[i] > 0) {
 				AttachVO attachVo = new AttachVO(Integer.parseInt(delarray[i]));
-				delList.add(i,attachVo);
+				delList.add(dellcnt,attachVo);
+				dellcnt++;
 			}	
 		}
 		
@@ -197,17 +210,17 @@ public class BoardUpdateServlet extends HttpServlet {
 			}
 		}
 		
-		System.out.println("delcnt : " + delcnt);
-		System.out.println("delarray.length : "+delarray.length);
-		System.out.println(dellarray[0]);
-		System.out.println(dellarray[1]);
-		System.out.println("delList.size() : " + delList.size());
-		System.out.println("delList.size() : " + delList.get(0).getFile_seq1());
-		
 		if(delcnt <= 0 ) {
 			// delcnt = 0 이면 아무것도 하지 않는다.
 			System.out.println("삭제파일 없음");
 		}else {
+			
+			System.out.println("delcnt : " + delcnt);
+			System.out.println("delarray.length : "+delarray.length);
+			System.out.println(dellarray[0]);
+			System.out.println(dellarray[1]);
+			System.out.println("delList.size() : " + delList.size());
+			System.out.println("delList.size() : " + delList.get(0).getFile_seq1());
 			int attachCnt = attchService.deleteAttach(delList);
 		}
 		

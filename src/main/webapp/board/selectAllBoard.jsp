@@ -30,6 +30,15 @@
 	#cont td{
 		font-size:20px;
 	} 
+	.title {
+		width : 600px;
+	}
+	.date {
+		width : 200px;
+	}
+	.id {
+		width : 150px;
+	}
 
 </style>
 <body> 
@@ -56,7 +65,7 @@
 	getBoard_del()
 	 -->
 
-	<a href="/boardinsertservlet?ctgr_seq1=${selectAllBoard.get(i).getCtgr_seq1()}"><input type="button" value="새로운 글 등록"></a>
+	<a href="/boardinsertservlet?ctgr_seq1=${ctgr_seq1}"><input type="button" value="새로운 글 등록"></a>
 	
 	int boardsize : ${ selectAllBoard.size() }
  	page : ${page}
@@ -71,15 +80,15 @@
 
 	<table border="1">
 			<tr id=title>
-				<td>게시판 시퀸스</td>
-				<td>부모 시퀸스값</td>
-				<td>제목</td>
-				<td>내용</td>
+				<!-- <td>게시판 시퀸스</td> -->
+				<!-- <td>부모 시퀸스값</td> -->
+				<td class="title">제목</td>
+				<!-- <td>내용</td> -->
 				<td>작성일</td>
-				<td>원글의 시퀸스</td>
+				<!-- <td>원글의 시퀸스</td> -->
 				<td>아이디</td>
-				<td>카테고리 번호</td>
-				<td>삭제여부</td>
+				<!-- <td>카테고리 번호</td> -->
+				<!-- <td>삭제여부</td> -->
 				<td></td>
 			</tr>
 		
@@ -89,27 +98,27 @@
 					<tr id="cont">
 						<c:choose>
 							<c:when test="${ selectAllBoard.get(i).getBoard_del() == 2 }">
-								<td>${ selectAllBoard.get(i).getBoard_seq1() }</td>
-								<td>${ selectAllBoard.get(i).getParent_seq1() }</td>
-								<td> 삭제된 게시물 입니다.</td>
-								<td>${ selectAllBoard.get(i).getBoard_cont() }</td>
-								<td>${ selectAllBoard.get(i).getBoard_date() }</td>
-								<td>${ selectAllBoard.get(i).getBoard_dep() }</td>
-								<td>${ selectAllBoard.get(i).getMem_id() }</td>
-								<td>${ selectAllBoard.get(i).getCtgr_seq1() }</td>
-								<td>${ selectAllBoard.get(i).getBoard_del() }</td>
+								<%-- <td>${ selectAllBoard.get(i).getBoard_seq1() }</td> --%>
+								<%-- <td>${ selectAllBoard.get(i).getParent_seq1() }</td> --%>
+								<td class="title"> 삭제된 게시물 입니다.</td>
+								<%-- <td>${ selectAllBoard.get(i).getBoard_cont() }</td> --%>
+								<td class="date"> </td>
+								<%-- <td>${ selectAllBoard.get(i).getBoard_dep() }</td> --%>
+								<td class="id"> </td>
+								<%-- <td>${ selectAllBoard.get(i).getCtgr_seq1() }</td> --%>
+								<%-- <td>${ selectAllBoard.get(i).getBoard_del() }</td> --%>
 							</c:when>
 							<c:otherwise>
-								<td>${ selectAllBoard.get(i).getBoard_seq1() }</td>
-								<td>${ selectAllBoard.get(i).getParent_seq1() }</td>
+								<%-- <td>${ selectAllBoard.get(i).getBoard_seq1() }</td> --%>
+								<%-- <td>${ selectAllBoard.get(i).getParent_seq1() }</td> --%>
 								<%-- <td><a href="/boardselectservlet?board_seq1=${selectAllBoard.get(i).getBoard_seq1()}&ctgr_seq1=${selectAllBoard.get(i).getCtgr_seq1()}">${selectAllBoard.get(i).getBoard_title()}</a></td>  --%>
-								<td><a href="/reviewselectallservlet?board_seq1=${selectAllBoard.get(i).getBoard_seq1()}">${selectAllBoard.get(i).getBoard_title()}</a></td>
-								<td>${ selectAllBoard.get(i).getBoard_cont() }</td>
-								<td>${ selectAllBoard.get(i).getBoard_date() }</td>
-								<td>${ selectAllBoard.get(i).getBoard_dep() }</td>
-								<td>${ selectAllBoard.get(i).getMem_id() }</td>
-								<td>${ selectAllBoard.get(i).getCtgr_seq1() }</td>
-								<td>${ selectAllBoard.get(i).getBoard_del() }</td>
+								<td class="title"><a href="/reviewselectallservlet?board_seq1=${selectAllBoard.get(i).getBoard_seq1()}">${selectAllBoard.get(i).getBoard_title()}</a></td>
+								<%-- <td>${ selectAllBoard.get(i).getBoard_cont() }</td> --%>
+								<td class="date">${ selectAllBoard.get(i).getBoard_date() }</td>
+								<%-- <td>${ selectAllBoard.get(i).getBoard_dep() }</td> --%>
+								<td class="id">${ selectAllBoard.get(i).getMem_id() }</td>
+								<%-- <td>${ selectAllBoard.get(i).getCtgr_seq1() }</td> --%>
+								<%-- <td>${ selectAllBoard.get(i).getBoard_del() }</td> --%>
 							</c:otherwise>	
 						</c:choose>
 					</tr>
@@ -121,24 +130,23 @@
 		</c:choose>
 	</table>
 	
-	
 	<div class="text-center">
 		<ul class="pagination">
 			<c:choose>
 				<c:when test="${1 < page}">
-					<li><a href="/boardselectallservlet?page=1&ctgr_seq1=${ctgr_seq1}&pageSize_str=${boardsize}">◀◀</a></li>
+					<li><a href="/boardselectallservlet?page=1&ctgr_seq1=${ctgr_seq1}&pageSize_str=${pages}">◀◀</a></li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="/boardselectallservlet?page=${page}&ctgr_seq1=${ctgr_seq1}&pageSize_str=${boardsize}">◀◀</a></li>
+					<li><a href="/boardselectallservlet?page=${page}&ctgr_seq1=${ctgr_seq1}&pageSize_str=${pages}">◀◀</a></li>
 				</c:otherwise>
 			</c:choose>	
 		
 			<c:choose>
 				<c:when test="${1 < page}">
-					<li><a href="/boardselectallservlet?page=${page-1}&ctgr_seq1=${ctgr_seq1}&pageSize_str=${boardsize}">◀</a></li>
+					<li><a href="/boardselectallservlet?page=${page-1}&ctgr_seq1=${ctgr_seq1}&pageSize_str=${pages}">◀</a></li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="/boardselectallservlet?page=${page}&ctgr_seq1=${ctgr_seq1}&pageSize_str=${boardsize}">◀</a></li>
+					<li><a href="/boardselectallservlet?page=${page}&ctgr_seq1=${ctgr_seq1}&pageSize_str=${pages}">◀</a></li>
 				</c:otherwise>
 			</c:choose>	
 			
@@ -148,27 +156,27 @@
 							<li class="active"><span>${i}</span></li>
 						</c:when>
 						<c:otherwise>
-							<li><a href="/boardselectallservlet?page=${i}&ctgr_seq1=${ctgr_seq1}&pageSize_str=${boardsize}">${i}</a></li>
+							<li><a href="/boardselectallservlet?page=${i}&ctgr_seq1=${ctgr_seq1}&pageSize_str=${pages}">${i}</a></li>
 						</c:otherwise>
 							  
 					</c:choose>				
 				</c:forEach>
 			
 			<c:choose>
-				<c:when test="${page < boardsize-1}">
-					<li><a href="/boardselectallservlet?page=${page+1}&ctgr_seq1=${ctgr_seq1}&pageSize_str=${boardsize}">▶</a></li>
+				<c:when test="${page < pages}">
+					<li><a href="/boardselectallservlet?page=${page+1}&ctgr_seq1=${ctgr_seq1}&pageSize_str=${pages}">▶</a></li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="/boardselectallservlet?page=${page}&ctgr_seq1=${ctgr_seq1}&pageSize_str=${boardsize}">▶</a></li>
+					<li><a href="/boardselectallservlet?page=${page}&ctgr_seq1=${ctgr_seq1}&pageSize_str=${pages}">▶</a></li>
 				</c:otherwise>
 			</c:choose>	
 			
 			<c:choose>
-				<c:when test="${page < boardsize-1}">
-					<li><a href="/boardselectallservlet?page=${boardsize-1}&ctgr_seq1=${ctgr_seq1}&pageSize_str=${boardsize}">▶▶</a></li>
+				<c:when test="${page < pages}">
+					<li><a href="/boardselectallservlet?page=${pages}&ctgr_seq1=${ctgr_seq1}&pageSize_str=${pages}">▶▶</a></li>
 				</c:when>
 				<c:otherwise>
-					<li><a href="/boardselectallservlet?page=${page}&ctgr_seq1=${ctgr_seq1}&pageSize_str=${boardsize}">▶▶</a></li>
+					<li><a href="/boardselectallservlet?page=${page}&ctgr_seq1=${ctgr_seq1}&pageSize_str=${pages}">▶▶</a></li>
 				</c:otherwise>
 			</c:choose>	
 		

@@ -156,45 +156,40 @@ $(document).ready(function() {
 	var board_seq1 = 0;
 	var arrNumber = new Array(0,0,0,0,0);
 	
-	$("#attachList li:nth-child(1)").on("click", function(){
+	$("#files0").on("click", function(){
 		
-		var file_seq1 = $(this).data("fileseq1");
+		var file_seq1 = $(this).parent().data("fileseq1");
 		arrNumber[0]= file_seq1
-		document.getElementById("di").innerHTML=arrNumber;
 		
 		 $('#di').val(arrNumber);
 		 
 	})
 	
-	$("#attachList li:nth-child(2)").on("click", function(){
+	$("#files1").on("click", function(){
 		
-		var file_seq1 = $(this).data("fileseq1");
+		var file_seq1 = $(this).parent().data("fileseq1");
 		arrNumber[1]= file_seq1
-		document.getElementById("di").innerHTML=arrNumber;
 		 $('#di').val(arrNumber);
 	})
 	  
-	$("#attachList li:nth-child(3)").on("click", function(){
+	$("#files2").on("click", function(){
 		
-		var file_seq1 = $(this).data("fileseq1");
+		var file_seq1 = $(this).parent().data("fileseq1");
 		arrNumber[2]= file_seq1
-		document.getElementById("di").innerHTML=arrNumber;
 		 $('#di').val(arrNumber);
 	})
 	  
-	$("#attachList li:nth-child(4)").on("click", function(){
+	$("#files3").on("click", function(){
 		
-		var file_seq1 = $(this).data("fileseq1");
+		var file_seq1 = $(this).parent().data("fileseq1");
 		arrNumber[3]= file_seq1
-		document.getElementById("di").innerHTML=arrNumber;
 		 $('#di').val(arrNumber);
 	})
 	
-	$("#attachList li:nth-child(5)").on("click", function(){
+	$("#files4").on("click", function(){
 		
-		var file_seq1 = $(this).data("fileseq1");
+		var file_seq1 = $(this).parent().data("fileseq1");
 		arrNumber[4]= file_seq1
-		document.getElementById("di").innerHTML=arrNumber;
 		 $('#di').val(arrNumber);
 	})
 	
@@ -265,8 +260,8 @@ $(document).ready(function() {
 					<c:out value="${fiseq }"/>
 					<fmt:formatNumber value="${fiseq }" type="number" var="numberType"/>
 					<c:set var="file_seq1" scope="request" value="${fiseq }"/>
-					<input type="text" id="files${i}" name="file_seq1" data-fileseq1="<c:out value="${file_seq1 }"/>" value="<%= attachList.get(i).getFile_seq1() %>" style="display:none">
-					<input type="file" name="file_real_name" value="<%= attachList.get(i).getFile_name() %>"><%= attachList.get(i).getFile_real_name() %>
+					<input type="text" name="file_seq1" data-fileseq1="<c:out value="${file_seq1 }"/>" value="<%= attachList.get(i).getFile_seq1() %>" style="display:none">
+					<input type="file" id="files<%= i %>" name="file_real_name" value="<%= attachList.get(i).getFile_name() %>"><%= attachList.get(i).getFile_real_name() %>
 					<input data-del="<%= attachList.get(i).getFile_seq1() %>" type="button" id="del<%= i %>" class="infile" name="file_real_name" value="삭제"><br><hr>
 			 	</li>  
 		<% }	%> 

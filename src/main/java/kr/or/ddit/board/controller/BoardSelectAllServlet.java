@@ -41,13 +41,13 @@ public class BoardSelectAllServlet extends HttpServlet {
 		//pageSize
 		String pageSize_str = request.getParameter("pageSize");
 		System.out.println("pageSize_str : " + pageSize_str);
-		int pageSize = pageSize_str == null ? 5 : Integer.parseInt(pageSize_str);
+		int pageSize = pageSize_str == null ? 10 : Integer.parseInt(pageSize_str);
 		request.setAttribute("pageSize", pageSize);
 		System.out.println("pageSize : " + pageSize);
 		 
 		// ctge_seq1
 		int ctgr_seq1 = Integer.parseInt(request.getParameter("ctgr_seq1"));
-		System.out.println("boardselectallservlet : " +ctgr_seq1);
+		System.out.println("boardselectallservlet ctgr_seq1 : " +ctgr_seq1);
 		request.setAttribute("ctgr_seq1", ctgr_seq1);
 			    
 		// pageVo : page, pageSize

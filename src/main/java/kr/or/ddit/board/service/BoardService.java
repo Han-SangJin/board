@@ -35,14 +35,37 @@ public class BoardService implements BoardServiceI {
 	public Map<String, Object> selectBoardPageList(PageVO pageVo) {
 		SqlSession sqlSession = MybatisUtil.getSession();
 		int ctgr_seq1 = pageVo.getCtgr_seq1();
-		System.out.println("selectBoardPageList : " +ctgr_seq1);
+		System.out.println("selectBoardPageList ctgr_seq1 : " +ctgr_seq1);
 		Map<String, Object> map = new HashMap<String, Object>();
+		
+		List<BoardVO> list = boardDao.selectBoardPageList(sqlSession,pageVo);
+		for(BoardVO post : list) {
+			System.out.println(post.getBoard_title());
+			post.setBoard_title(post.getBoard_title().replaceAll(" ", "&nbsp;"));
+//			System.out.println(post.getBoard_title().replaceAll(" ", "&nbsp;"));
+		}
+		
 		map.put("selectAllBoard", boardDao.selectBoardPageList(sqlSession,pageVo));
+		 
+		
+//		for(BoardVO post : list) {
+//			System.out.println(post.getBoard_title().replaceAll(" ", "&nbsp;"));
+//			
+//			post.setTitle(post.getTitle().replaceAll(" ", "&nbsp;"));
+//			if(("F").equals(post.getStatus())) {
+//				String oldTitle = post.getTitle();
+//				String newTitle = oldTitle.substring(0, oldTitle.lastIndexOf("─")+1);
+//				newTitle += "[삭제된 게시글입니다]";
+//				post.setTitle(newTitle);
+//			}
+//		}
+		
+		
 			 
 		// 15건 ==(페이지사이즈 7)==> 3페이지
 		// 15/7 ==  2.14.. ==(올림)==> 3페이지 
 		int totalCnt = boardDao.selectBoardTotalCnt(sqlSession, ctgr_seq1);
-		int pages = (int)Math.ceil((double)totalCnt/5);
+		int pages = (int)Math.ceil((double)totalCnt/10);
 		System.out.println("pages" + pages);
 		map.put("pages", pages);
 		

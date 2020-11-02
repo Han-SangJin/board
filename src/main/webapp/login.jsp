@@ -50,7 +50,7 @@
 			$("form").submit();
 		})	     
 	})	                  
-	                          
+	                    
 	function getCookieValues(cookieName){
 		var cookieString = document.cookie.split("; ")
 		for(var i=0; i< cookies.length; i++){
@@ -59,7 +59,7 @@
 				if(cookieName == cookieArr[0]){
 				return cookieArr[1];
 			}  
-		}             
+		}              
 		// 원하는 쿠키가 없는 경우	function setCookie(cookieName, cookieValue, expires){
 		//"USERNM=brown; path=/; expries=Wed, 07 Oct 2020 00:38:35 GMT;"
 		var today = new Date();
@@ -67,7 +67,7 @@
 		return "";  
 	}	                 
                                 
-	                          
+	                                                
 	// 쿠키 날짜 설정 
 		// 현재 날짜에서 미래로  + expires 만큼 한 날짜 구하기
 		today.setDate( today.getDate() + expires );
@@ -79,11 +79,11 @@
 		// 해당 쿠키의 expires 속성을 과거 날짜로 변경
 	function deleteCookie(cookieName){
 		setCookie(cookieName, "", -1);	
-	}            
-</script>                           
+	}               
+</script>                            
 </head>                                                
-                                                                                                                      
-                                                                                                    
+                                                                                                                           
+                                                                                                              
 <body>    
   <div class="container">
     <form action="${pageContext.request.contextPath}/login" method="post">

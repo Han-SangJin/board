@@ -71,34 +71,10 @@ public class BoardInsertServlet extends HttpServlet {
 		int ctgr_seq1 = Integer.parseInt(request.getParameter("ctgr_seq1"));
 		System.out.println(ctgr_seq1);
 			  
+		int filecnt = Integer.parseInt(request.getParameter("filecnt"));
 		
 		// 파일정보 보내기
 		int i = 0;
-		List<AttachVO> attachList = new ArrayList<>();
-		
-		for (Part profile : request.getParts()) {
-			String file_real_name = FileUploadUtil.getFilename(profile.getHeader("Content-Disposition"));
-			String ext = (".").concat(FileUploadUtil.getExtension(file_real_name));
-			String fileName = UUID.randomUUID().toString();
-			String file_name = "";
-			
-			
-			if(profile.getSize() > 0) {
-				file_name = "D:\\attachfile\\" + fileName + ext;
-				profile.write(file_name);
-			}
-			
-			if (profile.getSize()>0 && !file_name.equals("") && !file_real_name.equals("") ){
-				i++;
-//				System.out.println(i);
-//				System.out.println("file_name : " + file_name);
-//				System.out.println("realFilename : " + file_real_name);
-				
-				AttachVO attachVo = new AttachVO(file_name,file_real_name);
-				attachList.add(attachVo);
-			}
-	    }
-//		System.out.println(attachList.size());
 		
 		
 		// 게시판 정보 등록
@@ -107,16 +83,40 @@ public class BoardInsertServlet extends HttpServlet {
 		System.out.println("insertCnt : " + insertCnt);
 
 		
-		// 파일 정보 등록
-		int fileCnt = reviewService.insertAttach(attachList);
-		System.out.println("fileCnt : " + fileCnt);
+		if(filecnt>0) {
+		List<AttachVO> attachList = new ArrayList<>();
 		
+			for (Part profile : request.getParts()) {
+				System.out.println("profile.getSize() : " +profile.getSize());
+				
+				String file_real_name = FileUploadUtil.getFilename(profile.getHeader("Content-Disposition"));
+				String ext = (".").concat(FileUploadUtil.getExtension(file_real_name));
+				String fileName = UUID.randomUUID().toString();
+				String file_name = "";
+				
+				
+				if(profile.getSize() > 0) {
+					file_name = "D:\\attachfile\\" + fileName + ext;
+					profile.write(file_name);
+				}
+				
+				if (profile.getSize()>0 && !file_name.equals("") && !file_real_name.equals("") ){
+					i++;
+					
+					AttachVO attachVo = new AttachVO(file_name,file_real_name);
+					attachList.add(attachVo);
+				}
+		    }
 		
-		
-		
+			// 파일 정보 등록
+			int fileCnt = reviewService.insertAttach(attachList);
+			System.out.println("fileCnt : " + fileCnt);
+		}
+			
+
 		
 		// 둘다 가져왔을때 페이지 이동
-		if(insertCnt == 1 && fileCnt == 1){
+		if(insertCnt == 1){
 			request.getRequestDispatcher("/boardselectallservlet").forward(request, response);
 		}else {
 			doGet(request,response);
