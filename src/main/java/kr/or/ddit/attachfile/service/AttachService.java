@@ -24,11 +24,11 @@ public class AttachService implements AttachServiceI {
 		SqlSession sqlSession = MybatisUtil.getSession();
 		return attachDao.selectAllAttach(board_seq1);
 	}
-
+	
 	@Override
-	public int deleteAttach(int board_seq1) {
+	public int deleteAttach(List<AttachVO> attachList) {
 		SqlSession sqlSession = MybatisUtil.getSession();
-		return attachDao.deleteAttach(board_seq1); 
+		return attachDao.deleteAttach(attachList); 
 	}
 
 	@Override

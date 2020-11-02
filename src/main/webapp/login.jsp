@@ -33,8 +33,8 @@
 			//$("input[type=checkbox]").attr("checked","checked");
 			$("#inputEmail").val(Cookies.get("mem_id"))
 			//console.log("체크");
-		}                                         
-                                                         
+		}                                             
+                                                        
 		// sign in b버튼이 클릭 되엇을때 이벤크 핸들러
 		$("button").on('click',function(){
 			console.log("button_click");
@@ -50,7 +50,7 @@
 			$("form").submit();
 		})	     
 	})	                  
-	                        
+	                          
 	function getCookieValues(cookieName){
 		var cookieString = document.cookie.split("; ")
 		for(var i=0; i< cookies.length; i++){
@@ -67,7 +67,7 @@
 		return "";  
 	}	                 
                                 
-	                       
+	                          
 	// 쿠키 날짜 설정 
 		// 현재 날짜에서 미래로  + expires 만큼 한 날짜 구하기
 		today.setDate( today.getDate() + expires );
@@ -82,8 +82,8 @@
 	}            
 </script>                           
 </head>                                                
-                                                                                    
-                                                                                               
+                                                                                                                      
+                                                                                                    
 <body>    
   <div class="container">
     <form action="${pageContext.request.contextPath}/login" method="post">

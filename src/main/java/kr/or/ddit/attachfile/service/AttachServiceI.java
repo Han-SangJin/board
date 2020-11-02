@@ -9,9 +9,10 @@ public interface AttachServiceI {
 
 	List<AttachVO> selectAllAttach(int board_seq1);
 	
-	int deleteAttach(int board_seq1);
+	int deleteAttach(List<AttachVO> attachList);
 
 	int insertAttach(List<AttachVO> attachList);
 
 	int updateBoard(List<AttachVO> attachList);
+
 }

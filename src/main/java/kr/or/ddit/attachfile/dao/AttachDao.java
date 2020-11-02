@@ -21,11 +21,11 @@ public class AttachDao implements AttachDaoI {
 
 	
 	@Override
-	public int deleteAttach(int board_seq1) {
+	public int deleteAttach(List<AttachVO> attachList) {
 		SqlSession sqlSession = MybatisUtil.getSession();
-		int deleteCnt = sqlSession.delete("attach.deleteAttach", board_seq1);
+		int deleteCnt = sqlSession.delete("attach.deleteAttach", attachList);
 		
-		if(deleteCnt ==1){
+		if(deleteCnt >= 1){
 			sqlSession.commit();
 		}else{
 			sqlSession.rollback();

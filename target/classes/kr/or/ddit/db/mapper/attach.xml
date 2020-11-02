@@ -8,11 +8,6 @@
 		select * from attachfile1 where board_Seq1 = #{board_seq1}
 	</select>
  	
- 	
- 	<delete id="deleteAttach" parameterType="int" >
-   		 delete from attachfile1 where file_seq1 = #{file_seq1}
-    </delete>
-    
 <!--     
      insert 쿼리 list 넣기 변경
  	<insert id="insertAttach" parameterType="AttachVO">
@@ -42,7 +37,7 @@
 		 		) T 
    	 </insert> 
    	 	
-   	 	
+   	 
    	<!-- 게시판 업데이트 	// BOARD_TITLE, BOARD_CONT, FILE_NAME, FILE_REAL_NAME
    		게시판 업데이트 하는 dao, service 
    		파일 업데이트 하는 dao, service
@@ -56,6 +51,17 @@
 
 		</foreach>
 	</update>
+	
+	  <!-- select file_seq1 from attachfile1 where file_seq1 = #{attch.file_seq1} FROM dual -->
+	<!-- 파일 삭제 -->
+   	<delete id="deleteAttach" parameterType="java.util.List">
+		DELETE FROM ATTACHFILE1 			
+		<where>	
+			<foreach item="attch" collection="list" index="index" separator="OR" open="" close="">
+				( file_seq1 = #{attch.file_seq1} )
+			</foreach>
+		</where>
+	</delete>
    	
    	
 </mapper> 

@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import kr.or.ddit.attachfile.model.AttachVO;
 import kr.or.ddit.attachfile.service.AttachService;
 import kr.or.ddit.attachfile.service.AttachServiceI;
@@ -93,6 +96,9 @@ public class BoardUpdateServlet extends HttpServlet {
 //			System.out.println("arr[i].toString() : " + arr[i].toString());
 //		}	
 		
+		
+		
+		/*  업데이트 
 		// 파일이 없으면 실행하지 않음
 		if(attachsize <= 0) {
 			System.out.println("수정 파일 없음");
@@ -115,12 +121,19 @@ public class BoardUpdateServlet extends HttpServlet {
 					file_name = "D:\\attachfile\\" + fileName + ext;
 					profile.write(file_name);
 				}
-					
+				
 				
 				if (profile.getSize()>0 && !file_name.equals("") && !file_real_name.equals("") ){
-					u++;
 					String arr = request.getParameter("arr");
 					String[] array = arr.split(",");
+					
+					System.out.println("arr : " + arr);
+					
+					System.out.println("u : " + u);
+					System.out.println("array : " + array[0]);
+					System.out.println("file_name : " + file_name);
+					System.out.println("file_real_name : " + file_real_name);
+					
 					
 					if(Integer.parseInt(array[0].toString())>0 && u==0){
 						AttachVO attachVo = new AttachVO(Integer.parseInt(array[0].toString()),file_name,file_real_name);
@@ -142,9 +155,11 @@ public class BoardUpdateServlet extends HttpServlet {
 						AttachVO attachVo = new AttachVO(Integer.parseInt(array[4].toString()),file_name,file_real_name);
 						attUpList.add(attachVo);
 					}
+					// 파일 갯수만큼 회전 수 세기
+					u++;
 				}
 		    }
-			 
+			
 			// 파일 정보 업뎃
 			int attachCnt = attchService.updateBoard(attUpList);
 			
@@ -157,6 +172,45 @@ public class BoardUpdateServlet extends HttpServlet {
 			}
 		}
 		// http://localhost/reviewselectallservlet?board_seq1=27
+		
+		*/
+		
+		String delarr = request.getParameter("delarr");
+		String[] delarray = delarr.split(",");
+		int[] dellarray = {0,0,0,0,0};
+		int delcnt = 0;
+		List<AttachVO> delList = new ArrayList();
+		
+		// String 형 delarray를 int형으로 바꿈
+		for(int i=0; i<delarray.length; i++) {
+			dellarray[i] = Integer.parseInt(delarray[i]);
+			if(dellarray[i] > 0) {
+				AttachVO attachVo = new AttachVO(Integer.parseInt(delarray[i]));
+				delList.add(i,attachVo);
+			}	
+		}
+		
+		// dellarray 길이 계산
+		for(int i=0; i<dellarray.length; i++) {
+			if(dellarray[i] > 0) {
+				delcnt++;
+			}
+		}
+		
+		System.out.println("delcnt : " + delcnt);
+		System.out.println("delarray.length : "+delarray.length);
+		System.out.println(dellarray[0]);
+		System.out.println(dellarray[1]);
+		System.out.println("delList.size() : " + delList.size());
+		System.out.println("delList.size() : " + delList.get(0).getFile_seq1());
+		
+		if(delcnt <= 0 ) {
+			// delcnt = 0 이면 아무것도 하지 않는다.
+			System.out.println("삭제파일 없음");
+		}else {
+			int attachCnt = attchService.deleteAttach(delList);
+		}
+		
 		
 		
 	}

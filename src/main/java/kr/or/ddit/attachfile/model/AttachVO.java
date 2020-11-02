@@ -29,6 +29,10 @@ public class AttachVO {
 		this.file_real_name = file_real_name;
 	}
 
+	public AttachVO(int file_seq1) {
+		this.file_seq1 = file_seq1;
+	}
+
 	public int getFile_seq1() {
 		return file_seq1;
 	}

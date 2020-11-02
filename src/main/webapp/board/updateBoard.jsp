@@ -68,6 +68,68 @@
 $(document).ready(function() {
 
 
+	 $("#attachList li").on("click", function(){
+		var file_seq1 = $(this).data("fileseq1");
+		 document.getElementById("i_result").innerHTML=file_seq1;
+		 $('#i_result').val(file_seq1);
+	})
+
+	
+	var delNumber = new Array(0,0,0,0,0);
+
+		
+	$('#del0').on('click',function(){
+		alert('파일이 삭제되었습니다.')
+		 $(this).parent().hide();
+
+		var file_seq1 = $(this).parent().data("fileseq1");
+		delNumber[0]= file_seq1
+		 $('#divdel').val(delNumber);
+	}) 
+	
+	$('#del1').on('click',function(){
+		alert('파일이 삭제되었습니다.')
+		 $(this).parent().hide();
+
+		var file_seq1 = $(this).parent().data("fileseq1");
+		delNumber[1]= file_seq1
+		 $('#divdel').val(delNumber);
+	})
+	
+	$('#del2').on('click',function(){
+		alert('파일이 삭제되었습니다.')
+		 $(this).parent().hide();
+
+		var file_seq1 = $(this).parent().data("fileseq1");
+		delNumber[2]= file_seq1
+		 $('#divdel').val(delNumber);
+	})
+	
+	$('#del3').on('click',function(){
+		alert('파일이 삭제되었습니다.')
+		 $(this).parent().hide();
+
+		var file_seq1 = $(this).parent().data("fileseq1");
+		delNumber[3]= file_seq1
+		 $('#divdel').val(delNumber);
+	})
+	
+	$('#del4').on('click',function(){
+		alert('파일이 삭제되었습니다.')
+		 $(this).parent().hide();
+
+		var file_seq1 = $(this).parent().data("fileseq1");
+		delNumber[4]= file_seq1
+		 $('#divdel').val(delNumber);
+	})
+		 
+	//	dell.parent('li').style.display = 'none'
+
+	//		jQuery('.child').parent().css('color', 'red');
+		
+	
+	
+	
 	/* alert("file_seq0 : " + $('input[name=index1]').val())
 	
 	var file_seq1 = document.getElementByName("file_seq1").value
@@ -88,7 +150,7 @@ $(document).ready(function() {
 	});
 
 
-
+	
 
 	
 	var board_seq1 = 0;
@@ -138,11 +200,6 @@ $(document).ready(function() {
 	
 	
 	
-	 $("#attachList li").on("click", function(){
-		var file_seq1 = $(this).data("fileseq1");
-		 document.getElementById("i_result").innerHTML=file_seq1;
-		 $('#i_result').val(file_seq1);
-	})
 	 
 	
 });
@@ -191,10 +248,11 @@ $(document).ready(function() {
 			int attachsize = attachList.size();
 		%>	
 				<!-- file_seq 담기 -->				
-				<input type="text" name="afile" id="i_result" value="0"/>
+				i_result : <input type="text" name="afile" id="i_result" value="0"/>
 				
-				<input type="text" name="arr" id="di" value="0"/>
-				<input type="text" name="arr" id="li" value="0"/>
+				di : <input type="text" name="arr" id="di" value="0"/>
+				li : <input type="text" name="li" id="li" value="0"/>
+				del : <input type="text" name="delarr" id="divdel" value="0"/>
 
 				<input type="text" name="attachsize" value="<%= attachsize %>" style="display:none">
 				<ul id="attachList">
@@ -209,7 +267,7 @@ $(document).ready(function() {
 					<c:set var="file_seq1" scope="request" value="${fiseq }"/>
 					<input type="text" id="files${i}" name="file_seq1" data-fileseq1="<c:out value="${file_seq1 }"/>" value="<%= attachList.get(i).getFile_seq1() %>" style="display:none">
 					<input type="file" name="file_real_name" value="<%= attachList.get(i).getFile_name() %>"><%= attachList.get(i).getFile_real_name() %>
-					<input data-del="<%= attachList.get(i).getFile_seq1() %>" type="button" id="del" class="infile" name="file_real_name" value="삭제"><br><hr>
+					<input data-del="<%= attachList.get(i).getFile_seq1() %>" type="button" id="del<%= i %>" class="infile" name="file_real_name" value="삭제"><br><hr>
 			 	</li>  
 		<% }	%> 
 				</ul>	
@@ -224,7 +282,7 @@ $(document).ready(function() {
 			%>
 		  
  		
-		${boardVo.board_seq1}
+		
 		<div class="boarddiv" style="display:none">
 			<input type="text" name="board_seq1" value="${boardVo.board_seq1}" data-boardseq1="${boardVo.board_seq1}">
 			<input type="text" name="ctgr_seq1" value="<%= request.getParameter("ctgr_seq1") %>">

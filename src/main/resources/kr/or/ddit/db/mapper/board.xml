@@ -33,7 +33,7 @@
 		            FROM
 		        (SELECT *
 		            FROM
-		            (SELECT CONNECT_BY_ROOT(board_seq1) board_dep, board_seq1, LPAD(' ',(LEVEL-1)*4) || board_title board_title, board_cont, board_date, mem_id, parent_seq1, board_del, ctgr_seq1
+		            (SELECT CONNECT_BY_ROOT(board_seq1) board_dep, board_seq1, LPAD(' └─',(LEVEL-1)*4) || board_title board_title, board_cont, board_date, mem_id, parent_seq1, board_del, ctgr_seq1
 		                FROM board1
 		                WHERE ctgr_seq1 = #{ctgr_seq1} 
 		                START WITH parent_seq1 IS NULL
