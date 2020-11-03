@@ -84,6 +84,22 @@ $(document).ready(function() {
 	
     
 });
+
+
+$('#board_cont').keyup(function (e){
+    var content = $(this).val();
+    $('#counter').html("("+content.length+" / 최대 500자)");    //글자수 실시간 카운팅
+
+    if (content.length > 200){
+        alert("최대 500자까지 입력 가능합니다.");
+        $(this).val(content.substring(0, 500));
+        $('#counter').html("(500 / 최대 500자)");
+    }
+});
+
+
+
+
     // 파일 초기화
  	function fileReset(form){
  		document.getElementById("a").value = ""
@@ -137,6 +153,7 @@ $(document).ready(function() {
 			</div>
 		</div> --%> 
 		<h2>게시글 작성</h2>
+		<div id="counter">count :</div>
 		<input type="submit" value="작성완료" id="sub">
 		<hr>
 		<label for="board_title" class="dlabel" value=""><h3>제목 : </h3></label>
@@ -149,27 +166,7 @@ $(document).ready(function() {
 		<textarea id="board_cont" name="board_cont"></textarea>
 		<hr>
 		
-		
-		<div class="boarddiv" style="display:none">
-			<label for="board_seq1" class="dlabel" style="display:none">게시글 번호 : </label>
-			
-			<input type="text" id="mem_id" name="mem_id" placeholder="사용자 아이디" value="<%= session.getAttribute("mem_id") %>">
-			
-			<label for="parent_seq1" class="dlabel">부모의 시퀸스 값 : </label>
-			<label class="label">${boardVo.parent_seq1}</label>
-			
-			<label for="board_dep" class="dlabel">깊이 : </label>
-			<label class="label">${boardVo.board_dep}</label>
-			
-			<label for="board_del" class="dlabel">삭제여부 : </label>
-			<label class="label">${boardVo.board_del}</label>
-			
-			<label for="ctgr_seq1" class="dlabel">카테고리 : </label>
-			<label class="label">${boardVo.ctgr_seq1}</label>
-			<input type="text" name="ctgr_seq1" value="<%= request.getParameter("ctgr_seq1") %>">
-		</div>
-		
-	 	
+		 
 	 	
 		
 		<t> 파일 추가 </t>	<br>
@@ -184,6 +181,30 @@ $(document).ready(function() {
 		
 		del : <input type="text" name="filecnt" id="filecnt" value="0"/>
 	
+		
+		
+		<div>
+			parent_seq1 : <input type="text" name="parent_seq1" value="<%= request.getParameter("parent_seq1") %>">
+			board_seq1 : <input type="text" name="board_seq1" value="<%= request.getParameter("board_seq1") %>">
+			board_dep : <input type="text" name="board_dep" value="<%= request.getParameter("board_dep") %>">
+		</div>
+		
+		
+		<div class="boarddiv" style="display:none">
+			<label for="board_seq1" class="dlabel" style="display:none">게시글 번호 : </label>
+			
+			<input type="text" id="mem_id" name="mem_id" placeholder="사용자 아이디" value="<%= session.getAttribute("mem_id") %>">
+			
+			
+			<label for="board_del" class="dlabel">삭제여부 : </label>
+			<label class="label">${boardVo.board_del}</label>
+			
+			<label for="ctgr_seq1" class="dlabel">카테고리 : </label>
+			<label class="label">${boardVo.ctgr_seq1}</label>
+			<input type="text" name="ctgr_seq1" value="<%= request.getParameter("ctgr_seq1") %>">
+		</div>
+		
+	 	
 	</form>
 	
 	

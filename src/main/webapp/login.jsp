@@ -34,7 +34,7 @@
 			$("#inputEmail").val(Cookies.get("mem_id"))
 			//console.log("체크");
 		}                                             
-                                                        
+                                                          
 		// sign in b버튼이 클릭 되엇을때 이벤크 핸들러
 		$("button").on('click',function(){
 			console.log("button_click");
@@ -66,7 +66,7 @@
     
 		return "";  
 	}	                 
-                                
+                                  
 	                                                
 	// 쿠키 날짜 설정 
 		// 현재 날짜에서 미래로  + expires 만큼 한 날짜 구하기
@@ -80,10 +80,10 @@
 	function deleteCookie(cookieName){
 		setCookie(cookieName, "", -1);	
 	}               
-</script>                            
+</script>                              
 </head>                                                
-                                                                                                                           
-                                                                                                              
+                                                                                                                                           
+                                                                                                                   
 <body>    
   <div class="container">
     <form action="${pageContext.request.contextPath}/login" method="post">

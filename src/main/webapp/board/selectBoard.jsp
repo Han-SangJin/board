@@ -110,7 +110,7 @@
 				 
 			<c:choose>	
 				<c:when test="${mem_id eq boardVo.mem_id}">
-					<a href="/boardinsertservlet?board_seq1=${boardVo.board_seq1}&ctgr_seq1=${boardVo.ctgr_seq1}">
+					<a href="/boardinsertservlet?board_seq1=${boardVo.board_seq1}&ctgr_seq1=${boardVo.ctgr_seq1}&board_dep=${boardVo.board_dep}&parent_seq1=${boardVo.parent_seq1}">
 						<button id="delBtn" type="button">답글달기</button>
 					</a>
 					<a href="/boardupdateservlet?board_seq1=${boardVo.board_seq1}">
@@ -122,7 +122,7 @@
 				</c:when>
 				
 				<c:otherwise>
-					<a href="/boardinsertservlet?board_seq1=${boardVo.board_seq1}&ctgr_seq1=${boardVo.ctgr_seq1}">
+					<a href="/boardinsertservlet?board_seq1=${boardVo.board_seq1}&ctgr_seq1=${boardVo.ctgr_seq1}&board_dep=${boardVo.board_dep}&parent_seq1=${boardVo.parent_seq1}">
 						<button id="delBtn" type="button">답글달기</button>
 					</a>
 					
@@ -285,7 +285,7 @@
 		
 						</c:choose>
 					</tr>	
-				</c:forEach>
+				</c:forEach> 
 			</c:when>
 			<c:otherwise>
 				글 목록이 존재하지 않습니다.
@@ -295,6 +295,13 @@
 		</c:choose>
 	</table>
 	</div>
+		<div>
+			<label for="parent_seq1" class="dlabel">레벨 : </label>
+			<label class="label">${boardVo.parent_seq1}</label>
+				
+			<label for="board_dep" class="dlabel">원글 번호 : </label>
+			<label class="label">${boardVo.board_dep}</label>
+		</div>
 <br><br><br><br><br><br>
 <hr>
 </body>

@@ -65,7 +65,7 @@
 	getBoard_del()
 	 -->
 
-	<a href="/boardinsertservlet?ctgr_seq1=${ctgr_seq1}"><input type="button" value="새로운 글 등록"></a>
+	<a href="/boardinsertservlet?ctgr_seq1=${ctgr_seq1}&parent_seq1=${0}"><input type="button" value="새로운 글 등록"></a>
 	
 	int boardsize : ${ selectAllBoard.size() }
  	page : ${page}
@@ -80,7 +80,7 @@
 
 	<table border="1">
 			<tr id=title>
-				<!-- <td>게시판 시퀸스</td> -->
+				<td>글 번호</td>
 				<!-- <td>부모 시퀸스값</td> -->
 				<td class="title">제목</td>
 				<!-- <td>내용</td> -->
@@ -98,7 +98,7 @@
 					<tr id="cont">
 						<c:choose>
 							<c:when test="${ selectAllBoard.get(i).getBoard_del() == 2 }">
-								<%-- <td>${ selectAllBoard.get(i).getBoard_seq1() }</td> --%>
+								<td>${ selectAllBoard.get(i).getBoard_seq1() }</td> 
 								<%-- <td>${ selectAllBoard.get(i).getParent_seq1() }</td> --%>
 								<td class="title"> 삭제된 게시물 입니다.</td>
 								<%-- <td>${ selectAllBoard.get(i).getBoard_cont() }</td> --%>
@@ -109,7 +109,7 @@
 								<%-- <td>${ selectAllBoard.get(i).getBoard_del() }</td> --%>
 							</c:when>
 							<c:otherwise>
-								<%-- <td>${ selectAllBoard.get(i).getBoard_seq1() }</td> --%>
+								<td>${ selectAllBoard.get(i).getBoard_seq1() }</td>
 								<%-- <td>${ selectAllBoard.get(i).getParent_seq1() }</td> --%>
 								<%-- <td><a href="/boardselectservlet?board_seq1=${selectAllBoard.get(i).getBoard_seq1()}&ctgr_seq1=${selectAllBoard.get(i).getCtgr_seq1()}">${selectAllBoard.get(i).getBoard_title()}</a></td>  --%>
 								<td class="title"><a href="/reviewselectallservlet?board_seq1=${selectAllBoard.get(i).getBoard_seq1()}">${selectAllBoard.get(i).getBoard_title()}</a></td>

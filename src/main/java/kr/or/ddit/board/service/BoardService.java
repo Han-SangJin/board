@@ -44,7 +44,7 @@ public class BoardService implements BoardServiceI {
 			post.setBoard_title(post.getBoard_title().replaceAll(" ", "&nbsp;"));
 //			System.out.println(post.getBoard_title().replaceAll(" ", "&nbsp;"));
 		}
-		
+		System.out.println("실행안되는거같은데");
 		map.put("selectAllBoard", boardDao.selectBoardPageList(sqlSession,pageVo));
 		 
 		

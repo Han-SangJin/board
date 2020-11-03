@@ -40,6 +40,12 @@ public class BoardSelectServlet extends HttpServlet {
 			request.setAttribute("ctgr_seq1", ctgr_seq1);
 		}
 		
+		request.setAttribute("parent_seq1", request.getAttribute("parent_seq1"));	// 부모키 번호
+		System.out.println(request.getAttribute("parent_seq1"));
+		request.setAttribute("board_dep", request.getAttribute("board_dep"));	// 원글 번호
+		System.out.println(request.getAttribute("board_dep"));
+		
+		
 		request.setAttribute("ctgr_seq1", request.getAttribute("ctgr_seq1"));	// 카테고리 번호
 		System.out.println(request.getAttribute("ctgr_seq1"));
 		request.setAttribute("board_seq1",request.getAttribute("board_seq1"));	// 게시판 번호

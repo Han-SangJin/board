@@ -18,7 +18,7 @@
 			    FROM
 			        (SELECT CONNECT_BY_ROOT(board_seq1) board_dep, board_seq1, LPAD(' ',(LEVEL-1)*4) || board_title board_title, board_cont, board_date, mem_id, parent_seq1, board_del, ctgr_seq1
 			          FROM board1
-			        START WITH parent_seq1 IS NULL
+			        START WITH parent_seq1 = 0
 			        CONNECT BY PRIOR board_seq1 = parent_seq1)
 			            ORDER BY board_dep DESC, board_seq1 ASC)
 			 where ctgr_seq1 = #{ctgr_seq1}
@@ -36,7 +36,7 @@
 		            (SELECT CONNECT_BY_ROOT(board_seq1) board_dep, board_seq1, LPAD(' └─',(LEVEL-1)*4) || board_title board_title, board_cont, board_date, mem_id, parent_seq1, board_del, ctgr_seq1
 		                FROM board1
 		                WHERE ctgr_seq1 = #{ctgr_seq1} 
-		                START WITH parent_seq1 IS NULL
+		                START WITH parent_seq1 = 0
 		                CONNECT BY PRIOR board_seq1 = parent_seq1)
 		        ORDER BY board_dep DESC, board_seq1 ASC) a) 
 		    WHERE rn BETWEEN (#{page} - 1) * #{pageSize} + 1 AND #{page} * #{pageSize}
@@ -51,7 +51,12 @@
     
     <!-- 게시판 등록 -->
 	<insert id="insertBoard" parameterType="BoardVO">
-   		INSERT INTO board1 VALUES(board_seq.nextval, null, #{board_title}, #{board_cont}, sysdate , board_seq.nextval , 1 , #{mem_id} , #{ctgr_seq1})
+   		INSERT INTO board1 VALUES(board_seq.nextval, #{parent_seq1}, #{board_title}, #{board_cont}, sysdate , board_seq.nextval , 1, #{mem_id} , #{ctgr_seq1})
+   	</insert> 
+   	 
+    <!-- 답글 등록 -->
+	<insert id="inBoard" parameterType="BoardVO">
+   		INSERT INTO board1 VALUES(board_seq.nextval, #{parent_seq1}, #{board_title}, #{board_cont}, sysdate , #{board_dep} , 1, #{mem_id} , #{ctgr_seq1})
    	</insert>  
    	
    	 
