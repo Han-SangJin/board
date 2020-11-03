@@ -7,8 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kr.or.ddit.board.service.BoardService;
-import kr.or.ddit.board.service.BoardServiceI;
 import kr.or.ddit.review.service.ReviewService;
 import kr.or.ddit.review.service.ReviewServiceI;
 

@@ -97,7 +97,9 @@ public class BoardUpdateServlet extends HttpServlet {
 		// String 형 arr를 int형으로 바꿈
 		for(int i=0; i<cntarray.length; i++) {
 			ctarray[i] = Integer.parseInt(cntarray[i]);
+			System.out.println("ctarray[i] : " + ctarray[i]);
 		}
+		
 		
 		// ctarray 길이 계산
 		for(int i=0; i<ctarray.length; i++) {
@@ -121,8 +123,11 @@ public class BoardUpdateServlet extends HttpServlet {
 			List<AttachVO> attUpList = new ArrayList<>();
 			
 			int u = 0;
+			int y = 0;
 			for (Part profile : request.getParts()) {
 				String file_real_name = FileUploadUtil.getFilename(profile.getHeader("Content-Disposition"));
+				System.out.println("y  :  " +y);
+				y++;
 				String ext = (".").concat(FileUploadUtil.getExtension(file_real_name));
 				String fileName = UUID.randomUUID().toString();
 				String file_name = ""; 
@@ -145,26 +150,40 @@ public class BoardUpdateServlet extends HttpServlet {
 					System.out.println("file_real_name : " + file_real_name);
 					
 					
-					if(Integer.parseInt(array[0].toString())>0 && u==0){
-						AttachVO attachVo = new AttachVO(Integer.parseInt(array[0].toString()),file_name,file_real_name);
+					List attList = new ArrayList();
+					for(int i=0; i<ctarray.length; i++) {
+						if(ctarray[i] > 0) {
+							attList.add(ctarray[i]);
+						}
+					}
+					
+					for(int i=0; i<attList.size(); i++) {
+						System.out.println(attList.get(i));
+						AttachVO attachVo = new AttachVO(Integer.parseInt(attList.get(i).toString()),file_name,file_real_name);
 						attUpList.add(attachVo);
 					}
-					if(Integer.parseInt(array[1].toString())>0 && u==1){
-						AttachVO attachVo = new AttachVO(Integer.parseInt(array[1].toString()),file_name,file_real_name);
-						attUpList.add(attachVo);
-					}
-					if(Integer.parseInt(array[2].toString())>0 && u==2){
-						AttachVO attachVo = new AttachVO(Integer.parseInt(array[2].toString()),file_name,file_real_name);
-						attUpList.add(attachVo);
-					}
-					if(Integer.parseInt(array[3].toString())>0 && u==3){
-						AttachVO attachVo = new AttachVO(Integer.parseInt(array[3].toString()),file_name,file_real_name);
-						attUpList.add(attachVo);
-					}
-					if(Integer.parseInt(array[4].toString())>0 && u==4){
-						AttachVO attachVo = new AttachVO(Integer.parseInt(array[4].toString()),file_name,file_real_name);
-						attUpList.add(attachVo);
-					}
+					
+					
+				
+//					
+//					if(Integer.parseInt(array[0].toString())>0 && u==0){
+//					}
+//					if(Integer.parseInt(array[1].toString())>0 && u==1){
+//						AttachVO attachVo = new AttachVO(Integer.parseInt(array[1].toString()),file_name,file_real_name);
+//						attUpList.add(attachVo);
+//					}
+//					if(Integer.parseInt(array[2].toString())>0 && u==2){
+//						AttachVO attachVo = new AttachVO(Integer.parseInt(array[2].toString()),file_name,file_real_name);
+//						attUpList.add(attachVo);
+//					}
+//					if(Integer.parseInt(array[3].toString())>0 && u==3){
+//						AttachVO attachVo = new AttachVO(Integer.parseInt(array[3].toString()),file_name,file_real_name);
+//						attUpList.add(attachVo);
+//					}
+//					if(Integer.parseInt(array[4].toString())>0 && u==4){
+//						AttachVO attachVo = new AttachVO(Integer.parseInt(array[4].toString()),file_name,file_real_name);
+//						attUpList.add(attachVo);
+//					}
 					// 파일 갯수만큼 회전 수 세기
 					u++;
 				}
@@ -172,14 +191,14 @@ public class BoardUpdateServlet extends HttpServlet {
 			
 			// 파일 정보 업뎃
 			int attachCnt = attchService.updateBoard(attUpList);
+			 
 			
-			
-			if(boardCnt >= 1 && attachCnt >= 1){
-//			response.sendRedirect(request.getContextPath() + "/board/boardselectservlet?board_seq1=" + board_seq1);
-				request.getRequestDispatcher("/reviewselectallservlet?board_seq1="+board_seq1).forward(request, response);
-			}else {
-				doGet(request,response);
-			}
+//			if(boardCnt >= 1 && attachCnt >= 1){
+////			response.sendRedirect(request.getContextPath() + "/board/boardselectservlet?board_seq1=" + board_seq1);
+//				request.getRequestDispatcher("/reviewselectallservlet?board_seq1="+board_seq1).forward(request, response);
+//			}else {
+//				doGet(request,response);
+//			}
 		}
 		// http://localhost/reviewselectallservlet?board_seq1=27
 		
@@ -224,7 +243,11 @@ public class BoardUpdateServlet extends HttpServlet {
 			int attachCnt = attchService.deleteAttach(delList);
 		}
 		
-		
+		if(boardCnt >= 1){
+				request.getRequestDispatcher("/reviewselectallservlet?board_seq1="+board_seq1).forward(request, response);
+		}else {
+			doGet(request,response);
+		}
 		
 	}
 }

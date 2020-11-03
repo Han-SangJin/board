@@ -65,8 +65,8 @@
 	getBoard_del()
 	 -->
 
-	<a href="/boardinsertservlet?ctgr_seq1=${ctgr_seq1}&parent_seq1=${0}"><input type="button" value="새로운 글 등록"></a>
-	
+	<a href="/boardinsertservlet?ctgr_seq1=${ctgr_seq1}&parent_seq1=0"><input type="button" value="새로운 글 등록"></a>
+	 
 	int boardsize : ${ selectAllBoard.size() }
  	page : ${page}
  	pages : ${pages}

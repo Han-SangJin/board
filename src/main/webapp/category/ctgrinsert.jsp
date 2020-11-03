@@ -77,6 +77,8 @@
 		/* document.location="/member?userid=" + userid; */
 		     
 		updateCtgr(ctgr_seq1,ctgr_use);
+
+		location.reload();
 	})	
 }) 
   

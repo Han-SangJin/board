@@ -17,6 +17,8 @@ public interface BoardServiceI {
 	int selectBoardTotalCnt(int ctgr_seq1);
 	
 	int insertBoard(BoardVO boardVo);
+
+	int inBoard(BoardVO boardVo);
 	
 	int deleteBoard(int board_seq1);
 	

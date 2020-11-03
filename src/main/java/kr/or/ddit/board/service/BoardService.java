@@ -84,7 +84,13 @@ public class BoardService implements BoardServiceI {
 		SqlSession sqlSession = MybatisUtil.getSession();
 		return boardDao.insertBoard(boardVo); 
 	}
-
+	
+	@Override
+	public int inBoard(BoardVO boardVo) {
+		SqlSession sqlSession = MybatisUtil.getSession();
+		return boardDao.inBoard(boardVo); 
+	}
+	
 	@Override
 	public int deleteBoard(int board_seq1) {
 		SqlSession sqlSession = MybatisUtil.getSession();
@@ -96,6 +102,8 @@ public class BoardService implements BoardServiceI {
 		SqlSession sqlSession = MybatisUtil.getSession();
 		return boardDao.updateBoard(boardVo);
 	}
+
+
 
 
 

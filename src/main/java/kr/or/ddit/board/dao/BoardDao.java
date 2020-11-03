@@ -59,7 +59,23 @@ public class BoardDao implements BoardDaoI {
 		return insertCnt;
 	}
 
-	
+	@Override
+	public int inBoard(BoardVO boardVo) {
+		SqlSession sqlSession = MybatisUtil.getSession();
+		int insertCnt = 0;
+
+		insertCnt = sqlSession.insert("board.inBoard", boardVo);
+		
+		if(insertCnt == 1) {
+			sqlSession.commit();
+		}else {
+			sqlSession.rollback();
+		}
+			
+		sqlSession.close();
+		return insertCnt;
+	}
+		
 	@Override
 	public int deleteBoard(int board_seq1) {
 		SqlSession sqlSession = MybatisUtil.getSession();
@@ -79,7 +95,7 @@ public class BoardDao implements BoardDaoI {
 	public int updateBoard(BoardVO boardVo) {
 		SqlSession sqlSession = MybatisUtil.getSession();
 		int updateCnt = sqlSession.update("board.updateBoard", boardVo);
-		
+		System.out.println("updateCnt : "+updateCnt);
 		if(updateCnt ==1){
 			sqlSession.commit();
 		}else{
@@ -88,5 +104,6 @@ public class BoardDao implements BoardDaoI {
 		sqlSession.close();
 		return updateCnt;
 	}
+
 
 }

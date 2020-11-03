@@ -19,6 +19,8 @@ public interface BoardDaoI {
 	 
 	int insertBoard(BoardVO boardVo);
 	
+	int inBoard(BoardVO boardVo);
+	
 	int deleteBoard(int board_seq1);
 	
 	int updateBoard(BoardVO boardVo);

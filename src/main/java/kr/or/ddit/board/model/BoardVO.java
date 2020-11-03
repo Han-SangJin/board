@@ -78,6 +78,16 @@ public class BoardVO {
 		this.board_dep = board_dep;
 	}
 
+	
+	public BoardVO(int parent_seq1, String board_title, String board_cont, int board_dep, String mem_id, int ctgr_seq1) {
+		this.parent_seq1 = parent_seq1;
+		this.board_title = board_title;
+		this.board_cont = board_cont;
+		this.board_dep = board_dep;
+		this.mem_id = mem_id;
+		this.ctgr_seq1 = ctgr_seq1;
+	}
+
 
 	public int getBoard_seq1() {
 		return board_seq1;

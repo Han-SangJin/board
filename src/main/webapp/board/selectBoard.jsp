@@ -110,7 +110,7 @@
 				 
 			<c:choose>	
 				<c:when test="${mem_id eq boardVo.mem_id}">
-					<a href="/boardinsertservlet?board_seq1=${boardVo.board_seq1}&ctgr_seq1=${boardVo.ctgr_seq1}&board_dep=${boardVo.board_dep}&parent_seq1=${boardVo.parent_seq1}">
+					<a href="/boardinsertservlet?board_seq1=${boardVo.board_seq1}&ctgr_seq1=${boardVo.ctgr_seq1}&board_dep=${boardVo.board_dep}&parent_seq1=${boardVo.board_seq1}">
 						<button id="delBtn" type="button">답글달기</button>
 					</a>
 					<a href="/boardupdateservlet?board_seq1=${boardVo.board_seq1}">
@@ -122,7 +122,7 @@
 				</c:when>
 				
 				<c:otherwise>
-					<a href="/boardinsertservlet?board_seq1=${boardVo.board_seq1}&ctgr_seq1=${boardVo.ctgr_seq1}&board_dep=${boardVo.board_dep}&parent_seq1=${boardVo.parent_seq1}">
+					<a href="/boardinsertservlet?board_seq1=${boardVo.board_seq1}&ctgr_seq1=${boardVo.ctgr_seq1}&board_dep=${boardVo.board_dep}&parent_seq1=${boardVo.board_seq1}">
 						<button id="delBtn" type="button">답글달기</button>
 					</a>
 					
@@ -245,12 +245,13 @@
 						<!-- 댓  글  목  록 -->
 	<table>
 		<tr>
-			<td>댓글 시퀀스</td>
+			<td>번호</td>
+			<!-- <td>댓글 시퀀스</td> -->
 			<td>댓글 내용</td>
 			<td>작성 날짜</td>
-			<td>삭제 여부</td>
+			<!-- <td>삭제 여부</td> -->
 			<td>작성자</td>
-			<td>게시판 번호</td>
+			<!-- <td>게시판 번호</td> -->
 			<td>삭제</td>
 		</tr>
 		<h3> 댓 글 목 록</h3>
@@ -262,22 +263,24 @@
 						<c:choose>
 							
 							<c:when test="${reviewList.get(i).getRevw_del() == 2}">
-								<td>${reviewList.get(i).getRevw_seq1()}</td>
+								<td>${i +1}</td>
+								<%-- <td>${reviewList.get(i).getRevw_seq1()}</td> --%>
 								<td> -- 삭제된 댓글 입니다. -- </td>
 								<td>${reviewList.get(i).getRevw_dt()}</td>
-								<td>${reviewList.get(i).getRevw_del()}</td>
+								<%-- <td>${reviewList.get(i).getRevw_del()}</td> --%>
 								<td>${reviewList.get(i).getMem_id()}</td>
-								<td>${reviewList.get(i).getBoard_seq1()}</td>
+								<%-- <td>${reviewList.get(i).getBoard_seq1()}</td> --%>
 								<td></td>
 								 
 							</c:when>
 							<c:otherwise>
-								<td>${reviewList.get(i).getRevw_seq1()}</td>
+								<td>${i +1}</td>
+							<%-- 	<td>${reviewList.get(i).getRevw_seq1()}</td> --%>
 								<td>${reviewList.get(i).getRevw_cont()}</td>
 								<td>${reviewList.get(i).getRevw_dt()}</td>
-								<td>${reviewList.get(i).getRevw_del()}</td>
+								<%-- <td>${reviewList.get(i).getRevw_del()}</td> --%>
 								<td>${reviewList.get(i).getMem_id()}</td>
-								<td>${reviewList.get(i).getBoard_seq1()}</td>
+								<%-- <td>${reviewList.get(i).getBoard_seq1()}</td> --%>
 								<c:if test="${mem_id eq reviewList.get(i).getMem_id() }">
 									<td><a href="/reviewdeleteservlet?revw_seq1=${reviewList.get(i).getRevw_seq1()}&board_seq1=${reviewList.get(i).getBoard_seq1()}"><input type="button" value="삭제"></a></td>
 								</c:if>

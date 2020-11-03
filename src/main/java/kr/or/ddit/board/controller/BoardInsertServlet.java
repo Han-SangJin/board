@@ -63,47 +63,56 @@ public class BoardInsertServlet extends HttpServlet {
 		
 		// 게시판 정보 가져오기
 		String board_title = request.getParameter("board_title");
+		System.out.println("board_title :::: " + board_title);
 		if(board_title.equals(null) || board_title.equals("")) {
 			board_title = "(제목 없음)";
 		}
 		String board_cont = request.getParameter("board_cont");
+		System.out.println("board_cont :::: " + board_cont);
 		if(board_cont.equals(null) || board_cont.equals("")) {
 			board_cont = "(내용 없음)";
 		}
+		String mem_id = request.getParameter("mem_id");
+		System.out.println("mem_id :::: " + mem_id);
+		int ctgr_seq1 = Integer.parseInt(request.getParameter("ctgr_seq1"));
+		System.out.println("ctgr_seq1 :::: " + ctgr_seq1);
 		
 		int parent_seq1 = Integer.parseInt(request.getParameter("parent_seq1"));
-		int board_dep = Integer.parseInt(request.getParameter("board_dep"));
-		int board_seq1 = Integer.parseInt(request.getParameter("board_seq1"));
-		
-		String mem_id = request.getParameter("mem_id");
-		int ctgr_seq1 = Integer.parseInt(request.getParameter("ctgr_seq1"));
+		System.out.println("parent_seq1 :::: " + parent_seq1);
 		
 		
-		System.out.println(board_title);
-		System.out.println(board_cont);
-		System.out.println(mem_id);
-		System.out.println(ctgr_seq1);
-			  
-		int filecnt = Integer.parseInt(request.getParameter("filecnt"));
-		
-		// 파일정보 보내기
-		int i = 0;
 		 
 		// 게시판 정보 등록
 		BoardVO boardVo;
 		
-		if(parent_seq1 == 0) {	// 새글 작성하는 경우
+		
+		int insertCnt = 0;
+		// 새글 작성하는 경우
+		if(parent_seq1 == 0) {	
 			parent_seq1 = 0;
 			boardVo = new BoardVO(board_title,board_cont,mem_id,ctgr_seq1,parent_seq1);
-		}else {	// 답글 다는 경우
+		
+			int inserCnt = boardService.insertBoard(boardVo);
+			System.out.println("inserCnt : " + inserCnt);
+			
+		// 답글 작성하는 경우
+		}else {	
+			int board_dep = Integer.parseInt(request.getParameter("board_dep"));
+			System.out.println("board_dep :::: " + board_dep);
+			int board_seq1 = Integer.parseInt(request.getParameter("board_seq1"));
+			System.out.println("board_seq1 :::: " + board_seq1);
 			parent_seq1 = board_seq1;
-			boardVo = new BoardVO(board_title,board_cont,mem_id,ctgr_seq1,parent_seq1,board_dep);
+			
+			boardVo = new BoardVO(parent_seq1,board_title,board_cont,board_dep,mem_id,ctgr_seq1);
+			int inCnt = boardService.inBoard(boardVo);
+			System.out.println("inCnt : " + inCnt);
 		}
-		
-		
-		int insertCnt = boardService.insertBoard(boardVo);
-		System.out.println("insertCnt : " + insertCnt);
+			
 
+		int filecnt = Integer.parseInt(request.getParameter("filecnt"));
+		
+		// 파일정보 보내기
+		int i = 0;
 		
 		if(filecnt>0) {
 		List<AttachVO> attachList = new ArrayList<>();
@@ -137,11 +146,9 @@ public class BoardInsertServlet extends HttpServlet {
 			
 
 		
-		// 둘다 가져왔을때 페이지 이동
-		if(insertCnt == 1){
-			request.getRequestDispatcher("/boardselectallservlet").forward(request, response);
-		}else {
-			doGet(request,response);
-		}
+		// 글작성 성공시 페이지 이동
+		
+			request.getRequestDispatcher("/boardselectallservlet?ctgr_seq1="+ctgr_seq1).forward(request, response);
+	
 	}
 }
