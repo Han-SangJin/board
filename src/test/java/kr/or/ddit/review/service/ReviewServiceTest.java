@@ -18,19 +18,27 @@ public class ReviewServiceTest {
 	
 	
 	@Test
-	public List<ReviewVO> selectAllReview(int board_seq1) {
-		return null;
+	public void selectAllReviewTest(int board_seq1) {
+		
+		/***Given***/
+		board_seq1 = 1;
+		
+		/***When***/
+		List<ReviewVO> reviewlist = (List<ReviewVO>)reviewService.selectAllReview(board_seq1);
+		
+		/***Then***/
+		assertNotEquals(5, reviewlist.size());
 	}
-
-	
-	@Test
-	public int deleteReview(int revw_seq1) {
-		return 0;
-	}
-
-	
-	@Test
-	public int insertReview(ReviewVO reviewVo) {
-		return 0;
-	}
+//
+//	
+//	@Test
+//	public int deleteReview(int revw_seq1) {
+//		return 0;
+//	}
+//
+//	
+//	@Test
+//	public int insertReview(ReviewVO reviewVo) {
+//		return 0;
+//	}
 }

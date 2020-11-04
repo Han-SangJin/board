@@ -12,7 +12,6 @@ public class ReviewDao implements ReviewDaoI {
 	
 	@Override
 	public List<ReviewVO> selectAllReview(int board_seq1) {
-		System.out.println("selectAllReview : " + board_seq1);
 		SqlSession sqlSession = MybatisUtil.getSession();
 		List<ReviewVO> reviewList = sqlSession.selectList("review.selectAllReview", board_seq1);
 		

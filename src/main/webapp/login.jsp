@@ -71,7 +71,7 @@
 	// 쿠키 날짜 설정 
 		// 현재 날짜에서 미래로  + expires 만큼 한 날짜 구하기
 		today.setDate( today.getDate() + expires );
-      
+       
 		       
 		document.cookie = cookieName + "=" + cookieValue + "; path=/; expires=" + today.toGMTString();
 		console.log(document.cookie);
