@@ -9,14 +9,12 @@ import org.junit.Test;
 
 public class MemberServiceTest {
 	
-	private MemberServiceI memberService;
+	private MemberServiceI memberService = new MemberService();
 	
 	
 	@Test
 	public void getMemberTest() {
-		
 		/***Given***/
-		memberService = new MemberService();
 		String userid = "a001";
 		String password = "123";
 		

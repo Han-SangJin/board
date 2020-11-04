@@ -42,7 +42,6 @@
 		    WHERE rn BETWEEN (#{page} - 1) * #{pageSize} + 1 AND #{page} * #{pageSize}
 	</select>
 	
-	
 	<!-- 게시글 총 갯수 -->
 	<select id="selectBoardTotalCnt" resultType="int" parameterType="int"> 
     	SELECT COUNT (*) FROM board1 WHERE ctgr_seq1 = #{ctgr_seq1} 

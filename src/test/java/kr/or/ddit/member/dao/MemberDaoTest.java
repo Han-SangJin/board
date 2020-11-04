@@ -10,13 +10,11 @@ import org.junit.Test;
 
 public class MemberDaoTest {
 	
-	private MemberDaoI memberDao;
+	private MemberDaoI memberDao = new MemberDao();;
 	
 	@Test
 	public void getMemberTest() {
-		
 		/***Given***/
-		memberDao = new MemberDao();
 		String userid = "a001";
 		String userpass = "123";
 		

@@ -49,7 +49,7 @@ public class BoardDao implements BoardDaoI {
 
 		insertCnt = sqlSession.insert("board.insertBoard", boardVo);
 		
-		if(insertCnt == 1) {
+		if(insertCnt >= 1) {
 			sqlSession.commit();
 		}else {
 			sqlSession.rollback();
@@ -66,7 +66,7 @@ public class BoardDao implements BoardDaoI {
 
 		insertCnt = sqlSession.insert("board.inBoard", boardVo);
 		
-		if(insertCnt == 1) {
+		if(insertCnt >= 1) {
 			sqlSession.commit();
 		}else {
 			sqlSession.rollback();
@@ -81,7 +81,7 @@ public class BoardDao implements BoardDaoI {
 		SqlSession sqlSession = MybatisUtil.getSession();
 		int deleteCnt = sqlSession.update("board.deleteBoard", board_seq1);
 		
-		if(deleteCnt ==1){
+		if(deleteCnt >=1){
 			sqlSession.commit();
 		}else{
 			sqlSession.rollback();
@@ -89,14 +89,14 @@ public class BoardDao implements BoardDaoI {
 		sqlSession.close();
 		return deleteCnt;
 	}
-
+	
 	
 	@Override
 	public int updateBoard(BoardVO boardVo) {
 		SqlSession sqlSession = MybatisUtil.getSession();
 		int updateCnt = sqlSession.update("board.updateBoard", boardVo);
-		System.out.println("updateCnt : "+updateCnt);
-		if(updateCnt ==1){
+		System.out.println("servcie updateCnt : "+updateCnt);
+		if(updateCnt >=1){
 			sqlSession.commit();
 		}else{
 			sqlSession.rollback();

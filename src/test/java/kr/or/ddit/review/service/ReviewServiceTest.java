@@ -14,31 +14,48 @@ import org.junit.Test;
 
 public class ReviewServiceTest {
 	
-	private ReviewServiceI reviewService;
+	private ReviewServiceI reviewService = new ReviewService();
 	
 	
 	@Test
-	public void selectAllReviewTest(int board_seq1) {
-		
+	public void selectAllReviewTest() {
 		/***Given***/
-		board_seq1 = 1;
+		int board_seq1 = 1;
 		
 		/***When***/
 		List<ReviewVO> reviewlist = (List<ReviewVO>)reviewService.selectAllReview(board_seq1);
 		
-		/***Then***/
-		assertNotEquals(5, reviewlist.size());
+		/***Then***/ 
+		assertEquals(12, reviewlist.size());
+		
 	}
-//
-//	
-//	@Test
-//	public int deleteReview(int revw_seq1) {
-//		return 0;
-//	}
-//
-//	
-//	@Test
-//	public int insertReview(ReviewVO reviewVo) {
-//		return 0;
-//	}
+	
+	
+	@Test
+	public void deleteReview() {
+		/***Given***/
+		int revw_seq1 = 1;
+
+		/***When***/
+		int delreview = reviewService.deleteReview(revw_seq1);
+		
+		/***Then***/
+		assertEquals(1, delreview);
+	}
+
+	
+	@Test
+	public void insertReview() {
+		/***Given***/
+		ReviewVO reviewVo = new ReviewVO();
+		reviewVo.setBoard_seq1(0);
+		reviewVo.setMem_id("a001");
+		reviewVo.setRevw_cont("내용");
+
+		/***When***/
+		int inreview = reviewService.insertReview(reviewVo);
+		
+		/***Then***/
+		assertNotEquals(0, inreview);
+	}
 }

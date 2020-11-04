@@ -86,7 +86,7 @@ public class BoardUpdateServlet extends HttpServlet {
  		BoardVO boardVo = new BoardVO(board_seq1,board_title,board_cont);
  		int boardCnt = boardService.updateBoard(boardVo);
  		System.out.println("attachsize : " +attachsize);
- 		
+ 		System.out.println("boardCnt : = "+boardCnt);
  		
  		
  		String arr1 = request.getParameter("arr");

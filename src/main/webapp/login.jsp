@@ -38,7 +38,7 @@
 		// sign in b버튼이 클릭 되엇을때 이벤크 핸들러
 		$("button").on('click',function(){
 			console.log("button_click");
-						  
+						    
 		 	if($("input[type=checkbox]").prop("checked") == true){
 				Cookies.set("REMEMBERME","Y");
 				Cookies.set("mem_id", $("#inputEmail").val());
