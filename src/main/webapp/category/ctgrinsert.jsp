@@ -6,7 +6,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
     
 <%
-    	List<CtgrVO> ctgrList = (List<CtgrVO>) request.getAttribute("ctgrList");
+    	List<CtgrVO> ctgrList = (List<CtgrVO>) session.getAttribute("ctgrList");
 %>        
 
 		<c:set var="ctgrList" value="<%= ctgrList %>"/>
@@ -63,7 +63,7 @@
 		ctgruse = $(this).data("ctgruse");
 		//alert("ctgruse : " + ctgruse); 
 	})
-	  
+	   
 	  
 	$("#ctgrList #update").on("click", function(){
 		// data-userid
@@ -95,53 +95,36 @@
 });   */  
 </script>
 </head>
-<body>
-  <div class="row content">
-  	 
-     <div class="col-sm-3 sidenav">
-   
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="${pageContext.request.contextPath}/ctgrinsertservlet">게시판 생성</a></li>
-        
-        <c:forEach var="i" begin="0" end="${fn:length(ctgrList)-1}">
-        	
-        	<c:if test="${ctgrList.get(i).getCtgr_use() == 1}">
-			    <li><a href="${pageContext.request.contextPath}/boardselectallservlet?ctgr_seq1=${ctgrList.get(i).getCtgr_seq1()}" ><c:out value="${ctgrList.get(i).getCtgr_name()}" /></a></li>
-			</c:if>
-  			
-        	
-			
-		</c:forEach> 
-		
-      </ul><br>
-  	
-    </div>
- 	
-    <div class="col-sm-9">
-      <h4><small>게시판 목록</small></h4>
-        
-	   <%--  <c:forEach var="movie" items="${ctgrList}" varStatus="status">
-			<ul class="nav nav-sidebar">
-				<li class="active"><a>${status.ctgr_name } <span class="sr-only">(current)</span></a></li>
-				<li class="active"><a>${status.ctgr_use }</a></li>
-			</ul>  
-		</c:forEach> --%>
-        
-        
-	<%--<c:forEach var="i" begin="0" end="${fn:length(ctgrList)-1}">
-			${ctgrList[i]}<br>
-		</c:forEach>  --%>
-		 
-    </div>
- 	
-      
-      
-      
-    <div class="col-sm-9">
-      <h4><small>Board Make</small></h4>
-      <hr>
+
+<title>Jsp</title>
+<!-- 레이아웃 추가 -->
+<%@ include file="/layout/commonLib.jsp" %>
+</head>
+ 
      
-		<form id="ctgrfm" action="${pageContext.request.contextPath}/ctgrinsertservlet" method="post">
+<body>   
+<!-- 상단 네비게이션바 -->
+<%@ include file="/layout/header.jsp" %>
+		
+
+<div class="container-fluid">
+<div class="row"> 
+
+<!-- 왼쪽 사이드바 -->
+<div class="col-sm-3 col-md-2 sidebar">
+<%@ include file="../layout/left.jsp" %>
+
+</div>  
+
+<div class="col-sm-8 col-md-8  main">
+	<div class="blog-header">
+		<h1 class="blog-title">Category</h1>
+		<p class="lead blog-description">Jsp / CategoryList.</p>
+	</div> 
+  
+	<div class="col-sm-8 blog-main">
+		<div class="blog-post">
+				<form id="ctgrfm" action="${pageContext.request.contextPath}/ctgrinsertservlet" method="post">
         <table class="table table-striped">
 				 <tr>  
 				 	<td><h4>카테고리 번호</h4></td>
@@ -213,13 +196,12 @@
 				
 			</table>
     		</form>
-    </div>
-  </div>
+		</div>
+	</div>            
+	<!-- /.blog-main -->
+</div>	
 </div>
-
-<footer class="container-fluid">
-  <p>Footer Text</p>
-</footer>
-
+	</div>
+		
 </body>
 </html>

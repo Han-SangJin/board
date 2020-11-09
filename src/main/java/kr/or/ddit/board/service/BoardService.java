@@ -8,7 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import kr.or.ddit.board.dao.BoardDao;
 import kr.or.ddit.board.dao.BoardDaoI;
-import kr.or.ddit.board.model.BoardVO;
+import kr.or.ddit.board.model.BoardVo;
 import kr.or.ddit.common.model.PageVO;
 import kr.or.ddit.db.MybatisUtil;
 
@@ -22,12 +22,12 @@ public class BoardService implements BoardServiceI {
 	
 	
 	@Override
-	public BoardVO selectBoard(int board_seq1) {
+	public BoardVo selectBoard(int board_seq1) {
 		return boardDao.selectBoard(board_seq1);
 	}
 	
 	@Override
-	public List<BoardVO> selectAllBoard(int ctgr_seq1) {
+	public List<BoardVo> selectAllBoard(int ctgr_seq1) {
 		return boardDao.selectAllBoard(ctgr_seq1);
 	}
 	  
@@ -38,8 +38,8 @@ public class BoardService implements BoardServiceI {
 		System.out.println("selectBoardPageList ctgr_seq1 : " +ctgr_seq1);
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		List<BoardVO> list = boardDao.selectBoardPageList(sqlSession,pageVo);
-		for(BoardVO post : list) {
+		List<BoardVo> list = boardDao.selectBoardPageList(sqlSession,pageVo);
+		for(BoardVo post : list) {
 			System.out.println(post.getBoard_title());
 			post.setBoard_title(post.getBoard_title().replaceAll(" ", "&nbsp;"));
 //			System.out.println(post.getBoard_title().replaceAll(" ", "&nbsp;"));
@@ -80,13 +80,13 @@ public class BoardService implements BoardServiceI {
 	}
 	
 	@Override
-	public int insertBoard(BoardVO boardVo) {
+	public int insertBoard(BoardVo boardVo) {
 		SqlSession sqlSession = MybatisUtil.getSession();
 		return boardDao.insertBoard(boardVo); 
 	}
 	
 	@Override
-	public int inBoard(BoardVO boardVo) {
+	public int inBoard(BoardVo boardVo) {
 		SqlSession sqlSession = MybatisUtil.getSession();
 		return boardDao.inBoard(boardVo); 
 	}
@@ -98,7 +98,7 @@ public class BoardService implements BoardServiceI {
 	}
 	
 	@Override
-	public int updateBoard(BoardVO boardVo) {
+	public int updateBoard(BoardVo boardVo) {
 		SqlSession sqlSession = MybatisUtil.getSession();
 		return boardDao.updateBoard(boardVo);
 	}

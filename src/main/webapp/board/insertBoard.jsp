@@ -58,7 +58,6 @@
 	
 	}
 </style>
-
 <script>
 $(document).ready(function() {
 	//여기 아래 부분
@@ -111,33 +110,36 @@ $('#board_cont').keyup(function (e){
     }
 </script>
 
+<title>Jsp</title>
+<!-- 레이아웃 추가 -->
+<%@ include file="/layout/commonLib.jsp" %>
 </head>
-<body>
-		<!-- 	
-			int board_seq1;			//	board_seq1		게시판 시퀸스
-			int parent_seq1;		//	parent_seq1		게시판의 부모 시퀸스값
-			String board_title;		//	board_title		제목
-			String board_cont;		//	board_cont		내용
-			Date board_date;		//	board_date		작성일
-			int board_dep;			//	board_dep		깊이 
-			int board_del;			//  BOARD_DEL		게시판 삭제여부
-			String mem_id;			//	mem_id			작성자 아이디
-			int ctgr_seq1;			//	ctgr_seq1		카테고리 번호
-			
-			
-			getBoard_seq1()
-			getParent_seq1()
-			getBoard_title()
-			getBoard_cont()
-			getBoard_date()
-			getBoard_dep()
-			getMem_id()
-			getCtgr_seq1()
-			getBoard_del()
-		-->
-	
-	 
-	<form id="frm" class="form-horizontal" role="form" action="/boardinsertservlet" method="POST" enctype="multipart/form-data">
+ 
+     
+<body>   
+<!-- 상단 네비게이션바 -->
+<%@ include file="/layout/header.jsp" %>
+		
+
+<div class="container-fluid">
+<div class="row"> 
+
+<!-- 왼쪽 사이드바 -->
+<div class="col-sm-3 col-md-2 sidebar">
+<%@ include file="../layout/left.jsp" %>
+
+</div>  
+
+<div class="col-sm-8 col-md-8  main">
+	<div class="blog-header">
+		<h1 class="blog-title">Category</h1>
+		<p class="lead blog-description">Jsp / CategoryList.</p>
+	</div> 
+  
+	<div class="col-sm-8 blog-main">
+		<div class="blog-post">
+		
+		<form id="frm" class="form-horizontal" role="form" action="/boardinsertservlet" method="POST" enctype="multipart/form-data">
 		<%-- 
 			이미지 파일 보여주기
 			다운로드 버튼
@@ -207,7 +209,15 @@ $('#board_cont').keyup(function (e){
 	 	
 	</form>
 	
-	
-	
+		
+		
+		</div>
+	</div>            
+	<!-- /.blog-main -->
+</div>	
+</div>
+	</div>
+		
 </body>
 </html>
+

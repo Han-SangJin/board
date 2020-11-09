@@ -209,10 +209,38 @@ $(document).ready(function() {
     }
 
 </script>
-
 </head>
-<body>
-	<form id="frm" class="form-horizontal" role="form" action="/boardupdateservlet?board_seq1=${boardVo.board_seq1}" method="POST" enctype="multipart/form-data">
+
+<title>Jsp</title>
+<!-- 레이아웃 추가 -->
+<%@ include file="/layout/commonLib.jsp" %>
+</head>
+ 
+     
+<body>   
+<!-- 상단 네비게이션바 -->
+<%@ include file="/layout/header.jsp" %>
+		
+
+<div class="container-fluid">
+<div class="row"> 
+
+<!-- 왼쪽 사이드바 -->
+<div class="col-sm-3 col-md-2 sidebar">
+<%@ include file="../layout/left.jsp" %>
+
+</div>  
+
+<div class="col-sm-8 col-md-8  main">
+	<div class="blog-header">
+		<h1 class="blog-title">Category</h1>
+		<p class="lead blog-description">Jsp / CategoryList.</p>
+	</div> 
+  
+	<div class="col-sm-8 blog-main">
+		<div class="blog-post">
+
+		<form id="frm" class="form-horizontal" role="form" action="/boardupdateservlet?board_seq1=${boardVo.board_seq1}" method="POST" enctype="multipart/form-data">
 		
 		<h2>${boardVo.board_seq1} 번 게시글 수정</h2>
 		<c:set var="board_seq1" scope="request" value="${boardVo.board_seq1}"/>
@@ -284,5 +312,13 @@ $(document).ready(function() {
 		</div>
 	
 	</form>
+
+		</div>
+	</div>            
+	<!-- /.blog-main -->
+</div>	
+</div>
+	</div>
+		
 </body>
 </html>

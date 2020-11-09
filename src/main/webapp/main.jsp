@@ -3,7 +3,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+ <%= session.getAttribute("S_MEMBER") %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,46 +17,40 @@
 
 <title>Jsp</title>
 <!-- 레이아웃 추가 -->
-<%@ include file="/layout/commonLib.jsp" %>
+<%@ include file="../layout/commonLib.jsp" %>
 </head>
  
      
 <body>   
 <!-- 상단 네비게이션바 -->
-  
+<%@ include file="/layout/header.jsp" %>
       
-      
+
 <div class="container-fluid">
-		<div class="row">
-			
-		 	   
+<div class="row"> 
+
 <!-- 왼쪽 사이드바 -->
 <div class="col-sm-3 col-md-2 sidebar">
-<%@ include file="/layout/left.jsp" %>
-</div>  
-           
-     
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-			  	     
+<%@ include file="../layout/left.jsp" %>
 
-<div class="blog-header">
-	<h1 class="blog-title">Main</h1>
-	<p class="lead blog-description">Jsp / Spring.</p>
-</div> 
+</div>  
+
  
-<div class="row">
- 
+<div class="col-sm-8 col-md-8  main">
+	<div class="blog-header">
+		<h1 class="blog-title">Main</h1>
+		<p class="lead blog-description">Jsp / Board.</p>
+	</div> 
+    
 	<div class="col-sm-8 blog-main">
-	       
 		<div class="blog-post">
 			<h2 class="blog-post-title">JSP</h2>
 			<p class="blog-post-meta">
 				2017.10.30, room 201
 			</p>
- 	 	 	
 			<p>jsp를 통한 웹 프로그래밍 학습</p>
 			<hr>
-			            
+			                
 			<h3>상세내역</h3>
 			<p>JSP과정에서는 다음과 같은 내용을 학습한다.</p>
 			<ul>
@@ -69,10 +63,11 @@
 				<li>페이지 모듈화</li>
 			</ul>
 		</div>
-	</div>
+	</div>            
 	<!-- /.blog-main -->
-</div>	</div>
-		</div>
+</div>	
+</div>
 	</div>
+		
 </body>
 </html>

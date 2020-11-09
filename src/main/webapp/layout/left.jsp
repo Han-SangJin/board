@@ -1,26 +1,32 @@
-<%@page import="kr.or.ddit.category.model.CtgrVO"%>
-<%@page import="java.util.List"%>
+<%@ page import="kr.or.ddit.category.model.CtgrVO"%>
+<%@ page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="/js/categoryupdate.js"></script>
 
-<%
-    	List<CtgrVO> ctgrList = (List<CtgrVO>) request.getAttribute("ctgrList");
-%>        
-dfdfdfdsfsdfsdfsd
-<c:set var="ctgrList" value="<%=ctgrList %>"/>    
-    
-<%-- 	<c:forEach var="movie" items="${ctgrList}" varStatus="status">
-		<ul class="nav nav-sidebar">
-			<li class="active"><a>${status.ctgr_name } <span class="sr-only">(current)</span></a></li>
-			<li class="active"><a>${status.ctgr_use }</a></li>
-		</ul>  
-	</c:forEach> --%>
+<body>
+	<ul class="nav nav-sidebar">
+		<li class="active"><a href="${pageContext.request.contextPath}/login/unt/main">Main <span class="sr-only">(current)</span></a></li>
+		<li class="active"><a href="${pageContext.request.contextPath}/memberList/process">사용자</a></li>
+		<li><a href="${pageContext.request.contextPath}/ctgrinsertservlet">게시판 생성</a></li>
 	
+		<c:set var="ctgrsize" value="${ctgrList.size()-1}"/>
+		
+		<c:forEach var="i" begin="0" end="${ctgrsize}">
+			<c:if test="${ctgrList.get(i).getCtgr_use() == 1}">
+				<li><a href="${pageContext.request.contextPath}/boardselectallservlet?ctgr_seq1=${ctgrList.get(i).getCtgr_seq1()}">
+						${ctgrList.get(i).getCtgr_name()}</a></li>
+			</c:if>
+		</c:forEach>
 
-<%--  
- 	<c:forEach var="i" begin="0" end="${fn:length(ctgrList)-1}">
-			${ctgrList[i]}<br>
-	</c:forEach>  --%>
+	</ul>
+</body>

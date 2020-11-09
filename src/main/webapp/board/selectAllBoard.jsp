@@ -1,4 +1,4 @@
-<%@page import="kr.or.ddit.board.model.BoardVO"%>
+<%@page import="kr.or.ddit.board.model.BoardVo" %>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -6,9 +6,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 
 <%
-    List<BoardVO> selectAllBoard = (List<BoardVO>) request.getAttribute("selectAllBoard");
-%>    
-
+    	List<BoardVo> selectAllBoard = (List<BoardVo>) request.getAttribute("selectAllBoard");
+    %>    
+ 
 	<c:set var="selectAllBoard" value="<%= selectAllBoard %>"/>
 	<c:set var="boardsize" value="<%= selectAllBoard.size() %>"/>
 	<fmt:formatNumber value="${boardsize}" type="number" var="numberType" />
@@ -40,32 +40,83 @@
 		width : 150px;
 	}
 
-</style>
-<body> 
-<!-- 
-	int board_seq1;			//	board_seq1		게시판 시퀸스
-	int parent_seq1;		//	parent_seq1		게시판의 부모 시퀸스값
-	String board_title;		//	board_title		제목
-	String board_cont;		//	board_cont		내용
-	Date board_date;		//	board_date		작성일
-	int board_dep;			//	board_dep		깊이 
-	int board_del;			//  BOARD_DEL		게시판 삭제여부
-	String mem_id;			//	mem_id			작성자 아이디
-	int ctgr_seq1;			//	ctgr_seq1		카테고리 번호
-	
-	
-	getBoard_seq1()
-	getParent_seq1()
-	getBoard_title()
-	getBoard_cont()
-	getBoard_date()
-	getBoard_dep()
-	getMem_id()
-	getCtgr_seq1()
-	getBoard_del()
-	 -->
 
-	<a href="/boardinsertservlet?ctgr_seq1=${ctgr_seq1}&parent_seq1=0"><input type="button" value="새로운 글 등록"></a>
+</style>
+<script> 
+
+ $(document).ready(function(){
+	 var ctgruse = 0;
+	 var ctgr_seq1 = 0;
+	 var ctgr_use = 0;
+
+	 
+	$("#ctgrList tr").on("click",function(){
+		ctgruse = $(this).data("ctgruse");
+		//alert("ctgruse : " + ctgruse); 
+	})
+	   
+	  
+	$("#ctgrList #update").on("click", function(){
+		// data-userid
+		ctgr_seq1 = $(this).data("ctgrseq1");
+		//alert("ctgr_seq1 : " + ctgr_seq1); 
+		//alert($("#idx").val());
+	    // alert($("select[name=use"+ctgeuse+"]").val());
+	    ctgr_use = $("select[name=use"+ctgruse+"]").val();
+	    //alert(ctgr_use);
+	  	//$('#ctgrfm').submit();
+		/* document.location="/member?userid=" + userid; */
+		     
+		updateCtgr(ctgr_seq1,ctgr_use);
+
+		location.reload();
+	})	
+}) 
+  
+		  
+/* $(function(){
+
+	var se = document.getElementBuId("used");
+	alert(se)
+	
+	 $("#ctgrList #update").click(function(){
+		var email = $("#used option:selected").text();
+		alert(email)
+	)}; 
+});   */  
+</script>
+</head>
+
+<title>Jsp</title>
+<!-- 레이아웃 추가 -->
+<%@ include file="/layout/commonLib.jsp" %>
+</head>
+ 
+     
+<body>   
+<!-- 상단 네비게이션바 -->
+<%@ include file="/layout/header.jsp" %>
+		
+
+<div class="container-fluid">
+<div class="row"> 
+
+<!-- 왼쪽 사이드바 -->
+<div class="col-sm-3 col-md-2 sidebar">
+<%@ include file="../layout/left.jsp" %>
+</div>  
+
+<div class="col-sm-8 col-md-8  main">
+	<div class="blog-header">
+		<h1 class="blog-title">Category</h1>
+		<p class="lead blog-description">Jsp / CategoryList.</p>
+	</div> 
+  
+	<div class="col-sm-8 blog-main">
+		<div class="blog-post">
+				
+				
+				<a href="/boardinsertservlet?ctgr_seq1=${ctgr_seq1}&parent_seq1=0"><input type="button" value="새로운 글 등록"></a>
 	 
 	int boardsize : ${ selectAllBoard.size() }
  	page : ${page}
@@ -80,7 +131,7 @@
 
 	<table border="1">
 			<tr id=title>
-				<td>글 번호</td>
+				<td width="100px">번호</td>
 				<!-- <td>부모 시퀸스값</td> -->
 				<td class="title">제목</td>
 				<!-- <td>내용</td> -->
@@ -183,5 +234,12 @@
 			
 		</ul>
 	</div>
+		</div>
+	</div>            
+	<!-- /.blog-main -->
+</div>	
+</div>
+	</div>
+		
 </body>
 </html>

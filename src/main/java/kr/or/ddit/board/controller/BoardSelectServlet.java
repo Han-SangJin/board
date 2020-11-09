@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import kr.or.ddit.attachfile.model.AttachVO;
-import kr.or.ddit.board.model.BoardVO;
+import kr.or.ddit.board.model.BoardVo;
 import kr.or.ddit.board.service.BoardService;
 import kr.or.ddit.board.service.BoardServiceI;
 import kr.or.ddit.review.model.ReviewVO;
@@ -32,7 +32,7 @@ public class BoardSelectServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		int board_seq1 = Integer.parseInt(request.getParameter("board_seq1"));
 		System.out.println("boardselectservlet board_seq1 : " + board_seq1);
-		BoardVO boardVo = boardService.selectBoard(board_seq1);
+		BoardVo boardVo = boardService.selectBoard(board_seq1);
 		
 		
 		if(board_seq1 > 0) {	

@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 import kr.or.ddit.attachfile.model.AttachVO;
 import kr.or.ddit.attachfile.service.AttachService;
 import kr.or.ddit.attachfile.service.AttachServiceI;
-import kr.or.ddit.board.model.BoardVO;
+import kr.or.ddit.board.model.BoardVo;
 import kr.or.ddit.board.service.BoardService;
 import kr.or.ddit.board.service.BoardServiceI;
 
@@ -31,7 +31,7 @@ public class BoardUpdateServlet extends HttpServlet {
 	private BoardServiceI boardService;
 	private AttachServiceI attchService;
 	
-	BoardVO boardVo;
+	BoardVo boardVo;
 	List<AttachVO> attachList;
 	AttachVO attachVo;
 	String path = "";
@@ -83,7 +83,7 @@ public class BoardUpdateServlet extends HttpServlet {
  		System.out.println("board_cont + " +board_cont);
  		int attachsize = Integer.parseInt(request.getParameter("attachsize"));
  		// 게시판 정보 등록
- 		BoardVO boardVo = new BoardVO(board_seq1,board_title,board_cont);
+ 		BoardVo boardVo = new BoardVo(board_seq1,board_title,board_cont);
  		int boardCnt = boardService.updateBoard(boardVo);
  		System.out.println("attachsize : " +attachsize);
  		System.out.println("boardCnt : = "+boardCnt);

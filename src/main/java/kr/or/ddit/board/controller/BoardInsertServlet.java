@@ -16,7 +16,7 @@ import javax.servlet.http.Part;
 import kr.or.ddit.attachfile.model.AttachVO;
 import kr.or.ddit.attachfile.service.AttachService;
 import kr.or.ddit.attachfile.service.AttachServiceI;
-import kr.or.ddit.board.model.BoardVO;
+import kr.or.ddit.board.model.BoardVo;
 import kr.or.ddit.board.service.BoardService;
 import kr.or.ddit.board.service.BoardServiceI;
 
@@ -83,14 +83,14 @@ public class BoardInsertServlet extends HttpServlet {
 		
 		 
 		// 게시판 정보 등록
-		BoardVO boardVo;
+		BoardVo boardVo;
 		
 		
 		int insertCnt = 0;
 		// 새글 작성하는 경우
 		if(parent_seq1 == 0) {	
 			parent_seq1 = 0;
-			boardVo = new BoardVO(board_title,board_cont,mem_id,ctgr_seq1,parent_seq1);
+			boardVo = new BoardVo(board_title,board_cont,mem_id,ctgr_seq1,parent_seq1);
 		
 			int inserCnt = boardService.insertBoard(boardVo);
 			System.out.println("inserCnt : " + inserCnt);
@@ -103,7 +103,7 @@ public class BoardInsertServlet extends HttpServlet {
 			System.out.println("board_seq1 :::: " + board_seq1);
 			parent_seq1 = board_seq1;
 			
-			boardVo = new BoardVO(parent_seq1,board_title,board_cont,board_dep,mem_id,ctgr_seq1);
+			boardVo = new BoardVo(parent_seq1,board_title,board_cont,board_dep,mem_id,ctgr_seq1);
 			int inCnt = boardService.inBoard(boardVo);
 			System.out.println("inCnt : " + inCnt);
 		}

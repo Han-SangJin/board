@@ -8,7 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import kr.or.ddit.board.dao.BoardDao;
 import kr.or.ddit.board.dao.BoardDaoI;
-import kr.or.ddit.board.model.BoardVO;
+import kr.or.ddit.board.model.BoardVo;
 import kr.or.ddit.common.model.PageVO;
 import kr.or.ddit.db.MybatisUtil;
 
@@ -26,7 +26,7 @@ public class BoardServiceTest {
 		int ctgr_seq1 = 1;
 		
 		/***When***/
-		List<BoardVO> boarlist = (List<BoardVO>) boardService.selectAllBoard(ctgr_seq1);
+		List<BoardVo> boarlist = (List<BoardVo>) boardService.selectAllBoard(ctgr_seq1);
 
 		/***Then***/
 		assertEquals(30, boarlist.size());
@@ -43,7 +43,7 @@ public class BoardServiceTest {
 
 		/***When***/
 		Map<String, Object> map = (Map<String, Object>) boardService.selectBoardPageList(pageVo);
-		List<BoardVO> boardlist = (List<BoardVO>) map.get("selectAllBoard");
+		List<BoardVo> boardlist = (List<BoardVo>) map.get("selectAllBoard");
 		
 		/***Then***/
 		assertEquals(10, boardlist.size());
@@ -64,7 +64,7 @@ public class BoardServiceTest {
 	@Test
 	public void insertBoard() {
 		/***Given***/
-		BoardVO boardVo = new BoardVO();
+		BoardVo boardVo = new BoardVo();
 		boardVo.setBoard_cont("테스트내용");
 		boardVo.setBoard_title("테스트제목");
 		boardVo.setCtgr_seq1(1);	// 1,2
@@ -80,7 +80,7 @@ public class BoardServiceTest {
 	@Test
 	public void inBoard() {
 		/***Given***/
-		BoardVO boardVo = new BoardVO();
+		BoardVo boardVo = new BoardVo();
 		boardVo.setBoard_dep(10);
 		boardVo.setParent_seq1(10);
 		boardVo.setBoard_cont("테스트답글");
@@ -110,7 +110,7 @@ public class BoardServiceTest {
 	@Test
 	public void updateBoard() {
 		/***Given***/
-		BoardVO boardVo = new BoardVO();
+		BoardVo boardVo = new BoardVo();
 		boardVo.setBoard_title("테스트제목수정");
 		boardVo.setBoard_cont("테스트수정");
 		boardVo.setCtgr_seq1(10);

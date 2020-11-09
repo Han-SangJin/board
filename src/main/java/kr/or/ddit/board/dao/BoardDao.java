@@ -4,16 +4,16 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
-import kr.or.ddit.board.model.BoardVO;
+import kr.or.ddit.board.model.BoardVo;
 import kr.or.ddit.common.model.PageVO;
 import kr.or.ddit.db.MybatisUtil;
 
 public class BoardDao implements BoardDaoI {
 
 	@Override
-	public BoardVO selectBoard(int board_seq1) {
+	public BoardVo selectBoard(int board_seq1) {
 		SqlSession sqlSession = MybatisUtil.getSession();
-		BoardVO boardVo = sqlSession.selectOne("board.selectBoard", board_seq1);
+		BoardVo boardVo = sqlSession.selectOne("board.selectBoard", board_seq1);
 		
 		sqlSession.close();
 		return boardVo;
@@ -21,10 +21,10 @@ public class BoardDao implements BoardDaoI {
 	
 	// 전체글 가져오기
 	@Override
-	public List<BoardVO> selectAllBoard(int ctgr_seq1) {
+	public List<BoardVo> selectAllBoard(int ctgr_seq1) {
 		System.out.println("ctgr_seq1"+ctgr_seq1);
 		SqlSession sqlSession = MybatisUtil.getSession();
-		List<BoardVO> selectAllBoard =  sqlSession.selectList("board.selectAllBoard", ctgr_seq1);
+		List<BoardVo> selectAllBoard =  sqlSession.selectList("board.selectAllBoard", ctgr_seq1);
 		
 		sqlSession.close(); 
 		return selectAllBoard;
@@ -32,7 +32,7 @@ public class BoardDao implements BoardDaoI {
 
 	// 전체 글 가져오기 (계층정렬)
 	@Override
-	public List<BoardVO> selectBoardPageList(SqlSession sqlSession, PageVO pageVo) {
+	public List<BoardVo> selectBoardPageList(SqlSession sqlSession, PageVO pageVo) {
 		return sqlSession.selectList("board.selectBoardPageList", pageVo);
 	}
 	
@@ -43,7 +43,7 @@ public class BoardDao implements BoardDaoI {
 	}
 	
 	@Override
-	public int insertBoard(BoardVO boardVo) {
+	public int insertBoard(BoardVo boardVo) {
 		SqlSession sqlSession = MybatisUtil.getSession();
 		int insertCnt = 0;
 
@@ -60,7 +60,7 @@ public class BoardDao implements BoardDaoI {
 	}
 
 	@Override
-	public int inBoard(BoardVO boardVo) {
+	public int inBoard(BoardVo boardVo) {
 		SqlSession sqlSession = MybatisUtil.getSession();
 		int insertCnt = 0;
 
@@ -92,7 +92,7 @@ public class BoardDao implements BoardDaoI {
 	
 	
 	@Override
-	public int updateBoard(BoardVO boardVo) {
+	public int updateBoard(BoardVo boardVo) {
 		SqlSession sqlSession = MybatisUtil.getSession();
 		int updateCnt = sqlSession.update("board.updateBoard", boardVo);
 		System.out.println("servcie updateCnt : "+updateCnt);

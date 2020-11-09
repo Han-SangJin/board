@@ -8,7 +8,7 @@ public class PageVO {
 	// 인자가 없는 생성자
 	public PageVO() {
 			
-	}
+	} 
 	 
 	// 인자 있는 생성자를 선언하게 되면 default 생성자가 생성이 안됨
 	// 대다수의 framework 에서는 인지가 없는 생성자를 요구하는 경우가 많음

@@ -2,7 +2,7 @@ package kr.or.ddit.board.model;
 
 import java.sql.Date;
 
-public class BoardVO {
+public class BoardVo {
 	
 	
 	int board_seq1;			//	board_seq1		게시판 시퀸스
@@ -16,12 +16,12 @@ public class BoardVO {
 	int ctgr_seq1;			//	ctgr_seq1		카테고리 번호
 
 	
-	public BoardVO() {
+	public BoardVo() {
 		
 	}
 	
 	
-	public BoardVO(String board_title, String board_cont, int board_dep, int board_del, String mem_id, int ctgr_seq1) {
+	public BoardVo(String board_title, String board_cont, int board_dep, int board_del, String mem_id, int ctgr_seq1) {
 		this.board_title = board_title;
 		this.board_cont = board_cont;
 		this.board_dep = board_dep;
@@ -32,7 +32,7 @@ public class BoardVO {
 	}
 	
 	 
-	public BoardVO(String board_title, String board_cont, String mem_id, int ctgr_seq1) {
+	public BoardVo(String board_title, String board_cont, String mem_id, int ctgr_seq1) {
 		this.board_title = board_title;
 		this.board_cont = board_cont;
 		this.mem_id = mem_id;
@@ -40,7 +40,7 @@ public class BoardVO {
 	}
 	
 	
-	public BoardVO(int board_seq1, int parent_seq1, String board_title, String board_cont, Date board_date,
+	public BoardVo(int board_seq1, int parent_seq1, String board_title, String board_cont, Date board_date,
 			int board_dep, int board_del, String mem_id, int ctgr_seq1) {
 		this.board_seq1 = board_seq1;
 		this.parent_seq1 = parent_seq1;
@@ -54,14 +54,14 @@ public class BoardVO {
 	}
 	
 	// 새글 쓰는 경우
-	public BoardVO(int board_seq1, String board_title, String board_cont) {
+	public BoardVo(int board_seq1, String board_title, String board_cont) {
 		this.board_seq1 = board_seq1;
 		this.board_title = board_title;
 		this.board_cont = board_cont;
 	}
 
 
-	public BoardVO(String board_title, String board_cont, String mem_id, int ctgr_seq1, int parent_seq1, int board_dep) {
+	public BoardVo(String board_title, String board_cont, String mem_id, int ctgr_seq1, int parent_seq1, int board_dep) {
 		this.board_title = board_title;
 		this.board_cont = board_cont;
 		this.ctgr_seq1 = ctgr_seq1;
@@ -70,7 +70,7 @@ public class BoardVO {
 	}
 
 	// 답글다는 경우
-	public BoardVO(String board_title, String board_cont, String mem_id, int ctgr_seq1, int board_dep) {
+	public BoardVo(String board_title, String board_cont, String mem_id, int ctgr_seq1, int board_dep) {
 		this.board_title = board_title;
 		this.board_cont = board_cont;
 		this.mem_id = mem_id;
@@ -79,7 +79,7 @@ public class BoardVO {
 	}
 
 	
-	public BoardVO(int parent_seq1, String board_title, String board_cont, int board_dep, String mem_id, int ctgr_seq1) {
+	public BoardVo(int parent_seq1, String board_title, String board_cont, int board_dep, String mem_id, int ctgr_seq1) {
 		this.parent_seq1 = parent_seq1;
 		this.board_title = board_title;
 		this.board_cont = board_cont;
@@ -176,7 +176,7 @@ public class BoardVO {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		BoardVO other = (BoardVO) obj;
+		BoardVo other = (BoardVo) obj;
 		if (board_cont == null) {
 			if (other.board_cont != null)
 				return false;

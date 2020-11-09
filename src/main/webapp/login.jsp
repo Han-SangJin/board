@@ -33,7 +33,7 @@
 			//$("input[type=checkbox]").attr("checked","checked");
 			$("#inputEmail").val(Cookies.get("mem_id"))
 			//console.log("체크");
-		}                                             
+		}                                                    
                                                               
 		// sign in b버튼이 클릭 되엇을때 이벤크 핸들러
 		$("button").on('click',function(){
@@ -71,7 +71,7 @@
 	// 쿠키 날짜 설정 
 		// 현재 날짜에서 미래로  + expires 만큼 한 날짜 구하기
 		today.setDate( today.getDate() + expires );
-       
+        
 		       
 		document.cookie = cookieName + "=" + cookieValue + "; path=/; expires=" + today.toGMTString();
 		console.log(document.cookie);
@@ -82,10 +82,10 @@
 	}               
 </script>                              
 </head>                                                
-                                                                                                                                           
-                                                                                                                   
+                                                                                                                                            
+                                                                                               
 <body>    
-  <div class="container">
+  <div class="container"> 
     <form action="${pageContext.request.contextPath}/login" method="post">
        <h2 class="form-signin-heading">Please sign in</h2>
        <label for="inputEmail" >Email address</label>

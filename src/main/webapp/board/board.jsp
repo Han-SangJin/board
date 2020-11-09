@@ -51,9 +51,39 @@
       
   </style>
 </head>
-<body>
 
-  <div class="row content">
+
+
+<title>Jsp</title>
+<!-- 레이아웃 추가 -->
+<%@ include file="/layout/commonLib.jsp" %>
+</head>
+ 
+     
+<body>   
+<!-- 상단 네비게이션바 -->
+<%@ include file="/layout/header.jsp" %>
+		
+
+<div class="container-fluid">
+<div class="row"> 
+
+<!-- 왼쪽 사이드바 -->
+<div class="col-sm-3 col-md-2 sidebar">
+<%@ include file="../layout/left.jsp" %>
+
+</div>  
+
+<div class="col-sm-8 col-md-8  main">
+	<div class="blog-header">
+		<h1 class="blog-title">Category</h1>
+		<p class="lead blog-description">Jsp / CategoryList.</p>
+	</div> 
+  
+	<div class="col-sm-8 blog-main">
+		<div class="blog-post">
+		
+		  <div class="row content">
    
    
     <div class="col-sm-3 sidenav">
@@ -82,15 +112,15 @@
       <hr>
   
     
-    
-    
-  
     </div>
   </div>
-
-<footer class="container-fluid">
-  <p>Footer Text</p>
-</footer>
-
+	</div>
+</div>            
+	<!-- /.blog-main -->
+</div>	
+</div>
+	</div>
+		
 </body>
 </html>
+

@@ -1,6 +1,8 @@
 package kr.or.ddit.login;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -11,6 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import kr.or.ddit.category.model.CtgrVO;
+import kr.or.ddit.category.service.CtgrService;
+import kr.or.ddit.category.service.CtgrServiceI;
 import kr.or.ddit.member.model.MemberVO;
 import kr.or.ddit.member.service.MemberService;
 import kr.or.ddit.member.service.MemberServiceI;
@@ -20,12 +25,13 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final Logger logger = LoggerFactory.getLogger(LoginServlet.class);
 	private MemberServiceI memberService;
+	private CtgrServiceI ctgrService;
 	
-	  
 	@Override
 	public void init() throws ServletException {
 		// service 객체 생성
 		memberService = new MemberService();
+		ctgrService = new CtgrService();
 	}
 	
 	
@@ -68,7 +74,12 @@ public class LoginServlet extends HttpServlet {
 			System.out.println("접속성공!!!");
 			request.getSession().setAttribute("mem_id", mem_id);
 			request.getSession().setAttribute("S_MEMBER", memberVo);
-			request.getRequestDispatcher("/board/board.jsp").forward(request, response);
+			request.getSession().setAttribute("S_MEMBER", memberVo);
+			
+			List<CtgrVO> ctgrList = ctgrService.selectAllCtgr();
+			request.getSession().setAttribute("ctgrList", ctgrList);
+			
+			request.getRequestDispatcher("/main.jsp").forward(request, response);
 		}
 		
 		// 쿠키정보

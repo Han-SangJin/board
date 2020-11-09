@@ -31,7 +31,7 @@ public class CtgrInsertServlet extends HttpServlet {
 		System.out.println("ctgrList");
 		
 		List<CtgrVO> ctgrList = ctgrService.selectAllCtgr();
-		request.setAttribute("ctgrList", ctgrList);
+		request.getSession().setAttribute("ctgrList", ctgrList);
 		request.getRequestDispatcher("/category/ctgrinsert.jsp").forward(request, response);
 	}
 	

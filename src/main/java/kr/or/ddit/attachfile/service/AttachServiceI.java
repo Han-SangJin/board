@@ -3,7 +3,7 @@ package kr.or.ddit.attachfile.service;
 import java.util.List;
 
 import kr.or.ddit.attachfile.model.AttachVO;
-import kr.or.ddit.board.model.BoardVO;
+import kr.or.ddit.board.model.BoardVo;
 
 public interface AttachServiceI {
 
