@@ -18,7 +18,9 @@
 <script src="/js/summernote/summernote-lite.js"></script>
 <script src="/js/summernote/lang/summernote-ko-KR.js"></script>
 <link rel="stylesheet" href="/css/summernote/summernote-lite.css">
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote.js" defer></script>
 <script src="/js/fileupdate.js"></script> 
+
 <title>Insert title here</title>
 <style>
 	.dlabel{
@@ -65,7 +67,7 @@
 </style>
 
 <script>
-$(document).ready(function() {
+$(document).ready(function(){
 
 
 	 $("#attachList li").on("click", function(){
@@ -146,7 +148,7 @@ $(document).ready(function() {
 		  maxHeight: 300,             // 최대 높이
 		  focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
 		  lang: "ko-KR",					// 한글 설정
-		  placeholder: "최대 2048자까지 쓸 수 있습니다"	//placeholder 설정
+		/*   placeholder: "최대 2048자까지 쓸 수 있습니다"	//placeholder 설정 */
 	});
 
 
@@ -270,12 +272,6 @@ $(document).ready(function() {
 		<% 	 
 			int attachsize = attachList.size();
 		%>	
-				<!-- file_seq 담기 -->				
-				i_result : <input type="text" name="afile" id="i_result" value="0"/>
-				
-				di : <input type="text" name="arr" id="di" value="0"/>
-				li : <input type="text" name="li" id="li" value="0"/>
-				del : <input type="text" name="delarr" id="divdel" value="0"/>
 
 				<input type="text" name="attachsize" value="<%= attachsize %>" style="display:none">
 				<ul id="attachList">
@@ -307,6 +303,12 @@ $(document).ready(function() {
  		
 		
 		<div class="boarddiv" style="display:none">
+				<!-- file_seq 담기 -->				
+				i_result : <input type="text" name="afile" id="i_result" value="0"/>
+				
+				di : <input type="text" name="arr" id="di" value="0"/>
+				li : <input type="text" name="li" id="li" value="0"/>
+				del : <input type="text" name="delarr" id="divdel" value="0"/>
 			<input type="text" name="board_seq1" value="${boardVo.board_seq1}" data-boardseq1="${boardVo.board_seq1}">
 			<input type="text" name="ctgr_seq1" value="<%= request.getParameter("ctgr_seq1") %>">
 		</div>

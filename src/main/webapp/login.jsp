@@ -14,18 +14,20 @@
 <!-- <link rel="icon" href="../../favicon.ico"> -->
 	
 <title>Signin Template for Bootstrap</title>
-	
+	 
 <!-- Bootstrap core CSS -->
 <link href="${pageContext.request.contextPath }/css/bootstrap.min.css" rel="stylesheet">
 	 
 <!-- Custom styles for this template -->
 <link href="${pageContext.request.contextPath }/css/signin.css" rel="stylesheet">
-   
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript" src="${pageContext.request.contextPath }/js/js.cookie-2.2.1.min.js"></script>
+    
+<style>
+ #subbtn {
+	width: 48%;
+}
+</style>      
 <script src="/js/categoryupdate.js"></script>
-<script src="http://code.jquery.com/jquery-latest.js">    
+<script>    
 	$(function(){                 
 		// remember me cookie 확인
 	 	if(Cookies.get("REMEMBERME")=="Y"){
@@ -34,7 +36,7 @@
 			$("#inputEmail").val(Cookies.get("mem_id"))
 			//console.log("체크");
 		}                                                    
-                                                              
+                                                                   
 		// sign in b버튼이 클릭 되엇을때 이벤크 핸들러
 		$("button").on('click',function(){
 			console.log("button_click");
@@ -66,7 +68,7 @@
      
 		return "";  
 	}	                 
-                                  
+                                   
 	                                                         
 	// 쿠키 날짜 설정 
 		// 현재 날짜에서 미래로  + expires 만큼 한 날짜 구하기
@@ -81,9 +83,9 @@
 		setCookie(cookieName, "", -1);	
 	}               
 </script>                              
-</head>                                                
+</head>                                                 
                                                                                                                                             
-                                                                                               
+                                                                                                      
 <body>    
   <div class="container"> 
     <form action="${pageContext.request.contextPath}/login" method="post">
@@ -97,7 +99,7 @@
            <input type="checkbox" value="" id="remember"> Remember me
          </label>
        </div>
-       <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+       <button id="subbtn" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
      </form>
   </div> 
 </body>

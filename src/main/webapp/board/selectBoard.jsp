@@ -54,6 +54,27 @@
 <%@ include file="/layout/commonLib.jsp" %>
 </head>
  
+<script>
+
+$(document).ready(function(){
+	
+
+
+	
+	$('#revwBtn').on('click', function(){
+		tex = $('#revw_cont').val();
+
+		if(tex.length >=500)
+			alert("500글자가 넘었습니다.");
+		else
+			document.rvfmt.submit();
+			
+			
+	})
+
+})
+
+</script>
      
 <body>   
 <!-- 상단 네비게이션바 -->
@@ -98,11 +119,11 @@
 		  
 		<div class="boarddiv">
 			<label for="board_seq1" class="dlabel">게시글 번호 : </label>
-			<label class="label">${boardVo.board_seq1}</label>
+			<label class="dlabel">${boardVo.board_seq1}</label>
 			<label for="mem_id" class="dlabel">아이디 : </label>
-			<label class="label">${boardVo.mem_id}</label>
+			<label class="dlabel">${boardVo.mem_id}</label>
 			<label for="board_date" class="dlabel">작성일 : </label>
-			<label class="label">
+			<label class="dlabel">
 				<fmt:formatDate value="${boardVo.board_date}" pattern="yyyy-MM-dd" />
 			</label>
 			<br>
@@ -111,7 +132,7 @@
 		
 		<div class="boarddiv">
 			<label for="board_title" class="dlabel">제목</label>:
-			<label class="label">${boardVo.board_title}</label>
+			<label class="dlabel">${boardVo.board_title}</label>
 			
 				 
 			<c:choose>	
@@ -140,7 +161,7 @@
 		
 		<div id="contdiv" class="boarddiv">
 			<label for="board_cont" class="dlabel">내용</label><br>
-			<label class="label">${boardVo.board_cont}</label>
+			<label class="dlabel">${boardVo.board_cont}</label>
 		</div>
 		<hr>
 
@@ -149,16 +170,16 @@
 		
 		<div class="boarddiv" style="display:none">
 			<label for="parent_seq1" class="dlabel">부모의 시퀸스 값 : </label>
-			<label class="label">${boardVo.parent_seq1}</label>
+			<label class="dlabel">${boardVo.parent_seq1}</label>
 			
 			<label for="board_dep" class="dlabel">깊이 : </label>
-			<label class="label">${boardVo.board_dep}</label>
+			<label class="dlabel">${boardVo.board_dep}</label>
 			
 			<label for="board_del" class="dlabel">삭제여부 : </label>
-			<label class="label">${boardVo.board_del}</label>
+			<label class="dlabel">${boardVo.board_del}</label>
 			
 			<label for="ctgr_seq1" class="dlabel">카테고리 : </label>
-			<label class="label">${boardVo.ctgr_seq1}</label>
+			<label class="dlabel">${boardVo.ctgr_seq1}</label>
 		</div>
 	</form>
 
@@ -179,10 +200,8 @@
 <div>
 	<table>
 		<tr>
-			<td>파일 시퀀스</td>
-			<td>시퀸스 이름</td>
+			<!-- <td>번호</td> -->
 			<td>파일 이름</td>
-			<td>게시판 번호</td>
 		</tr>
 		
 		<c:choose>
@@ -191,11 +210,11 @@
 				<c:forEach var="i" begin="0" end="${attachList.size()-1}">
 					<tr>
 
-						<td>${attachList.get(i).getFile_seq1()}</td>
-						<td>${attachList.get(i).getFile_name()}</td>
+						<%-- <td>${attachList.get(i).getFile_seq1()}</td> --%>
+						<%-- <td>${attachList.get(i).getFile_name()}</td> --%>
 						<td>${attachList.get(i).getFile_real_name()}</td>
-						<td>${attachList.get(i).getBoard_seq1()}</td>
-					
+						<%-- <td>${attachList.get(i).getBoard_seq1()}</td> --%>
+						
 					</tr>	
 				</c:forEach>
 			</c:when>
@@ -230,15 +249,15 @@
 		<h3> 댓 글 작 성</h3>
 						<!-- 댓  글  작  성 -->
 						
-		<form action="reviewinsertservlet" method="post">
+		<form id="rvfmt" name="rvfmt" action="reviewinsertservlet" method="post">
 		
 			<!-- <input type="text" name="revw_cont" id="revw_cont" value=""/>	 -->
-			<textarea id="revw_cont" name="revw_cont"></textarea>
+			<textarea id="revw_cont" name="revw_cont" value=""></textarea>
 			<input type="text" name="mem_id" value="<%= session.getAttribute("mem_id") %>" style="display:none">
 			<input type="text" name="board_seq1" value="<%= request.getParameter("board_seq1") %>" style="display:none">
 			
 			<br><br>					
-			<input id="revwBtn" type="submit" value="작성완료">							
+			<input id="revwBtn" type="button" value="작성완료">							
 			<br><br><br><br><br><br>
 			 
 		</form>
@@ -258,7 +277,7 @@
 			<!-- <td>삭제 여부</td> -->
 			<td>작성자</td>
 			<!-- <td>게시판 번호</td> -->
-			<td>삭제</td>
+			<!-- <td>삭제</td> -->
 		</tr>
 		<h3> 댓 글 목 록</h3>
 		<c:choose>
@@ -297,19 +316,23 @@
 				</c:forEach> 
 			</c:when>
 			<c:otherwise>
-				글 목록이 존재하지 않습니다.
+				<tr>
+					<td>
+				 	댓글 목록이 없습니다.
+				 	
+				 	</td>
+				</tr>
 			</c:otherwise>
 		
 		
 		</c:choose>
 	</table>
-	</div>
-		<div>
+		<div class="boarddiv" style="display:none">
 			<label for="parent_seq1" class="dlabel">레벨 : </label>
-			<label class="label">${boardVo.parent_seq1}</label>
+			<label class="dlabel">${boardVo.parent_seq1}</label>
 				
 			<label for="board_dep" class="dlabel">원글 번호 : </label>
-			<label class="label">${boardVo.board_dep}</label>
+			<label class="dlabel">${boardVo.board_dep}</label>
 		</div>
 <br><br><br><br><br><br>
 <hr>

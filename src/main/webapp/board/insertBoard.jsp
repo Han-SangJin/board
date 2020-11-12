@@ -11,9 +11,15 @@
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
 <script src="/js/summernote/summernote-lite.js"></script>
 <script src="/js/summernote/lang/summernote-ko-KR.js"></script>
 <link rel="stylesheet" href="/css/summernote/summernote-lite.css">
+
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/summernote.js" defer></script>
+
 <title>Insert title here</title>
 <style>
 	.dlabel{
@@ -59,16 +65,54 @@
 	}
 </style>
 <script>
+
 $(document).ready(function() {
-	//여기 아래 부분
-	$('#board_cont').summernote({
+	// 서머노트 쓰기 활성화
+	/* $('#board_cont').summernote('enable'); */
+ 	
+ /*  	$('#board_cont').summernote({
+		  toolbar: [
+			    // [groupName, [list of button]]
+			    ['fontname', ['fontname']],
+			    ['fontsize', ['fontsize']],
+			    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+			    ['color', ['forecolor','color']],
+			    ['table', ['table']],
+			    ['para', ['ul', 'ol', 'paragraph']],
+			    ['height', ['height']],
+			    ['insert',['picture','link','video']],
+			    ['view', ['fullscreen', 'help']]
+			  ],
+			fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋음체','바탕체'],
+			fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
+	  }); */
+
+		 
+
+		
+  	$('#board_cont').summernote({
 		  height: 400,                 // 에디터 높이
 		  minHeight: 400,             // 최소 높이
 		  maxHeight: 300,             // 최대 높이
 		  focus: true,                  // 에디터 로딩후 포커스를 맞출지 여부
 		  lang: "ko-KR",					// 한글 설정
-		  placeholder: "최대 2048자까지 쓸 수 있습니다"	//placeholder 설정
-	});
+
+			  
+	});  
+	
+	   
+/* 	$('#board_cont').keyup(function (e){
+		alert("실행")
+	    var content = $('#board_cont').val();
+	    $('#counter').html("("+content.length+" / 최대 500자)");    //글자수 실시간 카운팅
+	
+	    if (content.length > 200){
+	        alert("최대 500자까지 입력 가능합니다.");
+	        $(this).val(content.substring(0, 500));
+	        $('#counter').html("(500 / 최대 500자)");
+	    }
+	});  */
+	
 
 	$('#plus').click(function(){
 		$('#filediv').append("")
@@ -85,18 +129,8 @@ $(document).ready(function() {
 });
 
 
-$('#board_cont').keyup(function (e){
-    var content = $(this).val();
-    $('#counter').html("("+content.length+" / 최대 500자)");    //글자수 실시간 카운팅
 
-    if (content.length > 200){
-        alert("최대 500자까지 입력 가능합니다.");
-        $(this).val(content.substring(0, 500));
-        $('#counter').html("(500 / 최대 500자)");
-    }
-});
-
-
+ 
 
 
     // 파일 초기화
@@ -155,7 +189,6 @@ $('#board_cont').keyup(function (e){
 			</div>
 		</div> --%> 
 		<h2>게시글 작성</h2>
-		<div id="counter">count :</div>
 		<input type="submit" value="작성완료" id="sub">
 		<hr>
 		<label for="board_title" class="dlabel" value=""><h3>제목 : </h3></label>
@@ -165,7 +198,8 @@ $('#board_cont').keyup(function (e){
 		
 		
 		<h3> 내 용 </h3>
-		<textarea id="board_cont" name="board_cont"></textarea>
+		<!-- <div id="counter">글자수 :</div> -->
+		<textarea id="board_cont" name="board_cont" placeholder="" value=""></textarea>
 		<hr>
 		
 		 
@@ -181,18 +215,18 @@ $('#board_cont').keyup(function (e){
 		<input type="file" id="d" class="infile" name="file_real_name" value=""><br>
 		<input type="file" id="e" class="infile" name="file_real_name" value=""><br>
 		
-		del : <input type="text" name="filecnt" id="filecnt" value="0"/>
 	
 		
 		
+		
+		
+		<div class="boarddiv" style="display:none">
 		<div>
+			del : <input type="text" name="filecnt" id="filecnt" value="0"/>
 			parent_seq1 : <input type="text" name="parent_seq1" value="<%= request.getParameter("parent_seq1") %>">
 			board_seq1 : <input type="text" name="board_seq1" value="<%= request.getParameter("board_seq1") %>">
 			board_dep : <input type="text" name="board_dep" value="<%= request.getParameter("board_dep") %>">
 		</div>
-		
-		
-		<div class="boarddiv" style="display:none">
 			<label for="board_seq1" class="dlabel" style="display:none">게시글 번호 : </label>
 			
 			<input type="text" id="mem_id" name="mem_id" placeholder="사용자 아이디" value="<%= session.getAttribute("mem_id") %>">

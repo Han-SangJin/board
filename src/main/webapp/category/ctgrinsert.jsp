@@ -14,14 +14,14 @@
 <!DOCTYPE html>
 <html lang="UTF-8">
 <head>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-   <script src="/js/categoryupdate.js"></script> 
-  <style>
+<title>Bootstrap Example</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<style>
     /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
     .row.content {height: 1500px}
      
@@ -57,13 +57,13 @@
 	 var ctgruse = 0;
 	 var ctgr_seq1 = 0;
 	 var ctgr_use = 0;
-
+	 
 	 
 	$("#ctgrList tr").on("click",function(){
 		ctgruse = $(this).data("ctgruse");
 		//alert("ctgruse : " + ctgruse); 
 	})
-	   
+	
 	  
 	$("#ctgrList #update").on("click", function(){
 		// data-userid
@@ -99,6 +99,7 @@
 <title>Jsp</title>
 <!-- 레이아웃 추가 -->
 <%@ include file="/layout/commonLib.jsp" %>
+
 </head>
  
      
@@ -177,7 +178,7 @@
 						</td>
 						
 						<td>
-						<input id="update" class="update" type="button" value="수정" data-ctgrseq1="<%= ctgrList.get(i).getCtgr_seq1() %>">
+							<input id="update" class="update" type="button" value="수정" data-ctgrseq1="<%= ctgrList.get(i).getCtgr_seq1() %>">
 						</td>
 						 
 					</tr>	  

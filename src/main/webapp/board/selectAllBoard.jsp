@@ -117,11 +117,12 @@
 				
 				
 				<a href="/boardinsertservlet?ctgr_seq1=${ctgr_seq1}&parent_seq1=0"><input type="button" value="새로운 글 등록"></a>
-	 
+	<div class="boarddiv" style="display:none">
 	int boardsize : ${ selectAllBoard.size() }
  	page : ${page}
  	pages : ${pages}
  	ctgr_seq1 : ${ctgr_seq1}
+ 	</div>
  	
  	<c:set var="ctgr_seq1" value="${ctgr_seq1}" scope="session"/>
  	

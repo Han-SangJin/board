@@ -57,8 +57,8 @@ public class CtgrInsertServlet extends HttpServlet {
 			List<CtgrVO> ctgrList = ctgrService.selectAllCtgr();
 			request.setAttribute("ctgrList", ctgrList);
 			
-			request.getRequestDispatcher("/category/ctgrinsert.jsp").forward(request, response);
-//			response.sendRedirect(request.getContextPath() + "/ctgrmake");
+		//	request.getRequestDispatcher("/category/ctgrinsert.jsp").forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/ctgrinsertservlet");
 		}
 			
 		// 1건이 아닐때 : 비정상 - 사용자가 데이터를 다시 업력할 수 있도록 등록페이지로 이동
